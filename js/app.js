@@ -240,12 +240,6 @@
   function head(p) {
     return '<div class="page-head"><span class="type-pill" style="background:' + TYPE_COLOUR[p.type] + '">' + esc(TYPE_LABEL[p.type]) + '</span><div><div class="page-id">' + esc(p.id) + "</div><h1>" + esc(p.title) + "</h1></div></div>";
   }
-  function levelsSection(p) {
-    var note = p.type === "trait" ? "Trait scale in source: 0 Not Demonstrated, 1 Inconsistent, 2 Competent, 3 Proficient, 4 Exceptional." : "Knowledge/skill scale in source uses different labels (e.g. 3 Proficient, 4 Strong).";
-    return "<h2>Proficiency levels</h2><div class=\"levels\">" + [1, 2, 3, 4].map(function (n) {
-      return '<div class="level"><b>Level ' + n + '</b><span class="ph-tag">PLACEHOLDER</span>Description of what Level ' + n + " looks like for \u201c" + esc(p.title) + "\u201d to be written.</div>";
-    }).join("") + '</div><p style="font-size:.8rem;color:var(--muted)">Level names are deliberately neutral until one scale is agreed. ' + esc(note) + " See " + link("HUB-ISSUES") + ".</p>";
-  }
   function relatedSection(p) {
     var html = "<h2>Related pages</h2>";
     if (p.members) html += '<h3>Systems in this group</h3><div class="chips">' + p.members.map(function (id) { return chip(id); }).join("") + "</div>";
@@ -293,7 +287,6 @@
     var rule = f && f.note && ["system", "sysgroup", "designtype", "productscope"].indexOf(p.type) >= 0 ? '<p class="facet-rule"><b>' + esc(f.label) + ":</b> " + esc(f.note) + "</p>" : "";
     var taggable = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline"].indexOf(p.type) >= 0;
     return head(p) + '<div class="grid"><div>' + (p.type === "srcsystem" ? mappingBox(p) : "") + contextBox(p) + "<h2>Description</h2>" + desc + rule +
-      levelsSection(p) +
       "<h2>Key considerations</h2>" + ph("Key considerations for \u201c" + p.title + "\u201d to be written and verified by a nominated owner.") +
       (taggable ? lessonsSection(p) : "") +
       relatedSection(p) +
@@ -400,7 +393,7 @@
       "<h2>Example topic pages (intersections)</h2><p>These demonstrate a single page tagged with several facets. Open one, then switch views: it stays the same page while the tree and breadcrumbs change.</p>" +
       '<table class="list"><thead><tr><th>ID</th><th>Topic</th><th>Tags</th></tr></thead><tbody>' +
       contents.map(function (c) { return '<tr><td class="mono">' + esc(c.id) + "</td><td>" + link(c.id) + '</td><td><div class="chips">' + storedTags(c).filter(function (id) { return ["stage", "system", "designtype"].indexOf(byId[id].type) >= 0; }).map(function (id) { return chip(id); }).join("") + "</div></td></tr>"; }).join("") + "</tbody></table>" +
-      '<div class="warn" style="margin-top:18px"><b>Prototype.</b> Lifecycle Stage, Discipline, Skill and Trait names and IDs come from the tracker registers; System, Design Type and Product Scope are the facets agreed on 2 Oct 2026, with the tracker\'s Aircraft System entries kept as mapped source references. All guidance text, proficiency levels, owners and review dates are placeholders or clearly labelled examples. ' + D.issues.length + " framework issues are listed on " + link("HUB-ISSUES") + ".</div>";
+      '<div class="warn" style="margin-top:18px"><b>Prototype.</b> Lifecycle Stage, Discipline, Skill and Trait names and IDs come from the tracker registers; System, Design Type and Product Scope are the facets agreed on 2 Oct 2026, with the tracker\'s Aircraft System entries kept as mapped source references. All guidance text, owners and review dates are placeholders or clearly labelled examples. ' + D.issues.length + " framework issues are listed on " + link("HUB-ISSUES") + ".</div>";
   }
 
   // ---------- render ----------

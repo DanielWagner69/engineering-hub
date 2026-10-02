@@ -368,7 +368,7 @@ def main(xlsx):
                              "so that the controlled lists can be corrected at source."})
 
     data = {
-        "meta": {"title": "Engineering Hub", "version": "0.3 (prototype)",
+        "meta": {"title": "Engineering Hub", "version": "0.4 (prototype)",
                  "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
                  "source": "Tracker workbook: " + ", ".join(ALLOWED_SHEETS),
                  "exampleNote": EXAMPLE_NOTE},
@@ -411,16 +411,7 @@ def find_issues(values, raw, lookups, rows):
         "Lookups defines only the three Knowledge_Category values; the actual options of each category exist only as rows in Knowledge_Register, "
         "which has no Sort_Order or Active flag (unlike Lookups). There is therefore no single authoritative controlled list per facet.", [], "Curated")
 
-    # 2. Proficiency scales
-    add("Inconsistent proficiency scales",
-        "Knowledge and skills are rated (in the tracker's assessment columns, which are not published here) on a scale using labels such as '3 - Proficient' and '4 - Strong', whereas traits use "
-        "'1 - Inconsistent', '2 - Competent', '3 - Proficient', '4 - Exceptional'. The Traits_Register drop-down also offers "
-        "'0 - Not Demonstrated', so the trait scale actually has five points (0-4). The same level number therefore means "
-        "different things in different registers. Separately, Lookups holds an Evidence_Strength scale with five points (1-5). "
-        "None of the scales has a description for each level. Proficiency sections in this Hub use neutral 'Level 1-4' placeholders "
-        "until a single scale is agreed.", [], "Curated")
-
-    # 3. Missing descriptions
+    # 2. Missing descriptions
     for facet, label in (("stage", "Lifecycle Stage (ASEL Stage)"), ("srcsystem", "tracker Aircraft System"), ("discipline", "Discipline")):
         ids = [v["id"] for v in values if v["facet"] == facet and not v["description"]]
         if ids:
@@ -436,7 +427,7 @@ def find_issues(values, raw, lookups, rows):
             add("Lookups: no descriptions for %s values" % cat,
                 "Lookup_Description is blank for every %s value, so the categories are not defined in the controlled list itself." % cat, [], "Auto-detected")
 
-    # 4. Bundled options
+    # 3. Bundled options
     bundled = [v["id"] for v in values if v["facet"] in ("stage", "srcsystem", "discipline", "skill") and re.search(r" & | / |, | - ", v["title"])]
     add("Bundled options covering several topics",
         "Many options combine several topics in one value (joined by '&', '/', ',' or ' - '), for example "
@@ -444,7 +435,7 @@ def find_issues(values, raw, lookups, rows):
         "'Skins, Doors & Panels' and 'Decision Making / Assumptions / Risk Analysis / Trade Off'. Some bundles are synonyms or a close family, "
         "others are distinct topics, which makes tagging ambiguous and works against single-topic, mutually exclusive options.", bundled, "Auto-detected (pattern) + curated")
 
-    # 5. Duplicate / near-duplicate names
+    # 4. Duplicate / near-duplicate names
     seen = collections.defaultdict(list)
     for v in values:
         seen[slug(v["title"])].append(v["id"])
@@ -455,7 +446,7 @@ def find_issues(values, raw, lookups, rows):
     if dups:
         add("Duplicate names", "Identical names after normalisation.", sum(dups, []))
 
-    # 6. Curated overlaps (mutual exclusivity concerns)
+    # 5. Curated overlaps (mutual exclusivity concerns)
     add("Possible overlaps within the Aircraft System list",
         "Several options appear to overlap rather than being mutually exclusive: 'Electrical - Equipment' vs 'Power Generation & Distribution'; "
         "'Structure' vs 'Skins, Doors & Panels' vs 'Windscreen & Canopy'; 'Mission Systems' vs 'Radar / Sensors', 'Electronic Warfare', 'Communications' and 'Data Links'; "
@@ -492,7 +483,7 @@ def find_issues(values, raw, lookups, rows):
         "Resolved: the tracker list has been reconciled into the agreed System facet (Primary Structure / Secondary Structure, Hydraulics, Skins, Doors & Panels kept grouped for now). "
         "The KN entries remain as source references and each shows its mapping.")
 
-    # 7. Naming inconsistencies
+    # 6. Naming inconsistencies
     add("Naming inconsistencies",
         "Mixed conventions: 'Hydraulics System' and 'Fuel System' (singular 'System'), 'Flight Control Systems', 'Navigation Systems', 'Mission Systems' (plural) "
         "and 'Pneumatics', 'Propulsion' (no suffix); separators vary between ' - ', ' / ', ' & ' and ','; 'Electro-Magnetic Compatibility' is usually written "
@@ -506,7 +497,7 @@ def find_issues(values, raw, lookups, rows):
         add("Discipline list not in a consistent order",
             "The Aircraft System list is alphabetical, but the Discipline list is not: 'Quality' (KN-0059) has been appended after 'Weight'. "
             "Harmless for IDs (which are permanent) but suggests a list that is extended ad hoc; a Sort_Order field would make intent explicit.", ["KN-0059"])
-    # 8. Text quality
+    # 7. Text quality
     txt = []
     for vid, r in raw.items():
         d = r["desc"]
@@ -520,7 +511,7 @@ def find_issues(values, raw, lookups, rows):
         "apostrophes mix straight (TR-0009) and curly (SK-0007, TR-0014) forms; trait names TR-0058/TR-0059 use 'Ability to...' phrasing and quotation marks "
         "unlike other trait names. Skills_Register has no category column, unlike Traits_Register.",
         sorted(set(txt + ["TR-0059", "TR-0058", "SK-0011", "TR-0009", "SK-0007", "TR-0014"])), "Auto-detected + curated")
-    # 9. Tracker -> agreed facet mapping (auto from KN_MAP)
+    # 8. Tracker -> agreed facet mapping (auto from KN_MAP)
     unclean = [v for v in values if v["facet"] == "srcsystem" and not v.get("mappingClean")]
     add("Tracker Aircraft System entries that do not map cleanly to the agreed facets (%d of 28)" % len(unclean),
         " ".join("%s %s: %s" % (v["id"], v["title"], v["mappingNote"]) for v in unclean),
