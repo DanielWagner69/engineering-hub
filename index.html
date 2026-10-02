@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Hub</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/home"><span class="brand-mark">EH</span><span>Engineering Hub</span><span class="proto">Prototype v0.3</span></a>
+  <div class="search-wrap">
+    <input id="search" type="search" placeholder="Search pages by title or ID (e.g. KN-0020, fuel)" autocomplete="off" aria-label="Search pages">
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="view-switch" role="tablist" aria-label="Navigation view">
+      <div class="view-switch-label">View</div>
+      <div class="view-buttons" id="view-buttons"></div>
+      <div class="view-desc" id="view-desc"></div>
+    </div>
+    <nav id="tree" class="tree" aria-label="Navigation tree"></nav>
+  </aside>
+  <main class="main">
+    <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></nav>
+    <article id="page" class="page"></article>
+    <footer class="footer" id="footer"></footer>
+  </main>
+</div>
+<noscript><p style="padding:2em">The Engineering Hub needs JavaScript enabled.</p></noscript>
+<script src="data/hub.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
