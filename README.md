@@ -1,4 +1,4 @@
-# Engineering Hub – prototype v0.4
+# Engineering Hub – prototype v0.5
 
 An interactive, linked engineering knowledge site (static HTML/CSS/JS, no build step, no external dependencies).
 
@@ -7,6 +7,7 @@ An interactive, linked engineering knowledge site (static HTML/CSS/JS, no build 
 **Core idea:** there is no fixed tree. Every item is stored once, in a flat list, with a permanent ID, and tagged with values from controlled facets (Lifecycle Stage, System Group › System, Design Type, Product Scope, Discipline, Skill, Trait). The navigation tree is a view generated from the tags: switch between the Lifecycle, System, Design Type and Discipline views and the same page is reached by different routes without duplication.
 
 ## Changelog
+- **v0.5 (2 Oct 2026):** applied the Hub colour palette (primary #00405E, accent #46C1BE, light #9EDEDC, plus tints, blue-tinted neutrals and a sparing coral/amber accent for warnings, open issues and verification status). All colours are CSS custom properties in `css/style.css`; text and link colours meet WCAG AA.
 - **v0.4 (2 Oct 2026):** removed personal competency-level content (the placeholder level sections on Knowledge, Skill and Trait pages, their styling, and the framework issue about mismatched rating scales; Framework issues now 19). The Hub now focuses on the engineering content; this may return later with a people / Subject Matter Expert focus.
 - **v0.3:** Product Scope as Level 0, selectable at the top of the System and Design Type views; first public release.
 

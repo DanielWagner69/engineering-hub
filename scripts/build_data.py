@@ -368,7 +368,7 @@ def main(xlsx):
                              "so that the controlled lists can be corrected at source."})
 
     data = {
-        "meta": {"title": "Engineering Hub", "version": "0.4 (prototype)",
+        "meta": {"title": "Engineering Hub", "version": "0.5 (prototype)",
                  "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
                  "source": "Tracker workbook: " + ", ".join(ALLOWED_SHEETS),
                  "exampleNote": EXAMPLE_NOTE},

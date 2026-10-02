@@ -377,7 +377,7 @@
       '<a class="card" style="border-top-color:var(--lesson)" href="' + href("HUB-LESSONS") + '"><div class="n">' + lessons.length + '</div><div class="l">Example lessons learned</div></a>' +
       '<a class="card" style="border-top-color:var(--srcsystem)" href="#/f/srcsystem?v=' + state.view + '"><div class="n">' + valuesOf("srcsystem").length + '</div><div class="l">Tracker source entries (mapped)</div></a>' +
       '<a class="card" style="border-top-color:var(--special)" href="' + href("HUB-ISSUES") + '"><div class="n">' + D.issues.length + '</div><div class="l">Framework issues</div></a>';
-    return '<div class="page-head"><span class="type-pill" style="background:var(--navy2)">Home</span><div><div class="page-id">' + esc(D.meta.version) + "</div><h1>Engineering Hub</h1></div></div>" +
+    return '<div class="page-head"><span class="type-pill" style="background:var(--primary)">Home</span><div><div class="page-id">' + esc(D.meta.version) + "</div><h1>Engineering Hub</h1></div></div>" +
       "<p>An interactive, linked knowledge site for the <b>education</b> of engineers, the <b>verification and validation</b> of information, and <b>navigation</b> of engineering knowledge across the Air System Engineering Lifecycle. The former Design Hub becomes one part of it.</p>" +
       "<h2>How it works: one store, many views</h2>" +
       "<ul><li>Every page is stored <b>once</b>, in a flat list, with a <b>permanent ID</b> (e.g. <span class=\"mono\">SYS-0007</span>, <span class=\"mono\">KN-0005</span>).</li>" +
