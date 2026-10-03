@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>crawl</title></head><body>
 <!-- Runtime link crawl: renders every page and every view, checks every in-page link resolves. Open in a browser or headless --dump-dom. -->
-<input id="search"><div id="view-buttons"></div><div id="view-desc"></div><nav id="tree"></nav><nav id="breadcrumbs"></nav><div class="main"><article id="page"></article></div><footer id="footer"></footer>
-<script src="../data/hub.js"></script><script src="../js/app.js"></script>
+<form id="ask-form"><input id="search"></form><div id="view-buttons"></div><div id="view-desc"></div><nav id="tree"></nav><nav id="breadcrumbs"></nav><div class="main"><article id="page"></article></div><footer id="footer"></footer>
+<script src="../data/hub.js"></script><script src="../js/ai.js"></script><script src="../js/app.js"></script>
 <script>
 var errs=[], n=0, links=0, routes=["#/home"].concat(EH.data.facets.map(function(f){return "#/f/"+f.key;})).concat(EH.data.pages.map(function(p){return "#/p/"+p.id;}));
 var allJs=[];

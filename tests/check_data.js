@@ -31,6 +31,14 @@ Object.entries(grp).forEach(([g, ls]) => { if (new Set(ls).size > 1) errs.push("
 const srcCount = D.pages.filter(p => p.type === "srcsystem").length; if (srcCount !== 28) errs.push("expected 28 tracker Aircraft System entries, got " + srcCount);
 D.issues.forEach(i => i.refs.forEach(id => { if (!byId[id]) errs.push(i.id + ": ref " + id + " missing"); }));
 D.views.forEach(v => v.levels.forEach(l => { if (!facets.includes(l)) errs.push("view " + v.key + " level " + l); }));
+// v0.6: images must exist in the site, with alt text and a caption; framework pages present; no production data in the framework
+D.pages.forEach(p => (p.images || []).forEach(im => {
+  if (!im.src || !fs.existsSync(path.join(__dirname, "..", im.src))) errs.push(p.id + ": image file missing " + im.src);
+  if (!im.alt || !im.caption) errs.push(p.id + ": image needs alt text and caption");
+}));
+["HUB-FRAMEWORK", "HUB-PRODEX", "HUB-LESSONS", "HUB-ISSUES"].forEach(id => { if (!byId[id]) errs.push("missing hub page " + id); });
+if ((D.meta || {}).hubKind !== "Framework") errs.push("meta.hubKind must be 'Framework'");
+D.pages.forEach(p => { if (p.productionData) errs.push(p.id + ": production data is not allowed in the Framework Hub"); });
 const counts = {}; D.pages.forEach(p => counts[p.type] = (counts[p.type] || 0) + 1);
 console.log("Pages:", JSON.stringify(counts), "Issues:", D.issues.length);
 if (errs.length) { console.log("ERRORS:\n" + errs.join("\n")); process.exit(1); } else console.log("Data checks passed: all IDs unique, all tags and links resolve.");

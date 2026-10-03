@@ -1,4 +1,4 @@
-/* Engineering Hub prototype v0.2 - vanilla JS, hash routing, no external dependencies.
+/* Engineering Hub (Framework) prototype v0.6 - vanilla JS, hash routing, no external dependencies.
    All content lives once in window.HUB_DATA.pages (flat). Trees are views generated from tags. */
 (function () {
   "use strict";
@@ -62,6 +62,20 @@
     });
     if (list) html += "</ul>";
     return html;
+  }
+  function figures(list) {
+    if (!list || !list.length) return "";
+    return list.map(function (im) {
+      return '<figure class="hub-fig"><button type="button" class="fig-open" data-src="' + esc(im.src) + '" data-alt="' + esc(im.alt) + '" data-caption="' + esc(im.caption) + '" aria-label="Enlarge image: ' + esc(im.alt) + '">' +
+        '<img src="' + esc(im.src) + '" alt="' + esc(im.alt) + '" loading="lazy"><span class="fig-zoom" aria-hidden="true">\u2922 Enlarge</span></button><figcaption>' + esc(im.caption) + "</figcaption></figure>";
+    }).join("");
+  }
+  function prodLinksSection(p) {
+    var what = TYPE_LABEL[p.type].toLowerCase();
+    return '<h2>Production data links</h2><p class="section-note">In a project\'s Production Hub this table lists the production records linked to this ' + esc(what) +
+      ' (models, calculations, test records), each under configuration control. The Framework Hub holds no production data, so it is empty here. See ' + link("HUB-FRAMEWORK") + ".</p>" +
+      '<div class="table-wrap"><table class="list prod-links"><thead><tr><th>Production record</th><th>Type</th><th>Authoritative system</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th><th>Status</th></tr></thead>' +
+      '<tbody><tr><td colspan="7" class="empty-row"><span class="ph-tag">EMPTY IN FRAMEWORK</span>No production data. A Production Hub would show linked records here, e.g. part models (PLM/CAD), calculation documents and verification records, with their applicability by build standard, serial or configuration.</td></tr></tbody></table></div>';
   }
   function ph(text) { return '<div class="ph"><span class="ph-tag">PLACEHOLDER</span>' + esc(text) + "</div>"; }
 
@@ -167,6 +181,8 @@
       '<div class="tree-section">' + esc(v.label) + " view: " + esc(facetByKey[v.levels[0]].plural) + (scopeOn() ? " \u00b7 " + esc(byId[state.scope].title) : "") + "</div>" + renderNodes(main) +
       '<div class="tree-section">Registers</div>' + renderNodes(reg) +
       '<div class="tree-section">Hub pages</div><ul>' +
+      simpleNode(href("HUB-FRAMEWORK"), "special", "Framework vs Production", state.id === "HUB-FRAMEWORK") +
+      simpleNode(href("HUB-PRODEX"), "special", "Production Hub (illustrative)", state.id === "HUB-PRODEX") +
       simpleNode(href("HUB-LESSONS"), "lesson", "Lessons Learned (" + lessons.length + ")", state.id === "HUB-LESSONS") +
       simpleNode(href("HUB-ISSUES"), "special", "Framework issues (" + D.issues.length + ")", state.id === "HUB-ISSUES") + "</ul>";
   }
@@ -286,9 +302,10 @@
     var f = facetByKey[p.type];
     var rule = f && f.note && ["system", "sysgroup", "designtype", "productscope"].indexOf(p.type) >= 0 ? '<p class="facet-rule"><b>' + esc(f.label) + ":</b> " + esc(f.note) + "</p>" : "";
     var taggable = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline"].indexOf(p.type) >= 0;
-    return head(p) + '<div class="grid"><div>' + (p.type === "srcsystem" ? mappingBox(p) : "") + contextBox(p) + "<h2>Description</h2>" + desc + rule +
+    return head(p) + '<div class="grid"><div>' + (p.type === "srcsystem" ? mappingBox(p) : "") + contextBox(p) + "<h2>Description</h2>" + desc + rule + figures(p.images) +
       "<h2>Key considerations</h2>" + ph("Key considerations for \u201c" + p.title + "\u201d to be written and verified by a nominated owner.") +
       (taggable ? lessonsSection(p) : "") +
+      (["system", "designtype"].indexOf(p.type) >= 0 ? prodLinksSection(p) : "") +
       relatedSection(p) +
       "<h2>Learning resources</h2>" + ph("Links to courses, standards, handbooks and internal guidance to be added.") +
       backlinkSection(p) + "</div><div>" + metaPanel(p) + verificationPanel(p) + "</div></div>";
@@ -337,11 +354,75 @@
     var others = contents.filter(function (c) { return c.id !== p.id && storedTags(c).some(function (id) { return storedTags(p).indexOf(id) >= 0; }); });
     return head(p) + '<div class="example-banner"><b>Example content.</b> ' + esc(p.exampleNote) + "</div>" +
       '<div class="grid"><div><p><i>' + rich(p.summary).replace(/^<p>|<\/p>$/g, "") + "</i></p>" +
-      p.sections.map(function (s) { return "<h2>" + esc(s.heading) + "</h2>" + rich(s.body); }).join("") +
+      p.sections.map(function (s) { return "<h2>" + esc(s.heading) + "</h2>" + rich(s.body); }).join("") + figures(p.images) +
       "<h2>Related pages</h2><p>Every tag in the metadata panel is a link to that value's page. This page is stored once and appears under each of its tags in every view.</p>" +
       (others.length ? '<h3>Other topics sharing a tag</h3><div class="chips">' + others.map(function (c) { return chip(c.id); }).join("") + "</div>" : "") +
       "<h2>Learning resources</h2>" + ph("Links to courses, standards and guidance to be added.") +
       backlinkSection(p) + "</div><div>" + metaPanel(p) + verificationPanel(p) + "</div></div>";
+  }
+  var FRAMEWORK_SVG =
+    '<svg class="fp-diagram" viewBox="0 0 960 400" role="img" aria-labelledby="fpd-t fpd-d" font-family="Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">' +
+    '<title id="fpd-t">Framework Hub, Production Hub and production data</title><desc id="fpd-d">The Framework Hub holds generic pages, templates, facets and link types. A Production Hub is a versioned, tailored instance of the framework for one project and adds project working data. It links by permanent ID and version to production data in authoritative systems such as PLM and CAD models, calculations and test records, under configuration control and effectivity.</desc>' +
+    '<defs><marker id="fpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#00405E"/></marker></defs>' +
+    '<rect width="960" height="400" rx="10" fill="#F7FBFB"/>' +
+    // column 1 framework
+    '<rect x="20" y="20" width="260" height="290" rx="10" fill="#00405E"/>' +
+    '<text x="150" y="50" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">Framework Hub</text><text x="150" y="70" fill="#fff" font-size="12" text-anchor="middle">one standard, generic, open</text>' +
+    ["Page templates & permanent IDs", "Controlled facets & levels", "Generic descriptions & guidance", "Typed link definitions", "Generic lessons learned"].map(function (t, i) {
+      return '<rect x="40" y="' + (88 + i * 42) + '" width="220" height="32" rx="6" fill="#FFFFFF"/><text x="150" y="' + (109 + i * 42) + '" fill="#00405E" font-size="13" font-weight="600" text-anchor="middle">' + t + "</text>"; }).join("") +
+    // arrow 1
+    '<path d="M286 140H352" stroke="#00405E" stroke-width="3" marker-end="url(#fpa)"/><text x="319" y="126" fill="#00405E" font-size="12" font-weight="600" text-anchor="middle">instantiate</text><text x="319" y="162" fill="#526775" font-size="11" text-anchor="middle">+ tailor</text>' +
+    '<path d="M352 210H286" stroke="#1D8C89" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#fpa)" transform="rotate(180 319 210)"/><text x="319" y="232" fill="#526775" font-size="11" text-anchor="middle">framework</text><text x="319" y="246" fill="#526775" font-size="11" text-anchor="middle">updates</text>' +
+    // column 2 production hub
+    '<rect x="360" y="20" width="260" height="290" rx="10" fill="#46C1BE"/>' +
+    '<text x="490" y="50" fill="#00405E" font-size="17" font-weight="700" text-anchor="middle">Production Hub</text><text x="490" y="70" fill="#00405E" font-size="12" text-anchor="middle">one per project, internal, access-controlled</text>' +
+    ["Framework pages (version vX)", "Points of contact", "Project stats", "Live model views", "Configuration & effectivity"].map(function (t, i) {
+      return '<rect x="380" y="' + (88 + i * 42) + '" width="220" height="32" rx="6" fill="' + (i ? "#FFFFFF" : "#D9F2F1") + '"/><text x="490" y="' + (109 + i * 42) + '" fill="#00405E" font-size="13" font-weight="600" text-anchor="middle">' + t + "</text>"; }).join("") +
+    // arrow 2
+    '<path d="M626 165H692" stroke="#00405E" stroke-width="3" marker-end="url(#fpa)"/><text x="659" y="138" fill="#00405E" font-size="12" font-weight="600" text-anchor="middle">typed links</text><text x="659" y="152" fill="#526775" font-size="11" text-anchor="middle">ID + version</text>' +
+    // column 3 production data
+    '<rect x="700" y="20" width="240" height="290" rx="10" fill="#9EDEDC"/>' +
+    '<text x="820" y="50" fill="#00405E" font-size="17" font-weight="700" text-anchor="middle">Production data</text><text x="820" y="70" fill="#00405E" font-size="12" text-anchor="middle">in authoritative systems</text>' +
+    ["Part models (PLM / CAD)", "Parametric model parameters", "Calculation documents", "Test & verification records"].map(function (t, i) {
+      return '<rect x="718" y="' + (88 + i * 42) + '" width="204" height="32" rx="6" fill="#FFFFFF"/><text x="820" y="' + (109 + i * 42) + '" fill="#00405E" font-size="13" font-weight="600" text-anchor="middle">' + t + "</text>"; }).join("") +
+    // config band
+    '<rect x="360" y="326" width="580" height="54" rx="10" fill="#FEF3DC" stroke="#F2A541" stroke-width="1.5"/>' +
+    '<text x="650" y="349" fill="#7A5000" font-size="14" font-weight="700" text-anchor="middle">Configuration control &amp; effectivity</text>' +
+    '<text x="650" y="368" fill="#7A5000" font-size="12" text-anchor="middle">version / issue \u00b7 baseline \u00b7 applicability by build standard, serial number or configuration</text>' +
+    '<text x="20" y="346" fill="#526775" font-size="12">Framework pages never contain</text><text x="20" y="362" fill="#526775" font-size="12">production data; production records</text><text x="20" y="378" fill="#526775" font-size="12">link to framework page IDs and facets.</text>' +
+    "</svg>";
+  function renderFrameworkPage(p) {
+    return head(p) + '<p class="lead">' + rich(p.summary).replace(/^<p>|<\/p>$/g, "") + "</p>" +
+      '<figure class="hub-fig fig-wide fig-inline"><button type="button" class="fig-open" data-inline="1" data-caption="Framework Hub \u2192 Production Hub instance \u2192 links to production data, under configuration control and effectivity." aria-label="Enlarge diagram: Framework vs Production">' + FRAMEWORK_SVG +
+      '<span class="fig-zoom" aria-hidden="true">\u2922 Enlarge</span></button><figcaption>Framework Hub \u2192 Production Hub instance \u2192 links to production data, under configuration control and effectivity.</figcaption></figure>' +
+      '<div class="grid"><div>' +
+      (p.sections || []).map(function (sec) { return "<h2>" + esc(sec.heading) + "</h2>" + rich(sec.body); }).join("") +
+      "<h2>Typed links between data</h2>" + figures(p.images) +
+      '<p>See ' + link("HUB-PRODEX") + " for an illustration of the panels a project would add.</p>" +
+      backlinkSection(p) + "</div><div>" + metaPanel(p) +
+      '<div class="panel"><h4>This site</h4><div class="kv"><span class="k">Hub kind</span><span><span class="kind-pill">Framework</span></span><span class="k">Framework version</span><span class="mono">' + esc(D.meta.version) + '</span><span class="k">Production data</span><span>None (by design)</span><span class="k">Hosting</span><span>Open (proposed rule: Production Hubs internal only)</span></div></div>' +
+      "</div></div>";
+  }
+  function renderProductionExample(p) {
+    function dash() { return '<span class="empty">\u2014</span>'; }
+    var stats = ["Requirements", "Product records", "Verification coverage", "Items flagged for review", "Open issues", "Linked models"].map(function (l) {
+      return '<div class="stat"><div class="n">\u2014</div><div class="l">' + l + "</div></div>"; }).join("");
+    var poc = ["Engineering lead", "System lead", "Design Type lead", "Configuration manager", "Hub owner"].map(function (r) {
+      return "<tr><td>" + r + "</td><td>" + dash() + "</td><td>" + dash() + "</td></tr>"; }).join("");
+    return head(p) + '<div class="example-banner"><b>Illustrative placeholder.</b> This page shows the layout a Production Hub adds for one project. All panels are empty or fictional; no project data is held in the Framework Hub.</div>' +
+      '<p class="lead">' + esc(p.summary) + "</p>" +
+      '<div class="prod-grid">' +
+      '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Points of contact</h3><table class="list"><thead><tr><th>Role</th><th>Name</th><th>Contact</th></tr></thead><tbody>' + poc + "</tbody></table></section>" +
+      '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Project stats</h3><div class="stats">' + stats + '</div><p class="section-note">Live counts from the project\'s data once connected.</p></section>' +
+      '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Live model view</h3><div class="model-view" role="img" aria-label="Empty live model viewer placeholder">' +
+        '<svg viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#9EDEDC" stroke-width="3" stroke-linejoin="round"><path d="M100 18L160 46V96L100 112L40 96V46Z"/><path d="M40 46L100 64L160 46M100 64V112"/></g></svg>' +
+        '<p>Live view of the product model from the authoritative PLM/CAD system, filtered to the configuration selected below.</p></div></section>' +
+      '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Configuration &amp; effectivity</h3>' +
+        '<div class="cfg-row"><label>Baseline<select disabled><option>\u2014</option></select></label><label>Build standard<select disabled><option>\u2014</option></select></label><label>Serial / configuration<select disabled><option>\u2014</option></select></label></div>' +
+        '<table class="list"><thead><tr><th>Record</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th></tr></thead><tbody><tr><td colspan="4" class="empty-row">No records: configuration-controlled records appear here in a Production Hub.</td></tr></tbody></table></section>' +
+      "</div>" +
+      '<div class="panel" style="margin-top:16px"><h4>Framework link</h4><div class="kv"><span class="k">Framework version</span><span class="mono">' + esc(D.meta.version) + '</span><span class="k">Tailoring</span><span class="empty">None recorded (placeholder)</span><span class="k">Concept</span><span>' + link("HUB-FRAMEWORK") + "</span></div></div>" +
+      backlinkSection(p);
   }
   function renderIssues(p) {
     var counts = {}; D.issues.forEach(function (i) { counts[i.status] = (counts[i.status] || 0) + 1; });
@@ -377,7 +458,8 @@
       '<a class="card" style="border-top-color:var(--lesson)" href="' + href("HUB-LESSONS") + '"><div class="n">' + lessons.length + '</div><div class="l">Example lessons learned</div></a>' +
       '<a class="card" style="border-top-color:var(--srcsystem)" href="#/f/srcsystem?v=' + state.view + '"><div class="n">' + valuesOf("srcsystem").length + '</div><div class="l">Tracker source entries (mapped)</div></a>' +
       '<a class="card" style="border-top-color:var(--special)" href="' + href("HUB-ISSUES") + '"><div class="n">' + D.issues.length + '</div><div class="l">Framework issues</div></a>';
-    return '<div class="page-head"><span class="type-pill" style="background:var(--primary)">Home</span><div><div class="page-id">' + esc(D.meta.version) + "</div><h1>Engineering Hub</h1></div></div>" +
+    return '<div class="page-head"><span class="type-pill" style="background:var(--primary)">Home</span><div><div class="page-id">' + esc(D.meta.version) + "</div><h1>Engineering Hub <span class=\"kind-pill\">Framework</span></h1></div></div>" +
+      '<div class="framework-callout"><b>This is the Framework Hub.</b> It holds the standard, generic pages, templates and controlled facets that every project uses, with descriptions written to stay valid for any project. Each project gets its own <b>Production Hub</b>, a tailored instance that adds project working data and links to production data under configuration control. See ' + link("HUB-FRAMEWORK") + " and " + link("HUB-PRODEX") + ".</div>" +
       "<p>An interactive, linked knowledge site for the <b>education</b> of engineers, the <b>verification and validation</b> of information, and <b>navigation</b> of engineering knowledge across the Air System Engineering Lifecycle. The former Design Hub becomes one part of it.</p>" +
       "<h2>How it works: one store, many views</h2>" +
       "<ul><li>Every page is stored <b>once</b>, in a flat list, with a <b>permanent ID</b> (e.g. <span class=\"mono\">SYS-0007</span>, <span class=\"mono\">KN-0005</span>).</li>" +
@@ -388,6 +470,7 @@
       "<li><b>Derived tags:</b> an assembly takes its System tag(s) from its components (a loom shows the Systems of its wires), and System Group is always derived from System.</li>" +
       "<li><b>Lessons Learned</b> use one standard template and the same tags, so " + link("HUB-LESSONS") + " can be filtered by any combination of stage, system, design type and discipline.</li>" +
       "<li>Every page carries verification status, owner and last-reviewed fields (placeholders in this prototype).</li></ul>" +
+      '<div class="home-fig">' + figures([{ src: "assets/img/facet-levels.svg", alt: "Diagram of facet levels: Product Scope at Level 0, System and Design Type at Level 1, assemblies and parts below, Lifecycle Stage and Discipline cross-cutting.", caption: "Facet levels used by every view." }]) + "</div>" +
       "<p>Current view: <b>" + esc(v.label) + "</b> (" + esc(v.description) + ").</p>" +
       '<div class="cards">' + cards + "</div>" +
       "<h2>Example topic pages (intersections)</h2><p>These demonstrate a single page tagged with several facets. Open one, then switch views: it stays the same page while the tree and breadcrumbs change.</p>" +
@@ -401,21 +484,23 @@
   function render() {
     parseHash();
     var el = document.getElementById("page"), html;
-    if (state.route === "home") { html = renderHome(); document.title = "Engineering Hub"; }
-    else if (state.route === "facet") { html = renderFacet(state.id); document.title = (facetByKey[state.id] ? facetByKey[state.id].plural + " \u2013 " : "") + "Engineering Hub"; }
+    if (state.route === "home") { html = renderHome(); document.title = "Engineering Hub \u2013 Framework"; }
+    else if (state.route === "facet") { html = renderFacet(state.id); document.title = (facetByKey[state.id] ? facetByKey[state.id].plural + " \u2013 " : "") + "Engineering Hub \u2013 Framework"; }
     else {
       var p = byId[state.id];
       if (!p) html = '<h1>Page not found</h1><p>No page has ID <span class="mono">' + esc(state.id) + "</span>.</p>";
       else if (p.type === "content") html = renderContentPage(p);
       else if (p.id === "HUB-ISSUES") html = renderIssues(p);
+      else if (p.id === "HUB-FRAMEWORK") html = renderFrameworkPage(p);
+      else if (p.id === "HUB-PRODEX") html = renderProductionExample(p);
       else if (p.id === "HUB-LESSONS") html = renderLessonsIndex(p);
       else if (p.type === "lesson") html = renderLessonPage(p);
       else html = renderValuePage(p);
-      document.title = (p ? p.id + " " + p.title + " \u2013 " : "") + "Engineering Hub";
+      document.title = (p ? p.id + " " + p.title + " \u2013 " : "") + "Engineering Hub \u2013 Framework";
     }
     el.innerHTML = html;
     document.getElementById("breadcrumbs").innerHTML = crumbs().join('<span class="sep">\u203a</span>');
-    document.getElementById("footer").textContent = "Engineering Hub " + D.meta.version + " \u00b7 data generated " + D.meta.generated + " \u00b7 " + D.pages.length + " pages \u00b7 " + D.meta.source;
+    document.getElementById("footer").textContent = "Engineering Hub \u2013 Framework " + D.meta.version + " \u00b7 data generated " + D.meta.generated + " \u00b7 " + D.pages.length + " pages \u00b7 " + D.meta.source;
     renderTree();
     var cur = document.querySelector(".tree .node.current"); if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest" });
     if (state.id !== "HUB-LESSONS" || !keepScroll) document.querySelector(".main").scrollTop = 0;
@@ -444,9 +529,52 @@
   search.addEventListener("input", function () { state.query = search.value.trim(); renderTree(); });
   search.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { search.value = ""; state.query = ""; renderTree(); }
-    if (e.key === "Enter") { var a = document.querySelector(".search-results a"); if (a) location.hash = a.getAttribute("href"); }
+    if (e.key === "Enter" && !document.getElementById("ask-form")) { var a = document.querySelector(".search-results a"); if (a) location.hash = a.getAttribute("href"); }
   });
-  window.addEventListener("hashchange", render);
-  window.EH = { data: D, byId: byId, backlinks: backlinks, outLinks: outLinks, buildTree: buildTree, render: render, allTags: allTags };
+  // ---------- Ask the Hub (AI provision; see js/ai.js) ----------
+  var askPanel = document.getElementById("ask-panel");
+  if (!askPanel) { askPanel = document.createElement("section"); askPanel.id = "ask-panel"; askPanel.className = "ask-panel"; askPanel.hidden = true; document.body.appendChild(askPanel); }
+  var askSeq = 0;
+  function askIntro() {
+    var on = window.HubAI && window.HubAI.isConnected();
+    return '<div class="ask-head"><h2>Ask the Hub</h2><span class="ai-status ' + (on ? "on" : "off") + '">' + (on ? "Internal AI connected" : "AI not connected \u00b7 keyword fallback") + '</span><button type="button" class="ask-close" aria-label="Close Ask the Hub">\u00d7</button></div>' +
+      '<p class="ask-about">Ask the Hub will connect through an API to the organisation\'s internal AI service. It will answer only from the controlled data sources in this Hub, cite the pages and records it used by permanent ID, and respect access control. Until it is connected, questions are answered by keyword search over Hub pages.</p>';
+  }
+  function openAsk(q) {
+    askPanel.hidden = false;
+    var my = ++askSeq;
+    if (!q) { askPanel.innerHTML = askIntro() + '<p class="empty">Type a question or keywords in the Ask the Hub bar and press Enter.</p>'; return; }
+    askPanel.innerHTML = askIntro() + '<p class="empty">Searching\u2026</p>';
+    var ask = window.HubAI ? window.HubAI.askHub(q) : Promise.resolve({ mode: "keyword", answer: "Ask the Hub module (js/ai.js) not loaded.", citations: [], note: "" });
+    ask.then(function (r) {
+      if (my !== askSeq) return;
+      askPanel.innerHTML = askIntro() + '<div class="ask-q">\u201c' + esc(q) + '\u201d</div><p class="ask-answer">' + esc(r.answer) + "</p>" +
+        (r.citations.length ? '<ol class="ask-cites">' + r.citations.map(function (c) { return '<li><a href="' + href(c.id) + '">' + esc(c.title) + '</a> <span class="mono nid">' + esc(c.id) + "</span>" + (c.snippet ? '<div class="ask-snip">' + esc(c.snippet) + "</div>" : "") + "</li>"; }).join("") + "</ol>" : "") +
+        (r.note ? '<p class="ask-note">' + esc(r.note) + "</p>" : "");
+    });
+  }
+  function closeAsk() { askPanel.hidden = true; }
+  askPanel.addEventListener("click", function (e) { if (e.target.closest(".ask-close")) closeAsk(); else if (e.target.closest("a[href^='#/']")) closeAsk(); });
+  var askForm = document.getElementById("ask-form");
+  if (askForm) askForm.addEventListener("submit", function (e) { e.preventDefault(); openAsk(search.value.trim()); });
+  function askFromHash() { var m = (location.hash || "").match(/[?&]ask=([^&]*)/); if (m) { var q = decodeURIComponent(m[1].replace(/\+/g, " ")); search.value = q; openAsk(q); } }
+
+  // ---------- image lightbox ----------
+  var lb = document.createElement("div"); lb.id = "lightbox"; lb.className = "lightbox"; lb.hidden = true; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Enlarged image");
+  document.body.appendChild(lb);
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".fig-open");
+    if (b) {
+      var inner = b.getAttribute("data-inline") ? b.querySelector("svg").outerHTML : '<img src="' + esc(b.getAttribute("data-src")) + '" alt="' + esc(b.getAttribute("data-alt")) + '">';
+      lb.innerHTML = '<div class="lb-box"><button type="button" class="lb-close" aria-label="Close enlarged image">\u00d7</button><div class="lb-media">' + inner + '</div><p class="lb-cap">' + esc(b.getAttribute("data-caption")) + "</p></div>";
+      lb.hidden = false; lb.querySelector(".lb-close").focus(); return;
+    }
+    if (!lb.hidden && (e.target === lb || (e.target.closest && e.target.closest(".lb-close")))) lb.hidden = true;
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (!lb.hidden) lb.hidden = true; else closeAsk(); } });
+
+  window.addEventListener("hashchange", function () { render(); askFromHash(); });
+  window.EH = { openAsk: openAsk, data: D, byId: byId, backlinks: backlinks, outLinks: outLinks, buildTree: buildTree, render: render, allTags: allTags };
   render();
+  askFromHash();
 })();

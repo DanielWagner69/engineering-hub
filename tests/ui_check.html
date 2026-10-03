@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>ui check</title></head><body>
+<!-- UI checks for v0.6: lightbox, Ask the Hub fallback, framework pages. Run headless with --dump-dom. -->
+<form id="ask-form"><input id="search"></form><section id="ask-panel" hidden></section><div id="view-buttons"></div><div id="view-desc"></div><nav id="tree"></nav><nav id="breadcrumbs"></nav><div class="main"><article id="page"></article></div><footer id="footer"></footer>
+<script src="../data/hub.js"></script><script src="../js/ai.js"></script><script src="../js/app.js"></script>
+<script>
+var errs = [];
+function out() { document.body.innerHTML = '<pre id="result">UI ' + (errs.length ? "FAIL" : "PASS") + " errors=" + errs.length + "\n" + errs.join("\n") + "</pre>"; }
+history.replaceState(null, "", "#/p/HUB-FRAMEWORK"); EH.render();
+if (!document.querySelector("#page svg.fp-diagram")) errs.push("framework diagram missing");
+var figs = document.querySelectorAll("#page .fig-open"); if (figs.length < 2) errs.push("expected 2 figures on HUB-FRAMEWORK, got " + figs.length);
+figs[1].click(); var lb = document.getElementById("lightbox");
+if (!lb || lb.hidden || !lb.querySelector("img")) errs.push("lightbox did not open with image");
+document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); if (!lb.hidden) errs.push("Escape did not close lightbox");
+figs[0].click(); if (lb.hidden || !lb.querySelector("svg")) errs.push("lightbox did not open inline svg"); lb.click(); if (!lb.hidden) errs.push("backdrop click did not close lightbox");
+history.replaceState(null, "", "#/p/HUB-PRODEX"); EH.render();
+["Points of contact", "Project stats", "Live model view", "Configuration"].forEach(function (t) { if (document.getElementById("page").textContent.indexOf(t) < 0) errs.push("production example missing " + t); });
+history.replaceState(null, "", "#/p/SYS-0007"); EH.render(); if (document.getElementById("page").textContent.indexOf("Production data links") < 0) errs.push("System page missing Production data links");
+history.replaceState(null, "", "#/p/DT-0009"); EH.render(); if (document.getElementById("page").textContent.indexOf("Production data links") < 0) errs.push("Design Type page missing Production data links");
+if (window.HUB_AI_ENDPOINT !== null) errs.push("HUB_AI_ENDPOINT should default to null");
+EH.openAsk("fuel system");
+HubAI.askHub("fuel system").then(function (r) {
+  if (r.mode !== "keyword") errs.push("expected keyword fallback");
+  if (!r.citations.length || !r.citations.every(function (c) { return EH.byId[c.id]; })) errs.push("fallback citations must be Hub pages");
+  setTimeout(function () { var p = document.getElementById("ask-panel"); if (p.hidden || !p.querySelector(".ask-cites a")) errs.push("Ask panel did not show cited results"); out(); }, 50);
+});
+</script></body></html>
