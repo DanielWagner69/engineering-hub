@@ -208,3 +208,24 @@ td.mono,.mono{font-family:Consolas,monospace;font-size:.82rem;white-space:nowrap
 .cfg-row select{min-width:120px;padding:3px 4px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--muted)}
 @media (max-width:1100px){.ask-label{display:none}.brand .proto{display:none}}
 @media (max-width:900px){.prod-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* v0.7: Source and Major Unit facets, supports links, All tags, glossary, scope applicability */
+:root{--itemsource:#6B4E16;--majorunit:#1F5F8B}
+.t-itemsource{background:var(--itemsource)} .t-majorunit{background:var(--majorunit)}
+.c-itemsource{color:var(--itemsource);border-color:var(--itemsource)} .c-majorunit{color:var(--majorunit);border-color:var(--majorunit)}
+.tag-row{margin:6px 0} .tag-facet{color:var(--muted);font-size:.78rem}
+.chip.supports{border-style:dotted;border-width:2px;background:#fff}
+.supports-tag,.home-tag{font-size:.66rem;border-radius:3px;padding:0 5px;color:var(--ph-ink);font-weight:400;text-transform:none;letter-spacing:0}
+.supports-tag{background:#fff;border:2px dotted var(--system)} .home-tag{background:var(--light-100);border:1px solid var(--system)}
+.chip.all-chip{font-weight:600;background:var(--light-100)}
+.scope-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:8px 0}
+.scope-cell{border:1px solid var(--line);border-radius:6px;padding:8px 10px;display:flex;align-items:center;gap:8px;font-size:.88rem}
+.scope-cell.on{background:var(--ok-bg);border-color:var(--ok-line)} .scope-cell.off{background:var(--surface);color:var(--muted)}
+.scope-mark{font-weight:700;width:1em;text-align:center} .scope-cell.on .scope-mark{color:var(--ok)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+dl.glossary{margin:8px 0 18px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.gl-row{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--line-soft)} .gl-row:last-child{border-bottom:0}
+.gl-row:nth-child(odd){background:var(--surface)}
+.gl-row dt{font-weight:700;color:var(--primary);padding:9px 12px} .gl-row dd{margin:0;padding:9px 12px;font-size:.92rem}
+table.item-tags td:last-child{color:var(--muted);font-size:.84rem}
+@media (max-width:900px){.scope-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gl-row{grid-template-columns:1fr}}

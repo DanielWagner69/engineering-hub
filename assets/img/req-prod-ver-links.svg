@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" role="img" aria-labelledby="t d" font-family="Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">
   <title id="t">Typed links between Requirement, Product and Verification data</title>
-  <desc id="d">A Requirement is satisfied by Product data; Product data is supported by Verification data; Verification demonstrates the Requirement is met. Hub pages link to all three. A change flags every linked item for review. AI may propose links, which a person confirms.</desc>
+  <desc id="d">A Requirement is satisfied by Product data; Product data is supported by Verification data; Verification demonstrates the Requirement is met. Hub pages link to all three. Each link type sets the direction of change flags; by default a change flags directly linked objects only, and the reviewer decides whether to pass it on. AI may propose links, which a person confirms.</desc>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#00405E"/></marker>
     <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1D8C89"/></marker>
@@ -30,9 +30,9 @@
     <path d="M345 162L268 128" marker-end="url(#b)"/><path d="M515 162L592 128" marker-end="url(#b)"/><path d="M430 194V250" marker-end="url(#b)"/>
   </g>
   <!-- change flag -->
-  <rect x="600" y="270" width="230" height="58" rx="8" fill="#FDEEE7" stroke="#E8835A" stroke-width="1.5"/>
+  <rect x="590" y="262" width="250" height="74" rx="8" fill="#FDEEE7" stroke="#E8835A" stroke-width="1.5"/>
   <text x="715" y="294" font-size="13" font-weight="700" fill="#A8461F" text-anchor="middle">Change flag</text>
-  <text x="715" y="313" font-size="12" fill="#A8461F" text-anchor="middle">a change flags every linked item</text>
+  <text x="715" y="312" font-size="12" fill="#A8461F" text-anchor="middle">flags direct links only, in the</text><text x="715" y="327" font-size="12" fill="#A8461F" text-anchor="middle">link type's direction; reviewer passes on</text>
   <text x="30" y="360" font-size="12" fill="#526775">Solid: confirmed typed links. Dashed: links from Hub pages; AI may propose links, a person confirms them before they count as verified.</text>
   <text x="30" y="380" font-size="12" fill="#526775">Generic framework diagram, not a real product.</text>
 </svg>

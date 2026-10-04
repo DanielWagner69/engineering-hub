@@ -20,6 +20,6 @@ EH.data.views.forEach(function(v){ (v.scopeSelectable?scopes:[""]).forEach(funct
 });});});
 // every content page must appear in every view's generated tree
 EH.data.views.forEach(function(v){ var found={}; (function walk(ns){ns.forEach(function(x){ if(x.id) found[x.id]=1; walk(x.children||[]);});})(EH.buildTree(v.key,""));
-  EH.data.pages.filter(function(p){return p.type==="content"||p.type==="lesson";}).forEach(function(p){ if(!found[p.id]) errs.push("view "+v.key+" missing "+p.id); }); });
+  EH.data.pages.filter(function(p){return (p.type==="content"||p.type==="lesson") && (!v.fixedScope || (p.tags.productscope||[]).indexOf(v.fixedScope)>=0);}).forEach(function(p){ if(!found[p.id]) errs.push("view "+v.key+" missing "+p.id); }); });
 document.body.innerHTML='<pre id="result">CRAWL '+(errs.length?"FAIL":"PASS")+" renders="+n+" links="+links+" errors="+errs.length+"\n"+errs.slice(0,50).join("\n")+"</pre>";
 </script></body></html>

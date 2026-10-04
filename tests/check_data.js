@@ -36,9 +36,39 @@ D.pages.forEach(p => (p.images || []).forEach(im => {
   if (!im.src || !fs.existsSync(path.join(__dirname, "..", im.src))) errs.push(p.id + ": image file missing " + im.src);
   if (!im.alt || !im.caption) errs.push(p.id + ": image needs alt text and caption");
 }));
-["HUB-FRAMEWORK", "HUB-PRODEX", "HUB-LESSONS", "HUB-ISSUES"].forEach(id => { if (!byId[id]) errs.push("missing hub page " + id); });
+["HUB-FRAMEWORK", "HUB-PRODEX", "HUB-LESSONS", "HUB-ISSUES", "HUB-GLOSSARY", "HUB-BUILDLEVELS", "HUB-FINISH"].forEach(id => { if (!byId[id]) errs.push("missing hub page " + id); });
 if ((D.meta || {}).hubKind !== "Framework") errs.push("meta.hubKind must be 'Framework'");
 D.pages.forEach(p => { if (p.productionData) errs.push(p.id + ": production data is not allowed in the Framework Hub"); });
+// v0.7 (requirements v13 decisions)
+const of = t => D.pages.filter(p => p.type === t);
+const dt = of("designtype").map(p => p.title);
+if (dt.length !== 10) errs.push("expected 10 Design Types, got " + dt.length);
+["DT-0011", "DT-0012", "DT-0013"].forEach(id => { if (byId[id]) errs.push(id + " is retired and must not be used"); });
+if (dt.some(t => /standard|bought|coating/i.test(t))) errs.push("Design Type must not contain Standard Parts, Bought-in or Coatings");
+const src = of("itemsource").map(p => p.title).join("|"); if (src !== "Make|Standard Part|Bought-in Equipment") errs.push("Source options wrong: " + src);
+const mu = of("majorunit").map(p => p.title).join("|"); if (mu !== "Front Fuselage|Centre Fuselage|Rear Fuselage|Wings|Fins|Final Assembly") errs.push("Major Unit options wrong: " + mu);
+of("majorunit").forEach(p => { if (JSON.stringify(p.scopes) !== '["PS-0001"]') errs.push(p.id + ": Major Unit must be Aircraft scope only"); });
+const muView = D.views.find(v => v.key === "majorunit"); if (!muView || muView.fixedScope !== "PS-0001") errs.push("Major Unit view must be fixed to the Aircraft scope");
+if (!D.views.find(v => v.key === "productscope")) errs.push("Product Scope view missing");
+of("system").forEach(p => { if (!(p.scopes || []).length) errs.push(p.id + ": no applicable Product Scopes"); (p.scopes || []).forEach(id => { if (!byId[id] || byId[id].type !== "productscope") errs.push(p.id + ": bad scope " + id); }); });
+const sc = id => (byId[id].scopes || []).join(",");
+if (sc("SYS-0007") !== "PS-0001,PS-0002,PS-0004") errs.push("Fuel must apply to Aircraft, Ground Equipment, Facilities");
+byId["SG-0006"].members.forEach(m => { if (sc(m) !== "PS-0001") errs.push(m + ": Mission Systems apply to Aircraft only"); });
+D.facets.filter(f => ["sysgroup", "system"].includes(f.key)).forEach(f => { if (/level [12]/i.test(f.source + f.note)) errs.push(f.key + ": use upper tier / lower tier, not level 1 / level 2"); });
+D.pages.filter(p => p.tags).forEach(p => {
+  (p.all || []).forEach(k => { if (!facets.includes(k)) errs.push(p.id + ": 'all' for unknown facet " + k); if (p.recordKind !== "knowledge") errs.push(p.id + ": only knowledge records may be tagged All"); });
+  ((p.supports || {}).system || []).forEach(id => { if (!byId[id] || byId[id].type !== "system") errs.push(p.id + ": supports link to non-System " + id); });
+  const has = k => (p.tags && (p.tags[k] || []).length) || (p.all || []).includes(k);
+  if (p.recordKind === "knowledge" && (!has("stage") || !has("system"))) errs.push(p.id + ": knowledge record lacks mandatory Lifecycle Stage / System");
+  if ((p.tags.productscope || []).length) (p.tags.system || []).forEach(sid => { if (!(p.tags.productscope).some(ps => (byId[sid].scopes || []).includes(ps))) errs.push(p.id + ": System " + sid + " does not apply to any of its Product Scopes"); });
+  if (p.exampleItem) { // items: exactly one option per facet
+    Object.entries(p.exampleItem.tags).forEach(([k, id]) => { if (typeof id !== "string") errs.push(p.id + ": example item must take exactly one option for " + k); else if (!byId[id] || byId[id].type !== k) errs.push(p.id + ": example item bad " + k + " " + id); });
+    if (p.exampleItem.tags.system && (p.exampleItem.supports || []).includes(p.exampleItem.tags.system)) errs.push(p.id + ": home System repeated as a supports link");
+  }
+});
+const gl = (byId["HUB-GLOSSARY"] || {}).glossary || [], terms = gl.map(g => g[0].toLowerCase());
+["data object", "item", "record", "page", "facet / option", "facet level", "build level", "tier", "data type", "link type"].forEach(t => { if (!terms.includes(t)) errs.push("glossary missing " + t); });
+if (!/^0\.7/.test(D.meta.version)) errs.push("version should be 0.7");
 const counts = {}; D.pages.forEach(p => counts[p.type] = (counts[p.type] || 0) + 1);
 console.log("Pages:", JSON.stringify(counts), "Issues:", D.issues.length);
 if (errs.length) { console.log("ERRORS:\n" + errs.join("\n")); process.exit(1); } else console.log("Data checks passed: all IDs unique, all tags and links resolve.");

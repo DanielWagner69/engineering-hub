@@ -1,4 +1,4 @@
-/* Engineering Hub (Framework) prototype v0.6 - vanilla JS, hash routing, no external dependencies.
+/* Engineering Hub (Framework) prototype v0.7 - vanilla JS, hash routing, no external dependencies.
    All content lives once in window.HUB_DATA.pages (flat). Trees are views generated from tags. */
 (function () {
   "use strict";
@@ -10,13 +10,14 @@
   D.pages.forEach(function (p) { byId[p.id] = p; });
   D.facets.forEach(function (f) { facetByKey[f.key] = f; });
   D.views.forEach(function (v) { viewByKey[v.key] = v; });
-  var TYPE_LABEL = { stage: "Lifecycle Stage", sysgroup: "System Group", system: "System", designtype: "Design Type", productscope: "Product Scope",
+  var TYPE_LABEL = { stage: "Lifecycle Stage", sysgroup: "System Group", system: "System", designtype: "Design Type", productscope: "Product Scope", majorunit: "Major Unit", itemsource: "Source",
     discipline: "Discipline", skill: "Skill", trait: "Trait", srcsystem: "Tracker source entry", content: "Topic (example)", lesson: "Lesson Learned", special: "Hub page" };
   var TYPE_COLOUR = {};
   Object.keys(TYPE_LABEL).forEach(function (k) { TYPE_COLOUR[k] = "var(--" + k + ")"; });
-  var TAG_FACETS = ["stage", "system", "designtype", "productscope", "discipline", "skill", "trait"]; // stored tags
-  var SHOW_FACETS = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline", "skill", "trait"]; // incl. derived
-  var LL_FACETS = ["stage", "system", "designtype", "discipline"];
+  var TAG_FACETS = ["stage", "productscope", "majorunit", "system", "designtype", "itemsource", "discipline", "skill", "trait"]; // stored tags
+  var SHOW_FACETS = ["stage", "productscope", "majorunit", "sysgroup", "system", "designtype", "itemsource", "discipline", "skill", "trait"]; // incl. derived
+  var LL_FACETS = ["stage", "productscope", "system", "designtype", "discipline"];
+  var HUB_PAGES = [["HUB-GLOSSARY", "special"], ["HUB-BUILDLEVELS", "special"], ["HUB-FINISH", "special"], ["HUB-FRAMEWORK", "special"], ["HUB-PRODEX", "special"]];
 
   function valuesOf(facet) { return D.pages.filter(function (p) { return p.type === facet; }).sort(function (a, b) { return a.order - b.order; }); }
   var contents = D.pages.filter(function (p) { return p.type === "content"; });
@@ -24,10 +25,16 @@
   var items = contents.concat(lessons);
 
   function refsInText(t) { var out = [], re = /\[\[([A-Z]{2,4}-[A-Z0-9]+)\]\]/g, m; while ((m = re.exec(t || ""))) out.push(m[1]); return out; }
-  function storedTags(p) { var o = []; TAG_FACETS.forEach(function (k) { (p.tags && p.tags[k] || []).forEach(function (id) { o.push(id); }); }); return o; }
+  // Knowledge records may carry several options per facet, or "All" (p.all lists the facets tagged with every option).
+  function isAll(p, k) { return !!(p.all && p.all.indexOf(k) >= 0); }
+  function rawTags(p, k) { return isAll(p, k) ? valuesOf(k).map(function (v) { return v.id; }) : (p.tags && p.tags[k]) || []; }
+  function storedTags(p) { var o = []; TAG_FACETS.forEach(function (k) { rawTags(p, k).forEach(function (id) { o.push(id); }); }); return o; }
   // Derived tags: System Group comes from the System tag(s); never stored.
-  function derivedGroups(p) { var g = []; (p.tags && p.tags.system || []).forEach(function (s) { var grp = byId[s] && byId[s].group; if (grp && g.indexOf(grp) < 0) g.push(grp); }); return g; }
-  function tagsOf(p, k) { return k === "sysgroup" ? derivedGroups(p) : (p.tags && p.tags[k]) || []; }
+  function derivedGroups(p) { var g = []; rawTags(p, "system").forEach(function (s) { var grp = byId[s] && byId[s].group; if (grp && g.indexOf(grp) < 0) g.push(grp); }); return g; }
+  function tagsOf(p, k) { return k === "sysgroup" ? derivedGroups(p) : rawTags(p, k); }
+  function supportsOf(p) { return (p.supports && p.supports.system) || []; }
+  // System applicability: each System records the Product Scopes it applies to
+  function sysApplies(sysId, scope) { var s = byId[sysId]; return !scope || !s || !s.scopes || s.scopes.indexOf(scope) >= 0; }
   function allTags(p) { return storedTags(p).concat(derivedGroups(p)); }
 
   // Explicit outgoing links (tags, inline references, structural links), used for backlinks
@@ -38,6 +45,8 @@
     if (p.group) s.push(p.group);
     (p.members || []).forEach(function (m) { s.push(m); });
     (p.sources || []).forEach(function (m) { s.push(m); });
+    supportsOf(p).forEach(function (m) { s.push(m); });
+    (p.scopes || []).forEach(function (m) { s.push(m); });
     Object.keys(p.mapsTo || {}).forEach(function (k) { s = s.concat(p.mapsTo[k]); });
     outLinks[p.id] = s;
   });
@@ -73,8 +82,8 @@
   function prodLinksSection(p) {
     var what = TYPE_LABEL[p.type].toLowerCase();
     return '<h2>Production data links</h2><p class="section-note">In a project\'s Production Hub this table lists the production records linked to this ' + esc(what) +
-      ' (models, calculations, test records), each under configuration control. The Framework Hub holds no production data, so it is empty here. See ' + link("HUB-FRAMEWORK") + ".</p>" +
-      '<div class="table-wrap"><table class="list prod-links"><thead><tr><th>Production record</th><th>Type</th><th>Authoritative system</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th><th>Status</th></tr></thead>' +
+      ' (models, calculations, test records), each under configuration control, with its current master from the authority register. The Framework Hub holds no production data, so it is empty here. See ' + link("HUB-FRAMEWORK") + ".</p>" +
+      '<div class="table-wrap"><table class="list prod-links"><thead><tr><th>Production record</th><th>Type</th><th>Current master</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th><th>Status</th></tr></thead>' +
       '<tbody><tr><td colspan="7" class="empty-row"><span class="ph-tag">EMPTY IN FRAMEWORK</span>No production data. A Production Hub would show linked records here, e.g. part models (PLM/CAD), calculation documents and verification records, with their applicability by build standard, serial or configuration.</td></tr></tbody></table></div>';
   }
   function ph(text) { return '<div class="ph"><span class="ph-tag">PLACEHOLDER</span>' + esc(text) + "</div>"; }
@@ -106,25 +115,30 @@
 
   // ---------- tree (generated from tags, any number of levels) ----------
   var expanded = {};
-  function buildLevel(levels, pool, ctx) {
+  function buildLevel(levels, pool, ctx, scope) {
     if (!levels.length) return pool.map(function (c) { return { id: c.id, ctx: ctx, key: ctx.concat([c.id]).join("/"), children: [] }; });
     var facet = levels[0], rest = levels.slice(1), vals = valuesOf(facet);
-    if (facet === "system") { // under a System Group, show only its member Systems
+    var sc = ctx.filter(function (id) { return byId[id].type === "productscope"; })[0] || scope || "";
+    if (facet === "system") { // under a System Group, show only its member Systems; only Systems that apply to the scope
       var g = ctx.filter(function (id) { return byId[id].type === "sysgroup"; })[0];
       if (g) vals = vals.filter(function (s) { return s.group === g; });
+      vals = vals.filter(function (s) { return sysApplies(s.id, sc); });
     }
+    if (facet === "sysgroup" && sc) vals = vals.filter(function (g) { return g.members.some(function (m) { return sysApplies(m, sc); }); });
+    var shown = vals.map(function (v) { return v.id; });
     var nodes = vals.map(function (v) {
       var sub = pool.filter(function (c) { return allTags(c).indexOf(v.id) >= 0; });
-      return { id: v.id, ctx: ctx, key: ctx.concat([v.id]).join("/"), count: sub.length, children: buildLevel(rest, sub, ctx.concat([v.id])) };
+      return { id: v.id, ctx: ctx, key: ctx.concat([v.id]).join("/"), count: sub.length, children: buildLevel(rest, sub, ctx.concat([v.id]), scope) };
     });
-    pool.filter(function (c) { return !tagsOf(c, facet).length; }).forEach(function (c) { nodes.push({ id: c.id, ctx: ctx, key: ctx.concat([c.id]).join("/"), children: [] }); });
+    // records with no tag among the options shown at this level are listed directly, so nothing disappears from a view
+    pool.filter(function (c) { return !tagsOf(c, facet).some(function (id) { return shown.indexOf(id) >= 0; }); }).forEach(function (c) { nodes.push({ id: c.id, ctx: ctx, key: ctx.concat([c.id]).join("/"), children: [] }); });
     return nodes;
   }
-  // Product Scope (Level 0) is selectable at the top of views whose top facet sits at Level 1
+  // Product Scope (facet level 0) is selectable at the top of views whose top facet sits at facet level 1; fixedScope views use one scope
   function buildTree(viewKey, scope) {
-    var v = viewByKey[viewKey], sc = scope === undefined ? (v.scopeSelectable ? state.scope : "") : scope;
+    var v = viewByKey[viewKey], sc = v.fixedScope || (scope === undefined ? (v.scopeSelectable ? state.scope : "") : scope);
     var pool = sc ? items.filter(function (c) { return tagsOf(c, "productscope").indexOf(sc) >= 0; }) : items;
-    return buildLevel(v.levels, pool, []);
+    return buildLevel(v.levels, pool, [], sc);
   }
   function registerTree() {
     var cats = {}, order = [];
@@ -132,6 +146,8 @@
     function leaf(p) { return { id: p.id, ctx: [], key: "reg/" + p.id, children: [] }; }
     return [
       { label: "Product Scope", facet: "productscope", key: "reg/ps", children: valuesOf("productscope").map(leaf) },
+      { label: "Source", facet: "itemsource", key: "reg/src-facet", children: valuesOf("itemsource").map(leaf) },
+      { label: "Major Unit (Aircraft scope)", facet: "majorunit", key: "reg/mu", children: valuesOf("majorunit").map(leaf) },
       { label: "Skills Register", facet: "skill", key: "reg/skill", children: valuesOf("skill").map(leaf) },
       { label: "Traits Register", facet: "trait", key: "reg/trait", children: order.map(function (c) { return { label: c, key: "reg/trait/" + c, children: cats[c].map(leaf) }; }) },
       { label: "Tracker Aircraft Systems (source)", facet: "srcsystem", key: "reg/src", children: valuesOf("srcsystem").map(leaf) }
@@ -165,7 +181,7 @@
     document.getElementById("view-buttons").innerHTML = groups.map(function (g) {
       var sel = g.views.some(function (v) { return v.scopeSelectable; }) ? (function () {
         var enabled = viewByKey[state.view].scopeSelectable;
-        return '<div class="scope-select"><label for="scope-select">Product Scope (Level 0)</label><select id="scope-select"' + (enabled ? "" : ' disabled title="Product Scope applies to the System and Design Type views"') + '><option value="">All scopes</option>' +
+        return '<div class="scope-select"><label for="scope-select">Product Scope (facet level 0)</label><select id="scope-select"' + (enabled ? "" : ' disabled title="Product Scope applies to the System and Design Type views"') + '><option value="">All scopes</option>' +
           valuesOf("productscope").map(function (ps) { return '<option value="' + ps.id + '"' + (enabled && state.scope === ps.id ? " selected" : "") + ">" + esc(ps.title) + "</option>"; }).join("") + "</select></div>";
       })() : "";
       return '<div class="view-group' + (g.views.some(function (v) { return v.key === state.view; }) ? " has-active" : "") + '"><div class="view-group-label">' + esc(g.name) + "</div>" + sel + '<div class="view-row">' + g.views.map(function (v) {
@@ -178,11 +194,10 @@
     markExpanded(main, []); markExpanded(reg, []);
     el.innerHTML =
       '<div class="tree-section">Home</div><ul>' + simpleNode("#/home?v=" + state.view, "special", "Engineering Hub home", state.route === "home") + "</ul>" +
-      '<div class="tree-section">' + esc(v.label) + " view: " + esc(facetByKey[v.levels[0]].plural) + (scopeOn() ? " \u00b7 " + esc(byId[state.scope].title) : "") + "</div>" + renderNodes(main) +
+      '<div class="tree-section">' + esc(v.label) + " view: " + (v.fixedScope ? "Full Aircraft \u203a " : "") + esc(facetByKey[v.levels[0]].plural) + (scopeOn() ? " \u00b7 " + esc(byId[state.scope].title) : "") + "</div>" + renderNodes(main) +
       '<div class="tree-section">Registers</div>' + renderNodes(reg) +
       '<div class="tree-section">Hub pages</div><ul>' +
-      simpleNode(href("HUB-FRAMEWORK"), "special", "Framework vs Production", state.id === "HUB-FRAMEWORK") +
-      simpleNode(href("HUB-PRODEX"), "special", "Production Hub (illustrative)", state.id === "HUB-PRODEX") +
+      HUB_PAGES.map(function (h) { return byId[h[0]] ? simpleNode(href(h[0]), h[1], esc(byId[h[0]].title), state.id === h[0]) : ""; }).join("") +
       simpleNode(href("HUB-LESSONS"), "lesson", "Lessons Learned (" + lessons.length + ")", state.id === "HUB-LESSONS") +
       simpleNode(href("HUB-ISSUES"), "special", "Framework issues (" + D.issues.length + ")", state.id === "HUB-ISSUES") + "</ul>";
   }
@@ -206,10 +221,11 @@
     var L = v.levels, path = state.ctx.slice();
     if (!path.length) {
       if (p.type === "content" || p.type === "lesson") {
-        L.forEach(function (k) { var t = tagsOf(p, k).filter(function (id) { return k !== "system" || !path.length || byId[path[0]].type !== "sysgroup" || byId[id].group === path[0]; })[0]; if (t) path.push(t); });
+        L.forEach(function (k) { var gc = path.filter(function (id) { return byId[id].type === "sysgroup"; })[0], sc = path.filter(function (id) { return byId[id].type === "productscope"; })[0];
+          var t = tagsOf(p, k).filter(function (id) { return (k !== "system" || !gc || byId[id].group === gc) && (k !== "system" || sysApplies(id, sc)) && (k !== "sysgroup" || !sc || byId[id].members.some(function (m) { return sysApplies(m, sc) && tagsOf(p, "system").indexOf(m) >= 0; })); })[0]; if (t) path.push(t); });
       } else if (p.type === "system" && L[0] === "sysgroup") path = [p.group];
       else if (p.type !== L[0]) {
-        if (["skill", "trait", "srcsystem", "productscope"].indexOf(p.type) >= 0) out.push("Registers");
+        if (["skill", "trait", "srcsystem", "productscope", "itemsource", "majorunit"].indexOf(p.type) >= 0) out.push("Registers");
         if (facetByKey[p.type]) out.push(facetLink(p.type));
         if (p.type === "trait") out.push(esc(p.category));
       }
@@ -231,7 +247,7 @@
     var f = facetByKey[p.type];
     var rows = '<span class="k">Permanent ID</span><span class="mono">' + esc(p.id) + "</span>" + '<span class="k">Page type</span><span>' + esc(TYPE_LABEL[p.type]) + "</span>";
     if (f) rows += '<span class="k">Facet</span><span><a href="#/f/' + f.key + "?v=" + state.view + '">' + esc(f.label) + "</a></span>" + '<span class="k">Source</span><span>' + esc(f.source) + "</span>" +
-      '<span class="k">Hierarchy level</span><span>' + esc(f.levelLabel) + "</span>";
+      '<span class="k">Level</span><span>' + esc(f.levelLabel) + "</span>";
     if (p.status) rows += '<span class="k">Status</span><span>' + esc(p.status) + "</span>";
     if (p.group) rows += '<span class="k">System Group</span><span>' + chip(p.group) + "</span>";
     if (p.sourceCategory && p.type !== "trait") rows += '<span class="k">Source category</span><span>' + esc(p.sourceCategory) + "</span>";
@@ -239,12 +255,21 @@
     if (p.sources) rows += '<span class="k">Source</span><span><div class="chips">' + p.sources.map(function (id) { return chip(id); }).join("") + "</div></span>";
     if (p.origin) rows += '<span class="k">Origin</span><span>' + (p.origin.url ? '<a href="' + esc(p.origin.url) + '">' + esc(p.origin.document) + "</a>" : esc(p.origin.document)) + ", issue: " + esc(p.origin.issue) + "</span>";
     var html = '<div class="panel"><h4>Metadata</h4><div class="kv">' + rows + "</div>";
+    if (p.type === "system" && p.scopes) rows += '<span class="k">Applies to Product Scopes</span><span><div class="chips">' + p.scopes.map(function (id) { return chip(id); }).join("") + "</div>" + (p.scopesConfirmed ? "" : '<span class="derived-note">Initial proposal, to be confirmed</span>') + "</span>";
+    if (p.type === "majorunit") rows += '<span class="k">Build level</span><span>Build Level 1 (Aircraft scope only)</span>';
+    if (p.recordKind === "knowledge") rows += '<span class="k">Tagging rule</span><span>Knowledge record: may carry several options per facet, or All. Mandatory: at least one Lifecycle Stage and at least one System.</span>';
     if (storedTags(p).length) {
-      html += '<h4 style="margin-top:12px">Tags</h4>' + SHOW_FACETS.filter(function (k) { return tagsOf(p, k).length; }).map(function (k) {
-        var der = k === "sysgroup" ? "derived from System" : (p.derived && p.derived[k] ? "derived from components" : "");
-        return '<div style="margin:6px 0"><div style="color:var(--muted);font-size:.78rem">' + esc(facetByKey[k].label) + (der ? ' <span class="derived-tag" title="' + esc(k === "sysgroup" ? "System Group is derived from the System tag(s); it is never stored." : p.derived[k]) + '">' + der + "</span>" : "") +
-          '</div><div class="chips">' + tagsOf(p, k).map(function (id) { return chip(id, der ? "derived" : ""); }).join("") + "</div>" +
-          (p.derived && p.derived[k] ? '<div class="derived-note">' + esc(p.derived[k]) + "</div>" : "") + "</div>";
+      var direct = SHOW_FACETS.filter(function (k) { return k !== "sysgroup" && tagsOf(p, k).length && !(p.derived && p.derived[k]); });
+      var derived = SHOW_FACETS.filter(function (k) { return tagsOf(p, k).length && (k === "sysgroup" || (p.derived && p.derived[k])); });
+      html += '<h4 style="margin-top:12px">Tags</h4>' + direct.map(function (k) {
+        return '<div class="tag-row"><div class="tag-facet">' + esc(facetByKey[k].label) + (k === "system" && supportsOf(p).length ? ' <span class="home-tag" title="The one System the item is part of">home System</span>' : "") + '</div><div class="chips">' +
+          (isAll(p, k) ? '<a class="chip all-chip c-' + k + '" href="#/f/' + k + "?v=" + state.view + '" title="Tagged with every option of this facet">All ' + esc(facetByKey[k].plural) + " (" + valuesOf(k).length + ")</a>" : tagsOf(p, k).map(function (id) { return chip(id); }).join("")) + "</div></div>";
+      }).join("");
+      if (supportsOf(p).length) html += '<h4 style="margin-top:12px">Supports links <span class="supports-tag">typed link, not a tag</span></h4><div class="tag-row"><div class="tag-facet">Systems carried or served</div><div class="chips">' +
+        supportsOf(p).map(function (id) { return chip(id, "supports"); }).join("") + '</div><div class="derived-note">A change flags these Systems for review, but no further.</div></div>';
+      if (derived.length) html += '<h4 style="margin-top:12px">Derived tags <span class="derived-tag">calculated, not stored</span></h4>' + derived.map(function (k) {
+        var why = k === "sysgroup" ? "Derived from the System tag(s); never stored." : p.derived[k];
+        return '<div class="tag-row"><div class="tag-facet">' + esc(facetByKey[k].label) + '</div><div class="chips">' + tagsOf(p, k).map(function (id) { return chip(id, "derived"); }).join("") + '</div><div class="derived-note">' + esc(why) + "</div></div>";
       }).join("");
     }
     return html + "</div>";
@@ -260,6 +285,8 @@
     var html = "<h2>Related pages</h2>";
     if (p.members) html += '<h3>Systems in this group</h3><div class="chips">' + p.members.map(function (id) { return chip(id); }).join("") + "</div>";
     var tagged = taggedWith(p.id), topics = tagged.filter(function (c) { return c.type === "content"; });
+    var sup = items.filter(function (c) { return supportsOf(c).indexOf(p.id) >= 0; });
+    if (sup.length) html += '<h3>Supported by (typed supports links, not tags)</h3><div class="chips">' + sup.map(function (c) { return chip(c.id, "supports"); }).join("") + "</div>";
     if (topics.length) html += "<h3>Topic pages tagged with this " + esc(TYPE_LABEL[p.type].toLowerCase()) + '</h3><div class="chips">' + topics.map(function (c) { return chip(c.id); }).join("") + "</div>";
     var co = {};
     tagged.forEach(function (c) { allTags(c).forEach(function (id) { var t = byId[id].type; if (id !== p.id && t !== p.type && !(p.type === "system" && t === "sysgroup") && !(p.type === "sysgroup" && t === "system")) (co[t] = co[t] || {})[id] = true; }); });
@@ -300,9 +327,17 @@
     else if (p.agreed) desc = ph("Description of this " + TYPE_LABEL[p.type].toLowerCase() + "'s function and boundary to be written (agreed by name and rule only).");
     else desc = '<div class="warn"><b>No description in the source register.</b> The tracker has no description for this entry, so it is shown here as a gap rather than invented. See ' + link("HUB-ISSUES") + ".</div>";
     var f = facetByKey[p.type];
-    var rule = f && f.note && ["system", "sysgroup", "designtype", "productscope"].indexOf(p.type) >= 0 ? '<p class="facet-rule"><b>' + esc(f.label) + ":</b> " + esc(f.note) + "</p>" : "";
-    var taggable = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline"].indexOf(p.type) >= 0;
-    return head(p) + '<div class="grid"><div>' + (p.type === "srcsystem" ? mappingBox(p) : "") + contextBox(p) + "<h2>Description</h2>" + desc + rule + figures(p.images) +
+    var rule = f && f.note && ["system", "sysgroup", "designtype", "productscope", "majorunit", "itemsource"].indexOf(p.type) >= 0 ? '<p class="facet-rule"><b>' + esc(f.label) + ":</b> " + esc(f.note) + "</p>" : "";
+    var taggable = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline", "majorunit", "itemsource"].indexOf(p.type) >= 0;
+    var scopeBox = "";
+    if (p.type === "system") scopeBox = "<h2>Applicable Product Scopes</h2><p>One shared System list is used for every Product Scope; each System records the scopes it applies to. Items in other scopes cannot take this System, and views filtered by Product Scope show only applicable Systems.</p>" +
+      '<div class="scope-grid">' + valuesOf("productscope").map(function (ps) { var on = p.scopes.indexOf(ps.id) >= 0; return '<div class="scope-cell ' + (on ? "on" : "off") + '"><span class="scope-mark" aria-hidden="true">' + (on ? "\u2713" : "\u2013") + "</span>" + link(ps.id) + '<span class="sr">' + (on ? " applies" : " does not apply") + "</span></div>"; }).join("") + "</div>" +
+      (p.scopesConfirmed ? '<p class="section-note">Confirmed (4 Oct 2026).</p>' : '<p class="section-note">Initial proposal, to be confirmed. See ' + link("HUB-ISSUES") + ".</p>");
+    if (p.type === "productscope") scopeBox = "<h2>Systems that apply to this scope</h2>" + valuesOf("sysgroup").map(function (g) { var ms = g.members.filter(function (m) { return sysApplies(m, p.id); }); return ms.length ? "<h3>" + esc(g.title) + '</h3><div class="chips">' + ms.map(function (m) { return chip(m); }).join("") + "</div>" : ""; }).join("") +
+      (p.id === "PS-0001" ? '<p>The Aircraft scope has a product-build hierarchy of build levels (Full Aircraft \u203a Major Unit or Final Assembly \u203a Assembly \u203a Sub-assembly \u203a Part). See ' + link("HUB-BUILDLEVELS") + ".</p>" : "<p>The lower build levels of this scope will be defined later. See " + link("HUB-BUILDLEVELS") + ".</p>");
+    if (p.type === "system" && scopeOn() && !sysApplies(p.id, state.scope)) scopeBox = '<div class="warn"><b>Not applicable to ' + esc(byId[state.scope].title) + ".</b> This System does not apply to the selected Product Scope, so it is not shown in the filtered view.</div>" + scopeBox;
+    if (p.type === "majorunit") scopeBox = '<p class="section-note">Part of the Aircraft scope (' + link("PS-0001") + "). See " + link("HUB-BUILDLEVELS") + " for how Build Level 1 relates to the other build levels.</p>";
+    return head(p) + '<div class="grid"><div>' + (p.type === "srcsystem" ? mappingBox(p) : "") + contextBox(p) + "<h2>Description</h2>" + desc + rule + scopeBox + figures(p.images) +
       "<h2>Key considerations</h2>" + ph("Key considerations for \u201c" + p.title + "\u201d to be written and verified by a nominated owner.") +
       (taggable ? lessonsSection(p) : "") +
       (["system", "designtype"].indexOf(p.type) >= 0 ? prodLinksSection(p) : "") +
@@ -332,7 +367,7 @@
       '<div class="facet-filters">' + boxes + "</div>" +
       "<p><b>" + res.length + " of " + lessons.length + " lessons match</b>" + (f.length ? ' \u00b7 filters: <span class="chips" style="display:inline-flex">' + f.map(function (id) { return chip(id); }).join("") + '</span> \u00b7 <a href="' + href("HUB-LESSONS") + '">Clear all</a>' : " (no filters applied)") + "</p>" +
       '<table class="list"><thead><tr><th>ID</th><th>Lesson</th><th>Summary</th><th>Tags</th></tr></thead><tbody>' +
-      (res.length ? res.map(function (l) { return '<tr><td class="mono">' + esc(l.id) + "</td><td>" + link(l.id) + "</td><td>" + esc(l.summary) + '</td><td><div class="chips">' + storedTags(l).filter(function (id) { return LL_FACETS.indexOf(byId[id].type) >= 0; }).map(function (id) { return chip(id); }).join("") + "</div></td></tr>"; }).join("")
+      (res.length ? res.map(function (l) { return '<tr><td class="mono">' + esc(l.id) + "</td><td>" + link(l.id) + "</td><td>" + esc(l.summary) + '</td><td><div class="chips">' + LL_FACETS.map(function (k) { return isAll(l, k) ? '<span class="chip all-chip c-' + k + '">All ' + esc(facetByKey[k].plural) + "</span>" : tagsOf(l, k).map(function (id) { return chip(id); }).join(""); }).join("") + "</div></td></tr>"; }).join("")
                   : '<tr><td colspan="4" class="empty">No lessons match this combination.</td></tr>') + "</tbody></table>" + backlinkSection(p);
   }
   function renderLessonPage(p) {
@@ -350,11 +385,26 @@
       "<p>See all lessons: " + link("HUB-LESSONS") + ".</p>" +
       backlinkSection(p) + "</div><div>" + metaPanel(p) + verificationPanel(p) + "</div></div>";
   }
+  // Example of an item's tags: exactly one option per facet, supports links shown separately
+  function exampleItemTable(p) {
+    var it = p.exampleItem; if (!it) return "";
+    var rows = ["productscope", "majorunit", "system", "designtype", "itemsource"].filter(function (k) { return it.tags[k]; }).map(function (k) {
+      return "<tr><td>" + esc(facetByKey[k].label) + (k === "system" ? " (home System)" : "") + "</td><td>" + chip(it.tags[k]) + "</td><td>Exactly one option</td></tr>"; }).join("") +
+      "<tr><td>Supports links</td><td><div class=\"chips\">" + (it.supports || []).map(function (id) { return chip(id, "supports"); }).join("") + "</div></td><td>Typed links, not tags</td></tr>";
+    return '<h2>Example item tagging</h2><p class="section-note">' + esc(it.name) + ". Illustrative only: the Framework Hub holds no project items.</p>" +
+      '<div class="table-wrap"><table class="list item-tags"><thead><tr><th>Facet</th><th>Option</th><th>Rule</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
+  }
+  function renderInfoPage(p) {
+    var gl = p.glossary ? '<dl class="glossary">' + p.glossary.map(function (g) { return '<div class="gl-row" id="gl-' + esc(g[0].toLowerCase().replace(/[^a-z]+/g, "-")) + '"><dt>' + esc(g[0]) + "</dt><dd>" + rich(g[1]).replace(/^<p>|<\/p>$/g, "") + "</dd></div>"; }).join("") + "</dl>" : "";
+    return head(p) + '<p class="lead">' + rich(p.summary).replace(/^<p>|<\/p>$/g, "") + "</p>" +
+      '<div class="grid"><div>' + gl + figures(p.images) + (p.sections || []).map(function (sec) { return "<h2>" + esc(sec.heading) + "</h2>" + rich(sec.body); }).join("") +
+      backlinkSection(p) + "</div><div>" + metaPanel(p) + verificationPanel(p) + "</div></div>";
+  }
   function renderContentPage(p) {
     var others = contents.filter(function (c) { return c.id !== p.id && storedTags(c).some(function (id) { return storedTags(p).indexOf(id) >= 0; }); });
     return head(p) + '<div class="example-banner"><b>Example content.</b> ' + esc(p.exampleNote) + "</div>" +
       '<div class="grid"><div><p><i>' + rich(p.summary).replace(/^<p>|<\/p>$/g, "") + "</i></p>" +
-      p.sections.map(function (s) { return "<h2>" + esc(s.heading) + "</h2>" + rich(s.body); }).join("") + figures(p.images) +
+      p.sections.map(function (s) { return "<h2>" + esc(s.heading) + "</h2>" + rich(s.body); }).join("") + exampleItemTable(p) + figures(p.images) +
       "<h2>Related pages</h2><p>Every tag in the metadata panel is a link to that value's page. This page is stored once and appears under each of its tags in every view.</p>" +
       (others.length ? '<h3>Other topics sharing a tag</h3><div class="chips">' + others.map(function (c) { return chip(c.id); }).join("") + "</div>" : "") +
       "<h2>Learning resources</h2>" + ph("Links to courses, standards and guidance to be added.") +
@@ -362,7 +412,7 @@
   }
   var FRAMEWORK_SVG =
     '<svg class="fp-diagram" viewBox="0 0 960 400" role="img" aria-labelledby="fpd-t fpd-d" font-family="Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">' +
-    '<title id="fpd-t">Framework Hub, Production Hub and production data</title><desc id="fpd-d">The Framework Hub holds generic pages, templates, facets and link types. A Production Hub is a versioned, tailored instance of the framework for one project and adds project working data. It links by permanent ID and version to production data in authoritative systems such as PLM and CAD models, calculations and test records, under configuration control and effectivity.</desc>' +
+    '<title id="fpd-t">Framework Hub, Production Hub and production data</title><desc id="fpd-d">The Framework Hub holds generic pages, templates, facets and link types. A Production Hub is a versioned, tailored instance of the framework for one project and adds project working data. It links by permanent ID and version to production data whose master is still another system (PLM and CAD models, calculations, test records), under configuration control and effectivity. An authority register records when each data type moves to the Production Hub, which becomes master of everything.</desc>' +
     '<defs><marker id="fpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#00405E"/></marker></defs>' +
     '<rect width="960" height="400" rx="10" fill="#F7FBFB"/>' +
     // column 1 framework
@@ -376,13 +426,13 @@
     // column 2 production hub
     '<rect x="360" y="20" width="260" height="290" rx="10" fill="#46C1BE"/>' +
     '<text x="490" y="50" fill="#00405E" font-size="17" font-weight="700" text-anchor="middle">Production Hub</text><text x="490" y="70" fill="#00405E" font-size="12" text-anchor="middle">one per project, internal, access-controlled</text>' +
-    ["Framework pages (version vX)", "Points of contact", "Project stats", "Live model views", "Configuration & effectivity"].map(function (t, i) {
+    ["Framework pages (version vX)", "Points of contact & stats", "Live model views", "Configuration & effectivity", "Authority register"].map(function (t, i) {
       return '<rect x="380" y="' + (88 + i * 42) + '" width="220" height="32" rx="6" fill="' + (i ? "#FFFFFF" : "#D9F2F1") + '"/><text x="490" y="' + (109 + i * 42) + '" fill="#00405E" font-size="13" font-weight="600" text-anchor="middle">' + t + "</text>"; }).join("") +
     // arrow 2
     '<path d="M626 165H692" stroke="#00405E" stroke-width="3" marker-end="url(#fpa)"/><text x="659" y="138" fill="#00405E" font-size="12" font-weight="600" text-anchor="middle">typed links</text><text x="659" y="152" fill="#526775" font-size="11" text-anchor="middle">ID + version</text>' +
     // column 3 production data
     '<rect x="700" y="20" width="240" height="290" rx="10" fill="#9EDEDC"/>' +
-    '<text x="820" y="50" fill="#00405E" font-size="17" font-weight="700" text-anchor="middle">Production data</text><text x="820" y="70" fill="#00405E" font-size="12" text-anchor="middle">in authoritative systems</text>' +
+    '<text x="820" y="50" fill="#00405E" font-size="17" font-weight="700" text-anchor="middle">Production data</text><text x="820" y="70" fill="#00405E" font-size="12" text-anchor="middle">current master until moved to the Hub</text>' +
     ["Part models (PLM / CAD)", "Parametric model parameters", "Calculation documents", "Test & verification records"].map(function (t, i) {
       return '<rect x="718" y="' + (88 + i * 42) + '" width="204" height="32" rx="6" fill="#FFFFFF"/><text x="820" y="' + (109 + i * 42) + '" fill="#00405E" font-size="13" font-weight="600" text-anchor="middle">' + t + "</text>"; }).join("") +
     // config band
@@ -416,7 +466,10 @@
       '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Project stats</h3><div class="stats">' + stats + '</div><p class="section-note">Live counts from the project\'s data once connected.</p></section>' +
       '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Live model view</h3><div class="model-view" role="img" aria-label="Empty live model viewer placeholder">' +
         '<svg viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#9EDEDC" stroke-width="3" stroke-linejoin="round"><path d="M100 18L160 46V96L100 112L40 96V46Z"/><path d="M40 46L100 64L160 46M100 64V112"/></g></svg>' +
-        '<p>Live view of the product model from the authoritative PLM/CAD system, filtered to the configuration selected below.</p></div></section>' +
+        '<p>Live view of the product model from its current master (PLM/CAD, or the Hub once that data type has moved), filtered to the configuration selected below.</p></div></section>' +
+      '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Authority register</h3><p class="section-note">Current master of each data type and the date it moved to the Hub. Data types move one at a time, once their records are verified; the end goal is that the Production Hub is master of everything.</p>' +
+        '<table class="list"><thead><tr><th>Data type</th><th>Current master</th><th>Moved to Hub</th></tr></thead><tbody>' +
+        ["Requirements", "Part models", "Calculations", "Configuration & effectivity"].map(function (t) { return "<tr><td>" + esc(t) + "</td><td>" + dash() + "</td><td>" + dash() + "</td></tr>"; }).join("") + "</tbody></table></section>" +
       '<section class="prod-panel"><h3><span class="ph-tag">PLACEHOLDER</span>Configuration &amp; effectivity</h3>' +
         '<div class="cfg-row"><label>Baseline<select disabled><option>\u2014</option></select></label><label>Build standard<select disabled><option>\u2014</option></select></label><label>Serial / configuration<select disabled><option>\u2014</option></select></label></div>' +
         '<table class="list"><thead><tr><th>Record</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th></tr></thead><tbody><tr><td colspan="4" class="empty-row">No records: configuration-controlled records appear here in a Production Hub.</td></tr></tbody></table></section>' +
@@ -437,22 +490,23 @@
   }
   function renderFacet(key) {
     var f = facetByKey[key]; if (!f) return "<p>Unknown facet.</p>";
-    var vals = valuesOf(key), extra = key === "trait" ? "Category" : key === "system" ? "System Group" : key === "srcsystem" ? "Maps to" : key === "sysgroup" ? "Systems" : null;
+    var vals = valuesOf(key), extra = key === "trait" ? "Category" : key === "system" ? "System Group \u00b7 Product Scopes" : key === "srcsystem" ? "Maps to" : key === "sysgroup" ? "Systems" : key === "majorunit" ? "Build level" : null;
     function extraCell(v) {
       if (key === "trait") return esc(v.category);
-      if (key === "system") return link(v.group);
+      if (key === "majorunit") return "Build Level 1 (Aircraft)";
+      if (key === "system") return link(v.group) + '<div class="chips" style="margin-top:4px">' + v.scopes.map(function (id) { return chip(id); }).join("") + "</div>";
       if (key === "sysgroup") return v.members.length;
       if (key === "srcsystem") return '<div class="chips">' + Object.keys(v.mapsTo).map(function (k) { return v.mapsTo[k].map(function (id) { return chip(id); }).join(""); }).join("") + "</div>" + (v.mappingClean ? "" : '<span class="status s-Open">not clean</span>');
       return "";
     }
     return '<div class="page-head"><span class="type-pill" style="background:' + TYPE_COLOUR[key] + '">Facet</span><div><div class="page-id">' + esc(f.source) + "</div><h1>" + esc(f.plural) + "</h1></div></div>" +
-      (f.note ? '<p class="facet-rule">' + esc(f.note) + "</p>" : "") + "<p><b>Hierarchy level:</b> " + esc(f.levelLabel) + "</p><p>" + vals.length + " values. Each is a page with a permanent ID.</p>" +
+      (f.note ? '<p class="facet-rule">' + esc(f.note) + "</p>" : "") + "<p><b>Level:</b> " + esc(f.levelLabel) + "</p><p>" + vals.length + " values. Each is a page with a permanent ID.</p>" +
       '<table class="list"><thead><tr><th>ID</th><th>' + esc(f.label) + "</th>" + (extra ? "<th>" + extra + "</th>" : "") + "<th>Description</th><th>Tagged items</th></tr></thead><tbody>" +
       vals.map(function (v) { return '<tr><td class="mono">' + esc(v.id) + "</td><td>" + link(v.id) + "</td>" + (extra ? "<td>" + extraCell(v) + "</td>" : "") + "<td>" + (v.description ? esc(v.description) : '<span class="empty">No description yet</span>') + "</td><td>" + taggedWith(v.id).length + "</td></tr>"; }).join("") + "</tbody></table>";
   }
   function renderHome() {
     var v = viewByKey[state.view];
-    var cardFacets = ["stage", "sysgroup", "system", "designtype", "productscope", "discipline", "skill", "trait"];
+    var cardFacets = ["stage", "productscope", "majorunit", "sysgroup", "system", "designtype", "itemsource", "discipline", "skill", "trait"];
     var cards = cardFacets.map(function (k) { return '<a class="card" style="border-top-color:' + TYPE_COLOUR[k] + '" href="#/f/' + k + "?v=" + state.view + '"><div class="n">' + valuesOf(k).length + '</div><div class="l">' + esc(facetByKey[k].plural) + "</div></a>"; }).join("") +
       '<a class="card" style="border-top-color:var(--content)" href="' + href(contents[0].id) + '"><div class="n">' + contents.length + '</div><div class="l">Example topic pages</div></a>' +
       '<a class="card" style="border-top-color:var(--lesson)" href="' + href("HUB-LESSONS") + '"><div class="n">' + lessons.length + '</div><div class="l">Example lessons learned</div></a>' +
@@ -463,20 +517,21 @@
       "<p>An interactive, linked knowledge site for the <b>education</b> of engineers, the <b>verification and validation</b> of information, and <b>navigation</b> of engineering knowledge across the Air System Engineering Lifecycle. The former Design Hub becomes one part of it.</p>" +
       "<h2>How it works: one store, many views</h2>" +
       "<ul><li>Every page is stored <b>once</b>, in a flat list, with a <b>permanent ID</b> (e.g. <span class=\"mono\">SYS-0007</span>, <span class=\"mono\">KN-0005</span>).</li>" +
-      "<li>Pages are <b>tagged</b> with values from controlled facets: Lifecycle Stage, System (two levels: System Group \u203a System), Design Type, Product Scope and Discipline, plus the Skills and Traits registers.</li>" +
-      "<li>There is no fixed tree. The navigation tree on the left is a <b>view generated from the tags</b>. Switch between <b>Lifecycle</b>, <b>System</b>, <b>Design Type</b> and <b>Discipline</b> views; the same page is reached by different routes, never duplicated.</li>" +
-      "<li><b>Facet levels:</b> every facet is assigned to a defined level. Product Scope (Aircraft, Ground Equipment, Test Equipment, Facilities) is Level 0 and can be selected at the top of the System and Design Type views. System and Design Type both sit at Level 1, directly below any Product Scope item (e.g. Full Aircraft), so either can structure that level; the view switcher only offers alternatives at the same level. Lifecycle and Discipline are cross-cutting. Each facet's level is shown in its metadata panel.</li>" +
-      "<li><b>Systems span scopes:</b> the System facet applies to every Product Scope, and interfaces between items in different scopes within the same System are links, not parent levels (see " + link("EX-0005") + ").</li>" +
-      "<li><b>Derived tags:</b> an assembly takes its System tag(s) from its components (a loom shows the Systems of its wires), and System Group is always derived from System.</li>" +
-      "<li><b>Lessons Learned</b> use one standard template and the same tags, so " + link("HUB-LESSONS") + " can be filtered by any combination of stage, system, design type and discipline.</li>" +
+      "<li>Pages are <b>tagged</b> with options from controlled facets: Lifecycle Stage, Product Scope, Major Unit, System (two tiers: System Group \u203a System), Design Type, Source and Discipline. Skills and Traits are linked registers, not facets. Terms are defined in the " + link("HUB-GLOSSARY") + ".</li>" +
+      "<li>There is no fixed tree. The navigation tree on the left is a <b>view generated from the tags</b>. Switch between the <b>Lifecycle</b>, <b>Discipline</b>, <b>Product Scope</b>, <b>System</b>, <b>Design Type</b> and <b>Major Unit</b> views; the same page is reached by different routes, never duplicated.</li>" +
+      "<li><b>Facet levels:</b> Product Scope (Aircraft, Ground Equipment, Test Equipment, Facilities) is facet level 0 and can be selected at the top of the System and Design Type views. System and Design Type both sit at facet level 1, directly below any Product Scope option, so either can structure that level. Lifecycle Stage, Source and Discipline are cross-cutting.</li>" +
+      "<li><b>Build levels</b> are numbered separately, within a Product Scope: Build Level 0 Full Aircraft, Build Level 1 Major Unit or Final Assembly, then Assembly, Sub-assembly, Part. The Major Unit view applies to the Aircraft scope only (see " + link("HUB-BUILDLEVELS") + ").</li>" +
+      "<li><b>One System list, scoped:</b> each System records the Product Scopes it applies to, and views filtered by scope show only applicable Systems. Interfaces between items in different scopes are links, not parent build levels (see " + link("EX-0005") + ").</li>" +
+      "<li><b>Items vs knowledge records:</b> an item takes exactly one option per facet; its home System is the System it is part of, and typed <b>supports links</b> to the Systems it carries are shown separately (see " + link("EX-0006") + "). An assembly's Systems are <b>derived tags</b> from its parts. Knowledge records (pages, lessons) may carry several options, or All.</li>" +
+      "<li><b>Lessons Learned</b> use one standard template and the same tags, so " + link("HUB-LESSONS") + " can be filtered by any combination of Lifecycle Stage, Product Scope, System, Design Type and Discipline.</li>" +
       "<li>Every page carries verification status, owner and last-reviewed fields (placeholders in this prototype).</li></ul>" +
-      '<div class="home-fig">' + figures([{ src: "assets/img/facet-levels.svg", alt: "Diagram of facet levels: Product Scope at Level 0, System and Design Type at Level 1, assemblies and parts below, Lifecycle Stage and Discipline cross-cutting.", caption: "Facet levels used by every view." }]) + "</div>" +
+      '<div class="home-fig">' + figures([{ src: "assets/img/facet-levels.svg", alt: "Diagram of facet levels: Product Scope at facet level 0, System and Design Type at facet level 1, items organised by build levels below, Lifecycle Stage, Source and Discipline cross-cutting.", caption: "Facet levels used by every view." }]) + "</div>" +
       "<p>Current view: <b>" + esc(v.label) + "</b> (" + esc(v.description) + ").</p>" +
       '<div class="cards">' + cards + "</div>" +
       "<h2>Example topic pages (intersections)</h2><p>These demonstrate a single page tagged with several facets. Open one, then switch views: it stays the same page while the tree and breadcrumbs change.</p>" +
       '<table class="list"><thead><tr><th>ID</th><th>Topic</th><th>Tags</th></tr></thead><tbody>' +
       contents.map(function (c) { return '<tr><td class="mono">' + esc(c.id) + "</td><td>" + link(c.id) + '</td><td><div class="chips">' + storedTags(c).filter(function (id) { return ["stage", "system", "designtype"].indexOf(byId[id].type) >= 0; }).map(function (id) { return chip(id); }).join("") + "</div></td></tr>"; }).join("") + "</tbody></table>" +
-      '<div class="warn" style="margin-top:18px"><b>Prototype.</b> Lifecycle Stage, Discipline, Skill and Trait names and IDs come from the tracker registers; System, Design Type and Product Scope are the facets agreed on 2 Oct 2026, with the tracker\'s Aircraft System entries kept as mapped source references. All guidance text, owners and review dates are placeholders or clearly labelled examples. ' + D.issues.length + " framework issues are listed on " + link("HUB-ISSUES") + ".</div>";
+      '<div class="warn" style="margin-top:18px"><b>Prototype.</b> Lifecycle Stage, Discipline, Skill and Trait names and IDs come from the tracker registers; System, Design Type and Product Scope are the facets agreed on 2 Oct 2026 (revised 4 Oct 2026, with Source and Major Unit added), with the tracker\'s Aircraft System entries kept as mapped source references. All guidance text, owners and review dates are placeholders or clearly labelled examples. ' + D.issues.length + " framework issues are listed on " + link("HUB-ISSUES") + ".</div>";
   }
 
   // ---------- render ----------
@@ -494,6 +549,7 @@
       else if (p.id === "HUB-FRAMEWORK") html = renderFrameworkPage(p);
       else if (p.id === "HUB-PRODEX") html = renderProductionExample(p);
       else if (p.id === "HUB-LESSONS") html = renderLessonsIndex(p);
+      else if (p.type === "special") html = renderInfoPage(p);
       else if (p.type === "lesson") html = renderLessonPage(p);
       else html = renderValuePage(p);
       document.title = (p ? p.id + " " + p.title + " \u2013 " : "") + "Engineering Hub \u2013 Framework";

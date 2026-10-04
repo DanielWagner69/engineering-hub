@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>ui check</title></head><body>
-<!-- UI checks for v0.6: lightbox, Ask the Hub fallback, framework pages. Run headless with --dump-dom. -->
+<!-- UI checks for v0.6/v0.7: lightbox, Ask the Hub fallback, framework pages, v13 decisions (Source, Major Unit, scopes, glossary, tags). Run headless with --dump-dom. -->
 <form id="ask-form"><input id="search"></form><section id="ask-panel" hidden></section><div id="view-buttons"></div><div id="view-desc"></div><nav id="tree"></nav><nav id="breadcrumbs"></nav><div class="main"><article id="page"></article></div><footer id="footer"></footer>
 <script src="../data/hub.js"></script><script src="../js/ai.js"></script><script src="../js/app.js"></script>
 <script>
@@ -16,6 +16,34 @@ history.replaceState(null, "", "#/p/HUB-PRODEX"); EH.render();
 ["Points of contact", "Project stats", "Live model view", "Configuration"].forEach(function (t) { if (document.getElementById("page").textContent.indexOf(t) < 0) errs.push("production example missing " + t); });
 history.replaceState(null, "", "#/p/SYS-0007"); EH.render(); if (document.getElementById("page").textContent.indexOf("Production data links") < 0) errs.push("System page missing Production data links");
 history.replaceState(null, "", "#/p/DT-0009"); EH.render(); if (document.getElementById("page").textContent.indexOf("Production data links") < 0) errs.push("Design Type page missing Production data links");
+// v0.7 checks
+function txt() { return document.getElementById("page").textContent; }
+function tree() { return document.getElementById("tree").textContent; }
+history.replaceState(null, "", "#/home?v=majorunit"); EH.render();
+["Front Fuselage", "Centre Fuselage", "Rear Fuselage", "Wings", "Fins", "Final Assembly"].forEach(function (t) { if (tree().indexOf(t) < 0) errs.push("Major Unit view missing " + t); });
+if (tree().indexOf("Full Aircraft") < 0) errs.push("Major Unit view should start from Full Aircraft");
+history.replaceState(null, "", "#/home?v=system&s=PS-0003"); EH.render();
+if (tree().indexOf("Fuel") >= 0) errs.push("System view for Test Equipment must not show Fuel");
+if (tree().indexOf("Radar") >= 0) errs.push("System view for Test Equipment must not show Mission Systems");
+history.replaceState(null, "", "#/home?v=productscope"); EH.render();
+if (!document.querySelector("#tree a[href*='PS-0004']")) errs.push("Product Scope view missing Facilities");
+history.replaceState(null, "", "#/p/SYS-0007"); EH.render();
+if (txt().indexOf("Applicable Product Scopes") < 0 || document.querySelectorAll("#page .scope-cell.on").length !== 3) errs.push("Fuel page should show 3 applicable scopes");
+history.replaceState(null, "", "#/p/HUB-GLOSSARY"); EH.render();
+if (document.querySelectorAll("#page dl.glossary .gl-row").length < 10) errs.push("glossary rows missing");
+history.replaceState(null, "", "#/p/HUB-BUILDLEVELS"); EH.render();
+if (!document.querySelector("#page img[src$='build-levels.svg']")) errs.push("build levels diagram missing");
+history.replaceState(null, "", "#/p/HUB-FINISH"); EH.render(); if (txt().indexOf("Finish Specification") < 0) errs.push("finish specifications page empty");
+history.replaceState(null, "", "#/p/EX-0006"); EH.render();
+if (document.querySelectorAll("#page .chip.supports").length < 2) errs.push("supports links not shown distinctly");
+if (txt().indexOf("Example item tagging") < 0) errs.push("example item table missing");
+history.replaceState(null, "", "#/p/EX-0003"); EH.render(); if (!document.querySelector("#page .chip.derived")) errs.push("derived tags not shown distinctly");
+history.replaceState(null, "", "#/p/LL-0002"); EH.render(); if (!document.querySelector("#page .all-chip")) errs.push("All tag not shown");
+history.replaceState(null, "", "#/p/HUB-LESSONS?f=PS-0004"); EH.render();
+if (!document.querySelector("#page input[data-filter='PS-0004']")) errs.push("Lessons Learned has no Product Scope filter");
+if (txt().indexOf("1 of 7 lessons match") < 0) errs.push("Product Scope filter on Lessons did not filter (expected 1 of 7)");
+history.replaceState(null, "", "#/p/SYS-0002?v=lifecycle"); EH.render(); if (txt().indexOf("Supported by") >= 0) errs.push("Secondary Structure should not be listed as supported");
+history.replaceState(null, "", "#/p/SYS-0009?v=lifecycle"); EH.render(); if (txt().indexOf("Supported by") < 0) errs.push("Hydraulics page should list items that support it");
 if (window.HUB_AI_ENDPOINT !== null) errs.push("HUB_AI_ENDPOINT should default to null");
 EH.openAsk("fuel system");
 HubAI.askHub("fuel system").then(function (r) {

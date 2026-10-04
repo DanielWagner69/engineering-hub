@@ -23,31 +23,36 @@ PUBLISHED_LOOKUPS = ["Knowledge_Category", "Trait_Category"]
 CATEGORY_TO_FACET = {"ASEL Stage": "stage", "Aircraft System": "srcsystem", "Discipline": "discipline"}
 
 FACETS = [
-    {"key": "stage", "level": "X-CROSS", "levelLabel": "Cross-cutting (not a product level; applies at every product level): lifecycle", "label": "Lifecycle Stage", "plural": "Lifecycle Stages", "source": "Knowledge_Register (Knowledge_Category = 'ASEL Stage')",
+    {"key": "stage", "level": "X-CROSS", "levelLabel": "Cross-cutting (not assigned to a facet level; applies at every build level): lifecycle", "label": "Lifecycle Stage", "plural": "Lifecycle Stages", "source": "Knowledge_Register (Knowledge_Category = 'ASEL Stage')",
      "note": "ASEL = Air System Engineering Lifecycle. Register order is lifecycle order."},
-    {"key": "sysgroup", "level": "L1", "levelLabel": "Level 1: directly below any Product Scope item, e.g. Full Aircraft (upper tier of the System facet)", "label": "System Group", "plural": "System Groups", "source": "Agreed System facet (2 Oct 2026), level 1",
-     "note": "Upper level of the two-level System facet. An item's System Group is derived from its System tag(s)."},
-    {"key": "system", "level": "L1", "levelLabel": "Level 1: directly below any Product Scope item, e.g. Full Aircraft", "label": "System", "plural": "Systems", "source": "Agreed System facet (2 Oct 2026), level 2; mapped from tracker Aircraft System list",
-     "note": "Rule: a System is a set of items that work together to perform one function. Every item belongs to exactly one System, the one whose function it serves. The System facet applies across all Product Scopes (aircraft, ground equipment, test equipment and facilities), so a System such as Fuel links up across them. Assemblies take their System tag(s) from their components (derived tags), so an assembly such as a loom may show several."},
-    {"key": "designtype", "level": "L1", "levelLabel": "Level 1: directly below any Product Scope item, e.g. Full Aircraft", "label": "Design Type", "plural": "Design Types", "source": "Agreed Design Type facet (2 Oct 2026)",
-     "note": "The kind of design work. Status: agreed for now, subject to refinement."},
-    {"key": "productscope", "level": "L0", "levelLabel": "Level 0: top level. Aircraft, Ground Equipment, Test Equipment and Facilities are peers; Full Aircraft is the top of the Aircraft scope", "label": "Product Scope", "plural": "Product Scopes", "source": "Agreed Product Scope facet (2 Oct 2026)",
-     "note": "Which product the item belongs to; the top level (Level 0). The four options are peers. Each scope has Systems; connections between items in different scopes are shown as links (interfaces), not as a parent level."},
-    {"key": "discipline", "level": "X-CROSS", "levelLabel": "Cross-cutting (not a product level; applies at every product level): knowledge area", "label": "Discipline", "plural": "Disciplines", "source": "Knowledge_Register (Knowledge_Category = 'Discipline')", "note": ""},
-    {"key": "skill", "level": "PEOPLE", "levelLabel": "People register (not part of the product hierarchy)", "label": "Skill", "plural": "Skills", "source": "Skills_Register", "note": ""},
-    {"key": "trait", "level": "PEOPLE", "levelLabel": "People register (not part of the product hierarchy)", "label": "Trait", "plural": "Traits", "source": "Traits_Register (Trait_Self_Assessment column not used)", "note": ""},
+    {"key": "sysgroup", "level": "L1", "levelLabel": "Facet level 1: directly below any Product Scope option, e.g. the Aircraft scope (upper tier of the System facet)", "label": "System Group", "plural": "System Groups", "source": "Agreed System facet (2 Oct 2026), upper tier",
+     "note": "Upper tier of the two-tier System facet. A data object's System Group is derived from its System tag(s)."},
+    {"key": "system", "level": "L1", "levelLabel": "Facet level 1: directly below any Product Scope option, e.g. the Aircraft scope (lower tier of the System facet)", "label": "System", "plural": "Systems", "source": "Agreed System facet (2 Oct 2026), lower tier; mapped from tracker Aircraft System list",
+     "note": "Rule: a System is a set of items that work together to perform one function. Every Part Instance has exactly one home System, the System it is part of (a bracket is Secondary Structure), and may have typed supports links to the Systems it carries or serves. Assemblies derive their Systems from their parts (derived tags), so a loom shows the Systems of its wires. Part Definitions carry no System. One shared System list is used for all Product Scopes, and each System records the Product Scopes it applies to."},
+    {"key": "designtype", "level": "L1", "levelLabel": "Facet level 1: directly below any Product Scope option, e.g. the Aircraft scope", "label": "Design Type", "plural": "Design Types", "source": "Agreed Design Type facet (2 Oct 2026; revised 4 Oct 2026)",
+     "note": "The kind of design work: material, process or item kind only. Bought-in items normally have no Design Type. Coatings, sealants and treatments are not Design Types: they are finish-specification records linked to the parts they are applied to. Status: agreed for now, subject to refinement."},
+    {"key": "productscope", "level": "L0", "levelLabel": "Facet level 0: the top facet. Aircraft, Ground Equipment, Test Equipment and Facilities are peers; Full Aircraft is the top item of the Aircraft scope", "label": "Product Scope", "plural": "Product Scopes", "source": "Agreed Product Scope facet (2 Oct 2026; boundaries 4 Oct 2026)",
+     "note": "Which product an item belongs to; facet level 0. The four options are peers. Facilities are fixed infrastructure (buildings, fuel farms, fixed rigs); Test Equipment is movable test kit; Ground Equipment is movable support kit that is not test kit. Each System records the Product Scopes it applies to; connections between items in different scopes are links (interfaces), not a parent build level."},
+    {"key": "majorunit", "level": "BUILD", "levelLabel": "Build Level 1 of the Aircraft scope (a build level, not a facet level; Aircraft scope only)", "label": "Major Unit", "plural": "Major Units", "source": "Agreed Major Unit facet (4 Oct 2026)",
+     "note": "Which manufactured major unit an item is built into. Applies to the Aircraft scope only. Items not built into any Major Unit sit under Final Assembly, at the same build level as the Major Units, because they are assembled with the Major Units to form the Full Aircraft. Other Product Scopes will define their own build breakdown later."},
+    {"key": "itemsource", "level": "X-CROSS", "levelLabel": "Cross-cutting (not assigned to a facet level; applies at every build level): how an item is obtained", "label": "Source", "plural": "Sources", "source": "Agreed Source facet (4 Oct 2026)",
+     "note": "How an item is obtained: made in-house, a catalogue standard part, or bought-in equipment. Independent of Design Type; bought-in items normally have no Design Type."},
+    {"key": "discipline", "level": "X-CROSS", "levelLabel": "Cross-cutting (not assigned to a facet level; applies at every build level): knowledge area", "label": "Discipline", "plural": "Disciplines", "source": "Knowledge_Register (Knowledge_Category = 'Discipline')", "note": ""},
+    {"key": "skill", "level": "PEOPLE", "levelLabel": "Linked register (not a facet; not used to classify items)", "label": "Skill", "plural": "Skills", "source": "Skills_Register", "note": ""},
+    {"key": "trait", "level": "PEOPLE", "levelLabel": "Linked register (not a facet; not used to classify items)", "label": "Trait", "plural": "Traits", "source": "Traits_Register (Trait_Self_Assessment column not used)", "note": ""},
     {"key": "srcsystem", "level": "SOURCE", "levelLabel": "Source reference only (not used for tagging)", "label": "Tracker Aircraft System (source)", "plural": "Tracker Aircraft Systems (source)", "source": "Knowledge_Register (Knowledge_Category = 'Aircraft System')",
-     "note": "The 28 original tracker entries, kept with their permanent KN IDs as source references. They are no longer used for tagging: each is mapped to the agreed System, Design Type or Product Scope values."},
+     "note": "The 28 original tracker entries, kept with their permanent KN IDs as source references. They are no longer used for tagging: each is mapped to the agreed System, Design Type, Source or Product Scope options."},
 ]
 
-# Facet levels: every facet is assigned to a defined level. Views are offered as alternatives only within the
-# same level; a view's top facet must be at the view group's level. Levels for Lifecycle Stage, Discipline and
-# Product Scope are provisional (only System and Design Type were stated: both directly below Full Aircraft).
+# Facet levels: every facet is assigned to a defined facet level. Views are offered as alternatives only within the
+# same group; a view's top facet must be at the group's facet level. Build levels (Major Unit) are not facet levels.
 VIEWS = [
     {"key": "lifecycle", "label": "Lifecycle", "group": "Cross-cutting", "levels": ["stage", "system"], "description": "Lifecycle Stage \u203a System \u203a content"},
-    {"key": "system", "label": "System", "group": "Level 1: below a Product Scope item", "scopeSelectable": True, "levels": ["sysgroup", "system", "stage"], "description": "System Group \u203a System \u203a Lifecycle Stage \u203a content"},
-    {"key": "designtype", "label": "Design Type", "group": "Level 1: below a Product Scope item", "scopeSelectable": True, "levels": ["designtype", "system"], "description": "Design Type \u203a System \u203a content"},
     {"key": "discipline", "label": "Discipline", "group": "Cross-cutting", "levels": ["discipline", "stage"], "description": "Discipline \u203a Lifecycle Stage \u203a content"},
+    {"key": "productscope", "label": "Product Scope", "group": "Facet level 0: Product Scope", "levels": ["productscope", "sysgroup", "system"], "description": "Product Scope \u203a System Group \u203a System (applicable Systems only) \u203a content"},
+    {"key": "system", "label": "System", "group": "Facet level 1: below a Product Scope option", "scopeSelectable": True, "levels": ["sysgroup", "system", "stage"], "description": "System Group \u203a System \u203a Lifecycle Stage \u203a content"},
+    {"key": "designtype", "label": "Design Type", "group": "Facet level 1: below a Product Scope option", "scopeSelectable": True, "levels": ["designtype", "system"], "description": "Design Type \u203a System \u203a content"},
+    {"key": "majorunit", "label": "Major Unit", "group": "Build Level 1: Aircraft scope only", "fixedScope": "PS-0001", "levels": ["majorunit", "system"], "description": "Full Aircraft \u203a Major Unit or Final Assembly (Build Level 1) \u203a System \u203a content"},
 ]
 
 # ---- Agreed facets (decisions of 2 Oct 2026). New permanent IDs.
@@ -67,16 +72,43 @@ DESIGN_TYPES = [
     ("DT-0007", "Non-metallic - Moulded", "Includes seals, rubbers and plastics."),
     ("DT-0008", "Glazing", "Includes canopy and windscreen transparencies."),
     ("DT-0009", "Pipework", None),
-    ("DT-0010", "Electrical Looms", "Looms are a Design Type, not a System: each wire takes the System it serves, and a loom shows the Systems of its wires (derived tags)."),
-    ("DT-0011", "Coatings, Sealants & Treatments", "Includes paint, primers, surface treatments, sealants and adhesives."),
-    ("DT-0012", "Standard Parts", "Catalogue fasteners, seals and fittings."),
-    ("DT-0013", "Bought-in Equipment", "Includes pumps, LRUs and actuators."),
+    ("DT-0010", "Electrical Looms", "Looms are a Design Type, not a System: each wire's home System is the System it serves, and a loom shows the Systems of its wires (derived tags)."),
 ]
+# DT-0011 (Coatings, Sealants & Treatments), DT-0012 (Standard Parts) and DT-0013 (Bought-in Equipment) were retired on
+# 4 Oct 2026 (v0.7). IDs are permanent, so these three are never reused. Standard parts and bought-in equipment are now
+# options of the Source facet; coatings, sealants and treatments are finish-specification records (HUB-FINISH).
+RETIRED_DESIGN_TYPES = {"DT-0011": "Coatings, Sealants & Treatments", "DT-0012": "Standard Parts", "DT-0013": "Bought-in Equipment"}
+SOURCES = [
+    ("SRC-0001", "Make", "Designed and made by or for the project to its own design (machined, sheet, composite, moulded, looms, pipework and so on)."),
+    ("SRC-0002", "Standard Part", "Catalogue parts to a published standard, such as fasteners, seals and fittings."),
+    ("SRC-0003", "Bought-in Equipment", "Equipment bought from a supplier to a specification, such as pumps, LRUs and actuators. Normally has no Design Type."),
+]
+MAJOR_UNITS = [
+    ("MU-0001", "Front Fuselage", "Items built into the front fuselage major unit before final assembly."),
+    ("MU-0002", "Centre Fuselage", "Items built into the centre fuselage major unit before final assembly."),
+    ("MU-0003", "Rear Fuselage", "Items built into the rear fuselage major unit before final assembly."),
+    ("MU-0004", "Wings", "Items built into the wing major units before final assembly."),
+    ("MU-0005", "Fins", "Items built into the fin major units before final assembly."),
+    ("MU-0006", "Final Assembly", "Not a Major Unit: holds the items that are not built into any Major Unit, such as pipes and looms installed at final assembly to connect Major Units. They sit at Build Level 1 because they are assembled with the Major Units to form the Full Aircraft."),
+]
+# System -> applicable Product Scopes (PS-0001 Aircraft, PS-0002 Ground Equipment, PS-0003 Test Equipment, PS-0004 Facilities).
+# Fuel and Mission Systems were stated by Daniel Wagner (4 Oct 2026); the rest is an initial proposal to be confirmed.
+_A, _G, _T, _F = "PS-0001", "PS-0002", "PS-0003", "PS-0004"
+SYSTEM_SCOPES = {
+    "SYS-0001": [_A, _G, _T, _F], "SYS-0002": [_A, _G, _T, _F], "SYS-0003": [_A, _G, _T], "SYS-0004": [_A],
+    "SYS-0005": [_A], "SYS-0006": [_A], "SYS-0007": [_A, _G, _F], "SYS-0008": [_A, _G, _T, _F], "SYS-0009": [_A, _G, _T], "SYS-0010": [_A, _G, _T],
+    "SYS-0011": [_A], "SYS-0012": [_A], "SYS-0013": [_A], "SYS-0014": [_A],
+    "SYS-0015": [_A, _G], "SYS-0016": [_A, _G, _T], "SYS-0017": [_A, _F], "SYS-0018": [_A],
+    "SYS-0019": [_A],
+    "SYS-0020": [_A], "SYS-0021": [_A], "SYS-0022": [_A], "SYS-0023": [_A], "SYS-0024": [_A],
+    "SYS-0025": [_A],
+}
+SYSTEM_SCOPES_CONFIRMED = {"SYS-0007", "SYS-0020", "SYS-0021", "SYS-0022", "SYS-0023", "SYS-0024"}
 PRODUCT_SCOPES = [
     ("PS-0001", "Aircraft", "The aircraft product. Its top item is Full Aircraft."),
-    ("PS-0002", "Ground Equipment", "Includes ground support equipment (tracker KN-0021). Its top items sit at the same level as Full Aircraft."),
-    ("PS-0003", "Test Equipment", "Test equipment as a product in its own right. Flight test instrumentation installed on the aircraft is a System (Flight Test Instrumentation), not this scope."),
-    ("PS-0004", "Facilities", "For example test rigs, hangars and fuel farms. Facilities have Systems like any other scope; their connections to other items are shown as links (interfaces), not as a parent level."),
+    ("PS-0002", "Ground Equipment", "Movable support kit that is not test kit, including ground support equipment (tracker KN-0021). Its top items sit at Build Level 0, alongside Full Aircraft."),
+    ("PS-0003", "Test Equipment", "Movable test kit, as a product in its own right. Flight test instrumentation installed on the aircraft is a System (Flight Test Instrumentation), not this scope; fixed test rigs are Facilities."),
+    ("PS-0004", "Facilities", "Fixed infrastructure, for example buildings, fuel farms and fixed test rigs. Facilities have Systems like any other scope; their connections to other items are links (interfaces), not a parent build level."),
 ]
 # Tracker Aircraft System (KN) -> agreed facets. clean=False means the mapping is not one-to-one; note explains.
 KN_MAP = {
@@ -85,8 +117,8 @@ KN_MAP = {
     "KN-0011": ({"system": ["SYS-0022"]}, True, ""),
     "KN-0012": ({"system": ["SYS-0018"]}, True, ""),
     "KN-0013": ({"system": ["SYS-0023"]}, True, ""),
-    "KN-0014": ({"designtype": ["DT-0010"]}, False, "No longer a System. Maps to Design Type 'Electrical Looms'; the System of each wire is the System it serves, and a loom's Systems are derived from its wires."),
-    "KN-0015": ({"designtype": ["DT-0013"], "system": ["SYS-0008"]}, False, "Split across two facets: Design Type 'Bought-in Equipment' plus System 'Electrical Power Generation & Distribution (electrical only)'. Electrical equipment that serves another function (e.g. a sensor's power supply) should take that function's System under the System rule, so this System tag is a default, not a certainty."),
+    "KN-0014": ({"designtype": ["DT-0010"]}, False, "No longer a System. Maps to Design Type 'Electrical Looms'; each wire's home System is the System it serves, and a loom's Systems are derived from its wires."),
+    "KN-0015": ({"itemsource": ["SRC-0003"], "system": ["SYS-0008"]}, False, "Split across two facets: Source 'Bought-in Equipment' plus System 'Electrical Power Generation & Distribution (electrical only)'. Electrical equipment that serves another function (e.g. a sensor's power supply) takes that function's System as its home System, so this System tag is a default, not a certainty. (Until 4 Oct 2026 this mapped to the retired Design Type DT-0013.)"),
     "KN-0016": ({"system": ["SYS-0021"]}, True, ""),
     "KN-0017": ({"system": ["SYS-0015"]}, True, ""),
     "KN-0018": ({"system": ["SYS-0011"]}, True, ""),
@@ -117,7 +149,7 @@ EXAMPLE_NOTE = ("Example text written for the Engineering Hub prototype to demon
 # Body text may reference any page with [[ID]].
 SAMPLES = [
     {"id": "EX-0001", "title": "Fuel System in Detailed Design",
-     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007"], "designtype": ["DT-0009", "DT-0011"], "productscope": ["PS-0001"], "discipline": ["KN-0053", "KN-0049", "KN-0043"],
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007"], "designtype": ["DT-0009"], "itemsource": ["SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0002", "MU-0004"], "discipline": ["KN-0053", "KN-0049", "KN-0043"],
               "skill": ["SK-0003"], "trait": ["TR-0006", "TR-0007"]},
      "summary": "How fuel system design questions typically come together once the design moves into [[KN-0005]].",
      "sections": [
@@ -127,14 +159,14 @@ SAMPLES = [
         ["Typical considerations (illustrative)",
          "- Route pipes and equipment so that a single event cannot disable redundant paths (see [[KN-0053]]).\n"
          "- Confirm material compatibility of pipes, seals and coatings with the fluid and environment (see [[KN-0049]]).\n"
-         "- Consider sealing, drainage and protection treatments in and around tank areas (see [[KN-0043]]).\n"
+         "- Consider sealing, drainage and protection treatments in and around tank areas (see [[KN-0043]]); these are finish specifications linked to the parts (see [[HUB-FINISH]]).\n"
          "- Record assumptions and trade-offs explicitly so they can be reviewed (see [[SK-0003]])."],
         ["Questions to ask at review",
          "- What are the knock-on effects of this routing on neighbouring systems and structure? ([[TR-0007]])\n"
          "- Has the design been considered as part of the whole aircraft rather than in isolation? ([[TR-0006]])"],
      ]},
     {"id": "EX-0002", "title": "Landing Gear in Preliminary Design",
-     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0002", "DT-0013"], "productscope": ["PS-0001"], "discipline": ["KN-0050", "KN-0056", "KN-0058"],
+     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0002"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0050", "KN-0056", "KN-0058"],
               "skill": ["SK-0003", "SK-0005"], "trait": ["TR-0008"]},
      "summary": "An example of how a major mechanical system is shaped during [[KN-0004]].",
      "sections": [
@@ -151,14 +183,14 @@ SAMPLES = [
      ]},
     {"id": "EX-0003", "title": "Electrical Looms in Production Support",
      "derived": {"system": "Derived from the loom's wires: this example loom carries wires serving Electrical Power Generation & Distribution and Flight Control."},
-     "tags": {"stage": ["KN-0007"], "system": ["SYS-0008", "SYS-0011"], "designtype": ["DT-0010"], "productscope": ["PS-0001"], "discipline": ["KN-0042", "KN-0040", "KN-0048"],
+     "tags": {"stage": ["KN-0007"], "system": ["SYS-0008", "SYS-0011"], "designtype": ["DT-0010"], "itemsource": ["SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0006"], "discipline": ["KN-0042", "KN-0040", "KN-0048"],
               "skill": ["SK-0009"], "trait": ["TR-0030", "TR-0055"]},
      "summary": "An example of the issues that arise once looms are being built and installed, during [[KN-0007]].",
      "sections": [
         ["Why this intersection matters",
          "Once the aircraft is in production, queries on [[DT-0010]] often concern installation, clearances and build sequence. "
          "Responding well needs an understanding of both the original design intent and the manufacturing reality.\n"
-         "Under the derived-tags rule this loom is not given a System directly: each wire takes the System it serves, so the loom shows "
+         "Under the derived-tags rule this loom is not given a System directly: each wire's home System is the System it serves, so the loom shows "
          "[[SYS-0008]] and [[SYS-0011]] because it carries wires for both."],
         ["Typical considerations (illustrative)",
          "- Check that bonding, screening and segregation intent is preserved by any change (see [[KN-0042]]).\n"
@@ -169,8 +201,9 @@ SAMPLES = [
          "- Is the change traceable to the original requirement and design intent? ([[TR-0055]])"],
      ]},
     {"id": "EX-0004", "title": "Hydraulics System in Qualification / Certification",
-     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0009", "DT-0013", "DT-0007"], "productscope": ["PS-0001"], "discipline": ["KN-0057", "KN-0039", "KN-0052"],
+     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0009", "DT-0007"], "itemsource": ["SRC-0001", "SRC-0002", "SRC-0003"], "productscope": ["PS-0001"], "discipline": ["KN-0057", "KN-0039", "KN-0052"],
               "skill": ["SK-0008", "SK-0010"], "trait": ["TR-0051", "TR-0053"]},
+     "all": ["majorunit"],
      "summary": "An example of the evidence-focused work typical of [[KN-0006]] for a fluid system.",
      "sections": [
         ["Why this intersection matters",
@@ -186,7 +219,7 @@ SAMPLES = [
          "- Have safety implications been given proper priority? ([[TR-0053]])"],
      ]},
     {"id": "EX-0005", "title": "Aircraft-to-Ground Refuelling Interface",
-     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007"], "designtype": ["DT-0009", "DT-0012"], "productscope": ["PS-0001", "PS-0002"], "discipline": ["KN-0040", "KN-0052"],
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007"], "designtype": ["DT-0009"], "itemsource": ["SRC-0001", "SRC-0002"], "productscope": ["PS-0001", "PS-0002"], "majorunit": ["MU-0004"], "discipline": ["KN-0040", "KN-0052"],
               "skill": ["SK-0002"], "trait": ["TR-0055"]},
      "summary": "An example of one System, [[SYS-0007]], crossing two Product Scopes: [[PS-0001]] and [[PS-0002]].",
      "sections": [
@@ -201,23 +234,45 @@ SAMPLES = [
         ["Questions to ask at review",
          "- Can each side of the interface be traced to the other and to the requirement that governs it? ([[TR-0055]])"],
      ]},
+    {"id": "EX-0006", "title": "Home System and Supports Links: a Pipe Bracket",
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0002"], "designtype": ["DT-0002"], "itemsource": ["SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0040"],
+              "skill": ["SK-0002"], "trait": ["TR-0007"]},
+     "supports": {"system": ["SYS-0007", "SYS-0009"]},
+     "exampleItem": {"name": "Pipe support bracket (example Part Instance)",
+                     "tags": {"productscope": "PS-0001", "majorunit": "MU-0002", "system": "SYS-0002", "designtype": "DT-0002", "itemsource": "SRC-0001"},
+                     "supports": ["SYS-0007", "SYS-0009"]},
+     "summary": "An example of the home System rule: a bracket is [[SYS-0002]], with typed supports links to the Systems whose pipes it carries.",
+     "sections": [
+        ["The rule",
+         "Each Part Instance has exactly one home System, the System it is part of. A bracket is part of the structure, so its home System is [[SYS-0002]]. "
+         "It also carries a fuel pipe and a hydraulic pipe, so it has typed supports links to [[SYS-0007]] and [[SYS-0009]]. "
+         "Supports links are not extra System tags: they are shown separately, and a change to the bracket flags the Systems it supports for review, but no further."],
+        ["One option per facet for items",
+         "As a physical item, the bracket takes exactly one option per facet (see the example item table below). Knowledge records such as this page may carry several options per facet, or All. "
+         "The Part Definition of the bracket carries no System, because the same design may be used in other places and Systems."],
+        ["Questions to ask at review",
+         "- If this bracket changes, which Systems does it support, and have their owners been told? ([[TR-0007]])\n"
+         "- Is the bracket's interface with each pipe recorded once and referenced from both sides? (see [[KN-0040]], [[SK-0002]])"],
+     ]},
 ]
 
 
 LESSON_NOTE = ("EXAMPLE lesson written for the Engineering Hub prototype to demonstrate the Lessons Learned template and facet filtering. "
                "It is generic and fictional, does not describe a real event, and is NOT authoritative engineering guidance.")
 
-# Example Lessons Learned. Same template for every lesson; tags use the three knowledge facets.
+# Example Lessons Learned. Same template for every lesson. Lessons are knowledge records, so they may carry several
+# options per facet, or "all" (every option of a facet). Mandatory tags: >=1 Lifecycle Stage and >=1 System.
 LESSONS = [
     {"id": "LL-0001", "title": "Pipe-to-structure clearances found late in the design",
-     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007", "SYS-0001"], "designtype": ["DT-0009", "DT-0002"], "productscope": ["PS-0001"], "discipline": ["KN-0056", "KN-0040"]},
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007", "SYS-0001"], "designtype": ["DT-0009", "DT-0002"], "itemsource": ["SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0002", "MU-0004"], "discipline": ["KN-0056", "KN-0040"]},
      "summary": "Clearance problems between pipe runs and structure were only found when the full assembly model was checked.",
      "whatHappened": "Pipe routes and structural parts were developed in separate models. When they were combined for a design review, several locations had insufficient clearance once tolerances and pipe movement were included.",
      "rootCause": "No agreed space-allocation model or regular combined clash check during development; tolerance stack-ups were not included in the clearance criteria.",
      "recommendation": "Agree space allocation early, run combined clash checks at a set frequency, and define clearance criteria that include tolerances and in-service movement.",
      "applicability": "Any routed system (fuel, hydraulic, electrical) installed close to structure, from Preliminary Design onwards."},
     {"id": "LL-0002", "title": "Seal material not compatible with the operating fluid",
-     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0007"], "productscope": ["PS-0001"], "discipline": ["KN-0049", "KN-0057"]},
+     "all": ["majorunit"],
+     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0007"], "itemsource": ["SRC-0002"], "productscope": ["PS-0001"], "discipline": ["KN-0049", "KN-0057"]},
      "summary": "A seal degraded during endurance testing because its compatibility with the fluid had been assumed rather than confirmed.",
      "whatHappened": "During an endurance test a seal swelled and leaked. Investigation showed the selected seal compound was not approved for the fluid at the tested temperature range.",
      "rootCause": "Material selection relied on a similar earlier design; the compatibility assumption was not recorded or checked against the actual fluid and temperature range.",
@@ -225,33 +280,41 @@ LESSONS = [
      "applicability": "All fluid systems; most relevant during Detailed Design and Qualification / Certification."},
     {"id": "LL-0003", "title": "Loom chafing at panel edges",
      "derived": {"system": "The loom's System tags (Electrical Power Generation & Distribution, Navigation) are derived from its wires; Skins, Doors & Panels is tagged because the panel is part of the lesson."},
-     "tags": {"stage": ["KN-0007", "KN-0008"], "system": ["SYS-0008", "SYS-0014", "SYS-0003"], "designtype": ["DT-0010"], "productscope": ["PS-0001"], "discipline": ["KN-0040", "KN-0047"]},
+     "tags": {"stage": ["KN-0007", "KN-0008"], "system": ["SYS-0008", "SYS-0014", "SYS-0003"], "designtype": ["DT-0010"], "itemsource": ["SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0001"], "discipline": ["KN-0040", "KN-0047"]},
      "summary": "Electrical looms rubbed against panel edges after repeated panel removal for maintenance.",
      "whatHappened": "Inspections found wear on loom sleeving near a frequently removed access panel. The loom was correctly installed but moved each time the panel was removed and refitted.",
      "rootCause": "Loom support design considered the installed state only, not the movement caused by maintenance access.",
      "recommendation": "Assess loom supports and clearances for maintenance actions as well as the installed state; add edge protection where panels are removed regularly.",
      "applicability": "Looms and pipes near removable panels and doors; check in Detailed Design and when maintenance procedures change."},
     {"id": "LL-0004", "title": "Mass growth from unrecorded assumptions",
-     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0004", "DT-0013"], "productscope": ["PS-0001"], "discipline": ["KN-0058"]},
+     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0004"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0058"]},
      "summary": "Early mass estimates grew significantly because the assumptions behind them were not recorded.",
      "whatHappened": "The mass of a mechanism grew steadily as the design matured. Reviewers could not tell which items had been included in the early estimate, so growth could not be predicted or challenged.",
      "rootCause": "Mass estimates were recorded as single numbers without their scope, assumptions or maturity.",
      "recommendation": "Store each mass estimate with its scope, assumptions and maturity level, and hold a growth allowance appropriate to that maturity.",
      "applicability": "All systems and structure from Initial System Design to Detailed Design."},
     {"id": "LL-0005", "title": "Maintenance access not considered for equipment replacement",
-     "tags": {"stage": ["KN-0005"], "system": ["SYS-0009", "SYS-0007"], "designtype": ["DT-0013", "DT-0009"], "productscope": ["PS-0001"], "discipline": ["KN-0047", "KN-0045"]},
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0009", "SYS-0007"], "designtype": ["DT-0009"], "itemsource": ["SRC-0003", "SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0003"], "discipline": ["KN-0047", "KN-0045"]},
      "summary": "A replaceable item could only be removed after removing several other items.",
      "whatHappened": "During a maintainability review it was found that removing one line-replaceable item required disconnecting neighbouring pipes and equipment, increasing maintenance time and the risk of errors.",
      "rootCause": "Removal paths were not modelled or reviewed; maintainability was assessed after the installation layout had been fixed.",
      "recommendation": "Model removal and replacement paths for replaceable items as part of layout design, and include maintainers in early layout reviews.",
      "applicability": "Any replaceable equipment in congested bays; Preliminary and Detailed Design."},
     {"id": "LL-0006", "title": "Ambiguous requirement led to rework",
+     "all": ["majorunit"],
      "tags": {"stage": ["KN-0001"], "system": ["SYS-0011"], "productscope": ["PS-0001"], "discipline": ["KN-0051", "KN-0039"]},
      "summary": "A requirement that could be read two ways was implemented differently by two teams.",
      "whatHappened": "Two teams interpreted the same requirement differently. The difference was found at integration, and one design had to be reworked.",
      "rootCause": "The requirement used undefined terms and had no stated verification method, so its meaning was never tested before design started.",
      "recommendation": "Review each requirement for single interpretation and define its verification method when it is written; hold requirements as linked structured data rather than prose.",
      "applicability": "All systems; most important at Requirements Capture / Concept."},
+    {"id": "LL-0007", "title": "Refuelling coupling tolerances agreed separately on each side",
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0007"], "designtype": ["DT-0009"], "itemsource": ["SRC-0001", "SRC-0002"], "productscope": ["PS-0001", "PS-0002", "PS-0004"], "majorunit": ["MU-0004"], "discipline": ["KN-0040", "KN-0052"]},
+     "summary": "Aircraft, ground refuelling equipment and the fuel farm were each designed to their own tolerances at a shared coupling.",
+     "whatHappened": "During an interface check the aircraft refuelling coupling, the ground equipment nozzle and the fuel farm connection were found to have been toleranced separately, so some combinations would not connect reliably.",
+     "rootCause": "The interface between items in different Product Scopes was not recorded as one linked interface record, so no single owner saw all three sides.",
+     "recommendation": "Record cross-scope interfaces once, as typed interface links between the items on each side, so a change on one side flags the others for review.",
+     "applicability": "Any System that crosses Product Scopes (for example Fuel across Aircraft, Ground Equipment and Facilities)."},
 ]
 
 
@@ -303,7 +366,7 @@ def main(xlsx):
                        "members": [x[0] for x in systems], "agreed": True})
         for sid, sname in systems:
             values.append({"id": sid, "facet": "system", "title": sname, "description": None, "sourceCategory": None, "category": None,
-                           "group": gid, "agreed": True})
+                           "group": gid, "agreed": True, "scopes": SYSTEM_SCOPES[sid], "scopesConfirmed": sid in SYSTEM_SCOPES_CONFIRMED})
     SYSTEM_DESCRIPTIONS = {
         "SYS-0008": "Electrical power only: generation and distribution of electrical power. Hydraulic and pneumatic power belong to Hydraulics and Pneumatics.",
         "SYS-0025": "Flight test instrumentation installed on the aircraft. Off-aircraft test equipment is Product Scope 'Test Equipment'.",
@@ -316,6 +379,11 @@ def main(xlsx):
                        "agreed": True, "status": "Agreed for now, subject to refinement"})
     for pid, pname, pdesc in PRODUCT_SCOPES:
         values.append({"id": pid, "facet": "productscope", "title": pname, "description": pdesc, "sourceCategory": None, "category": None, "agreed": True})
+    for xid, xname, xdesc in SOURCES:
+        values.append({"id": xid, "facet": "itemsource", "title": xname, "description": xdesc, "sourceCategory": None, "category": None, "agreed": True, "agreedV13": True})
+    for mid, mname, mdesc in MAJOR_UNITS:
+        values.append({"id": mid, "facet": "majorunit", "title": mname, "description": mdesc, "sourceCategory": None, "category": None, "agreed": True, "agreedV13": True,
+                       "buildLevel": 1, "scopes": ["PS-0001"]})
     # Source references: tracker KN Aircraft System entries -> agreed values
     vids = {v["id"] for v in values}
     for v in values:
@@ -342,10 +410,12 @@ def main(xlsx):
         pg = {"id": v["id"], "type": v["facet"], "title": v["title"], "description": v["description"],
               "category": v["category"], "sourceCategory": v["sourceCategory"], "order": v["order"],
               "tags": {}, "placeholder": True}
-        for k in ("group", "members", "mapsTo", "mappingClean", "mappingNote", "sources", "agreed", "status"):
+        for k in ("group", "members", "mapsTo", "mappingClean", "mappingNote", "sources", "agreed", "status", "scopes", "scopesConfirmed", "buildLevel"):
             if k in v:
                 pg[k] = v[k]
-        if v.get("agreed"):
+        if v.get("agreedV13"):
+            pg["origin"] = {"document": "Facet decisions agreed by Daniel Wagner, 4 Oct 2026 (recorded in 'Requirements Prompt - Draft', sections 1B.7, 1C and 1F)", "issue": "Draft v13", "url": None, "references": []}
+        elif v.get("agreed"):
             pg["origin"] = {"document": "Facet decisions agreed by Daniel Wagner, 2 Oct 2026 (recorded in 'Requirements Prompt - Draft', sections 1B.7 and 1F)", "issue": "Draft v11", "url": None, "references": []}
         else:
             pg["origin"] = {"document": "Tracker workbook, " + {"skill": "Skills_Register", "trait": "Traits_Register"}.get(v["facet"], "Knowledge_Register"),
@@ -354,14 +424,15 @@ def main(xlsx):
     for s in SAMPLES:
         pages.append({"id": s["id"], "type": "content", "title": s["title"], "summary": s["summary"],
                       "sections": [{"heading": h, "body": b} for h, b in s["sections"]],
-                      "tags": s["tags"], "derived": s.get("derived", {}), "example": True, "exampleNote": EXAMPLE_NOTE,
+                      "tags": s["tags"], "derived": s.get("derived", {}), "example": True, "exampleNote": EXAMPLE_NOTE, "recordKind": "knowledge",
+                      **{k: s[k] for k in ("all", "supports", "exampleItem") if k in s},
                       "origin": {"document": "Engineering Hub prototype (example text)", "issue": "Draft 0.1", "url": None, "references": []}})
 
     for l in LESSONS:
-        pages.append(dict(l, type="lesson", example=True, exampleNote=LESSON_NOTE,
+        pages.append(dict(l, type="lesson", example=True, exampleNote=LESSON_NOTE, recordKind="knowledge",
                           origin={"document": "None (example lesson written for the Engineering Hub prototype)", "issue": "n/a", "url": None, "references": []}))
     pages.append({"id": "HUB-LESSONS", "type": "special", "title": "Lessons Learned",
-                  "summary": "All lessons learned, filterable by any combination of Lifecycle Stage, Aircraft System and Discipline."})
+                  "summary": "All lessons learned, filterable by any combination of Lifecycle Stage, Product Scope, System, Design Type and Discipline."})
     # ---- Framework Hub pages (v0.6): generic, project-independent; no production data ----
     pages.append({"id": "HUB-FRAMEWORK", "type": "special", "title": "Framework vs Production",
                   "summary": "This site is the Framework Hub: the standard, project-independent Engineering Hub. Each project gets a Production Hub, "
@@ -370,7 +441,18 @@ def main(xlsx):
     pages.append({"id": "HUB-PRODEX", "type": "special", "title": "Production Hub (illustrative)", "example": True,
                   "summary": "An illustration of what a project's Production Hub adds on top of the framework. Every panel is an empty placeholder: "
                              "the Framework Hub never holds project data."})
+    pages.append({"id": "HUB-BUILDLEVELS", "type": "special", "title": "Build levels",
+                  "summary": "Build levels are the levels of the product-build hierarchy within a Product Scope. They are numbered separately from facet levels.",
+                  "sections": BUILD_SECTIONS, "images": [IMG_BUILD]})
+    pages.append({"id": "HUB-FINISH", "type": "special", "title": "Finish specifications",
+                  "summary": "Coatings, sealants and treatments are recorded as Finish Specification records linked to the parts they are applied to, not as a Design Type.",
+                  "sections": FINISH_SECTIONS})
+    pages.append({"id": "HUB-GLOSSARY", "type": "special", "title": "Glossary",
+                  "summary": "The terms used throughout the Hub and the requirements (section 0.4 of the requirements draft v13), each with one meaning.",
+                  "glossary": GLOSSARY})
     for pg in pages:
+        if pg["type"] == "majorunit":
+            pg["images"] = [IMG_BUILD]
         if pg["type"] == "productscope":
             pg["images"] = [IMG_FACETS]
     issues = find_issues(values, raw, lookups, rows)
@@ -379,7 +461,7 @@ def main(xlsx):
                              "so that the controlled lists can be corrected at source."})
 
     data = {
-        "meta": {"title": "Engineering Hub", "hubKind": "Framework", "version": "0.6 (prototype)",
+        "meta": {"title": "Engineering Hub", "hubKind": "Framework", "version": "0.7 (prototype)",
                  "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
                  "source": "Tracker workbook: " + ", ".join(ALLOWED_SHEETS),
                  "exampleNote": EXAMPLE_NOTE},
@@ -396,18 +478,71 @@ def main(xlsx):
 
 # ---- Framework vs Production content (v0.6) ----
 IMG_FACETS = {"src": "assets/img/facet-levels.svg",
-              "caption": "Facet levels: Product Scope is Level 0; System and Design Type sit at Level 1 directly below any Product Scope item; Lifecycle Stage and Discipline are cross-cutting.",
-              "alt": "Diagram of facet levels. Four Product Scope boxes (Aircraft, Ground Equipment, Test Equipment, Facilities) at Level 0, System and Design Type boxes at Level 1, assemblies and parts below, and two vertical bands for Lifecycle Stage and Discipline spanning all levels."}
+              "caption": "Facet levels: Product Scope is facet level 0; System and Design Type sit at facet level 1, directly below any Product Scope option; Lifecycle Stage, Source and Discipline are cross-cutting. Items below are organised by build levels (see Build levels).",
+              "alt": "Diagram of facet levels. Four Product Scope boxes (Aircraft, Ground Equipment, Test Equipment, Facilities) at facet level 0, System and Design Type boxes at facet level 1, items organised by build levels below, and vertical bands for the cross-cutting facets Lifecycle Stage, Source and Discipline."}
+IMG_BUILD = {"src": "assets/img/build-levels.svg",
+             "caption": "Build levels of the Aircraft scope: Build Level 0 Full Aircraft; Build Level 1 the Major Units plus Final Assembly; then Assembly, Sub-assembly and Part. Build levels are separate from facet levels.",
+             "alt": "Diagram of build levels. Full Aircraft at Build Level 0; six boxes at Build Level 1 (Front Fuselage, Centre Fuselage, Rear Fuselage, Wings, Fins and Final Assembly, the last drawn differently because it is not a Major Unit); Assembly, Sub-assembly and Part below; a side note that facet levels are numbered separately."}
 IMG_RPV = {"src": "assets/img/req-prod-ver-links.svg",
-           "caption": "Typed links: a Requirement is satisfied by Product data, Product data is supported by Verification data, and Verification demonstrates the Requirement. A change flags every linked item; AI-proposed links need human confirmation.",
+           "caption": "Typed links: a Requirement is satisfied by Product data, Product data is supported by Verification data, and Verification demonstrates the Requirement. Each link type sets the direction of change flags; by default a change flags directly linked objects only and the reviewer decides whether to pass it on. AI-proposed links need human confirmation.",
            "alt": "Diagram with three boxes, Requirement, Product and Verification, joined by labelled arrows, a Hub page box linked to all three with dashed arrows, and a change-flag note."}
+BUILD_SECTIONS = [
+    {"heading": "Build levels of the Aircraft scope",
+     "body": "- Build Level 0: Full Aircraft, the top item of the Aircraft scope.\n"
+             "- Build Level 1: the Major Units ([[MU-0001]], [[MU-0002]], [[MU-0003]], [[MU-0004]], [[MU-0005]]) and [[MU-0006]].\n"
+             "- Build Level 2: Assembly. Build Level 3: Sub-assembly. Build Level 4: Part.\n"
+             "In the product-build view every item sits at exactly one build level and has exactly one parent at the build level above. Other views may show the same data object under several branches."},
+    {"heading": "Final Assembly",
+     "body": "Items that are not built into any Major Unit, for example pipes and looms installed at final assembly to connect Major Units, sit under [[MU-0006]]. "
+             "Final Assembly is at Build Level 1 alongside the Major Units because those items are assembled with the Major Units to form the Full Aircraft. It is an option of the Major Unit facet but is not itself a Major Unit."},
+    {"heading": "Build levels are not facet levels",
+     "body": "Facet levels place facets relative to each other: Product Scope is facet level 0 and System and Design Type are facet level 1, directly below any Product Scope option. "
+             "Build levels place items in the product-build hierarchy of one Product Scope. Major Unit is the facet behind Build Level 1 and applies to the Aircraft scope only. See [[HUB-GLOSSARY]]."},
+    {"heading": "Other Product Scopes",
+     "body": "The top items of [[PS-0002]], [[PS-0003]] and [[PS-0004]] sit at Build Level 0, alongside Full Aircraft. Their lower build levels will be defined later. "
+             "Connections between items in different Product Scopes are interface links, not parent build levels."},
+    {"heading": "Requirements have their own breakdown",
+     "body": "Requirements follow a functional breakdown per Product Scope (for the Aircraft scope: Air System \u203a System \u203a Sub-system \u203a Item), not the build levels. Each Requirement links to the items that meet it."},
+]
+FINISH_SECTIONS = [
+    {"heading": "Why finishes are not a Design Type",
+     "body": "A part is designed as one kind of design work (for example [[DT-0002]]) but may be painted, primed, treated and sealed. If coatings were a Design Type option, a part would need several options from one facet, which breaks the one-option rule for items. "
+             "So coatings, sealants and treatments are recorded as Finish Specification records and linked to the parts they are applied to. A part may have several Finish Specifications."},
+    {"heading": "What a Finish Specification record holds (framework template)",
+     "body": "- Permanent ID, title and finish kind (coating, primer, surface treatment, sealant, adhesive).\n"
+             "- The specification it is made to, with issue/revision, and its origin.\n"
+             "- Typed 'finish applied' links to the parts it is applied to. A change to the Finish Specification flags those parts for review.\n"
+             "- Verification status, owner and last reviewed date, like every other record."},
+    {"heading": "In the Framework Hub",
+     "body": "The Framework Hub defines the template and link type only. Project Finish Specification records belong to a Production Hub. "
+             "Related knowledge areas: [[KN-0043]] and [[KN-0049]]."},
+    {"heading": "Retired Design Type IDs",
+     "body": "Until 4 Oct 2026 the Design Type facet also had DT-0011 Coatings, Sealants & Treatments, DT-0012 Standard Parts and DT-0013 Bought-in Equipment. "
+             "These IDs are retired and never reused. Standard parts and bought-in equipment are now options of the Source facet ([[SRC-0002]], [[SRC-0003]]); coatings, sealants and treatments are Finish Specification records."},
+]
+GLOSSARY = [
+    ["Data object", "Anything stored with a unique, permanent identifier. Every item, record and page is a data object."],
+    ["Data type", "The kind of data object, which defines its schema: for example Requirement, Part Definition, Part Instance, Verification, Issue, Lesson Learned, Finish Specification, Hub page."],
+    ["Item", "A physical product item: a Part Instance, or an assembly of Part Instances. Items take exactly one option per applicable facet; derived tags are kept separate."],
+    ["Record", "A data object that is not an item, for example a Requirement, Verification, Issue, Lesson Learned or Finish Specification. Knowledge records (pages, lessons, issues, requirements) may take several options per facet, or All."],
+    ["Page", "A Hub page: a data object that presents knowledge and links to other data objects."],
+    ["Facet / option", "A facet is a controlled classification dimension, such as System or Design Type. An option is one controlled value of a facet. Options never overlap and together cover every case."],
+    ["Facet level", "The position of a facet in the hierarchy of facets. Product Scope is facet level 0; System and Design Type are facet level 1. Lifecycle Stage, Source and Discipline are cross-cutting."],
+    ["Build level", "The position of an item in the product-build hierarchy of a Product Scope. Aircraft scope: Build Level 0 Full Aircraft; 1 Major Unit or Final Assembly; then Assembly, Sub-assembly, Part. Build levels are not facet levels."],
+    ["Tier", "A level within one facet that has two tiers: System Group is the upper tier and System the lower tier of the System facet."],
+    ["Link type", "The controlled type of a link between data objects (for example satisfied by, verified by, supports, interface). It sets the direction and depth of change flags."],
+    ["Home System", "The one System a Part Instance is part of (a bracket is Secondary Structure)."],
+    ["Supports link", "A typed link from an item to a System it carries or serves, shown separately from its home System. A change flags the supported System, but no further."],
+    ["Derived tag", "A tag calculated from other tags, never stored as a fact: an assembly's Systems come from its parts, and System Group comes from System."],
+    ["Authority register", "A Production Hub's record of the current master of each data type and the date it moved to the Hub."],
+]
 FRAMEWORK_SECTIONS = [
     {"heading": "Framework data",
      "body": "Framework data is the same for every project and never contains project data:\n"
-             "- Controlled facets and their options (Lifecycle Stage, System, Design Type, Product Scope, Discipline).\n"
+             "- Controlled facets and their options (Lifecycle Stage, Product Scope, Major Unit, System, Design Type, Source, Discipline), the glossary and the link-type table.\n"
              "- Page templates, permanent page IDs and typed link definitions.\n"
              "- Generic, unchanging descriptions and guidance written so that they hold for any project.\n"
-             "- Generic lessons learned and the Skills and Traits registers.\n"
+             "- Generic lessons learned and the Skills and Traits linked registers.\n"
              "This Framework Hub may be hosted openly because it holds framework data only (proposed security rule)."},
     {"heading": "Production data",
      "body": "Production data belongs to one project and lives only in that project's Production Hub, on internal, access-controlled infrastructure:\n"
@@ -416,13 +551,18 @@ FRAMEWORK_SECTIONS = [
              "- Configuration and effectivity records: version or issue, baseline, and applicability by build standard, serial number or configuration.\n"
              "- Project lessons learned and the project's tailoring of the framework."},
     {"heading": "How production data connects to framework pages",
-     "body": "- A Production Hub is created from a numbered framework version and records which version it uses.\n"
+     "body": "- A Production Hub is a versioned instance of the framework: it is created from a numbered framework version and records which version it uses.\n"
              "- Production records are tagged with the same controlled facets and reference framework page IDs (for example a pipe model tagged with System [[SYS-0007]] and Design Type [[DT-0009]]). The production Hub shows them alongside the framework page; the framework page itself never stores them.\n"
              "- Tailoring is recorded as project data that points at the framework page IDs it changes, so framework updates can be adopted in a controlled way without losing the tailoring. Conflicts go to a person to decide.\n"
-             "- The Hub links to the authoritative system (for example PLM or CAD) rather than copying models, and records the identifier and version of each linked record.\n"
-             "- The Production Hub controls which version and effectivity apply in each view; a superseded record or changed effectivity flags the linked pages for review."},
+             "- A superseded record or changed effectivity flags the directly linked pages for review."},
+    {"heading": "Authority register: the Production Hub becomes master",
+     "body": "- End goal: once a Production Hub is set up for a project, it is master of all of that project's data, including configuration and effectivity.\n"
+             "- It integrates with CAD, PLM and analysis tools through an API. Once a data type has moved to the Hub, those tools sync to the Hub rather than holding a master.\n"
+             "- An authority register records, for each data type, its current master (for example PLM or released documents) and the date it moved to the Hub.\n"
+             "- Data types move one at a time, once their records are verified. Until then the Hub links to the current master, recording each record's identifier and version.\n"
+             "- Released documents stay master until they are converted to verified records, which then become master with the document kept as their origin."},
     {"heading": "AI and people",
-     "body": "- AI identifies candidate links between data and pages, typed by what they connect (Requirement, Product, Verification and so on), so updates can flow through the whole product rapidly.\n"
+     "body": "- AI identifies candidate links between data and pages, typed by what they connect (Requirement, Product, Verification and so on), so updates can flow through the whole product rapidly. Each link type sets the direction of change flags; by default a change flags directly linked objects only and the reviewer decides whether to pass it on.\n"
              "- AI-proposed links and records stay unverified until a person confirms them.\n"
              "- People keep meaningful work by design, not only verification: models are parametric so that people can modify them directly.\n"
              "- The Ask the Hub assistant answers only from controlled Hub sources, cites them, and respects access control."},
@@ -500,18 +640,18 @@ def find_issues(values, raw, lookups, rows):
         "'Thermal Management / Fire Protection' vs 'Environmental Control Systems'.",
         ["KN-0015", "KN-0028", "KN-0033", "KN-0031", "KN-0036", "KN-0025", "KN-0030", "KN-0016", "KN-0011", "KN-0013",
          "KN-0035", "KN-0018", "KN-0009", "KN-0032", "KN-0034", "KN-0017"], "Curated", "Resolved",
-        "The agreed two-level System facet (2 Oct 2026) and the System rule resolve these overlaps (one function per System; each item in exactly one System). "
-        "Electrical equipment and looms moved to Design Type; Mission Systems became a System Group; Structure split into Primary and Secondary; "
+        "The agreed two-tier System facet (2 Oct 2026) and the System rule resolve these overlaps (one function per System; each Part Instance has exactly one home System). "
+        "Looms moved to Design Type and bought-in electrical equipment to Source; Mission Systems became a System Group; Structure split into Primary and Secondary; "
         "Armaments merged into Stores Integration; Thermal Management and Fire Protection separated. See the tracker-to-facet mapping issue below.")
     add("Ground Support Equipment and Flight Test Instrumentation were listed as Aircraft Systems",
         "The tracker listed 'Ground Support Equipment' and 'Flight Test Instrumentation' as Aircraft Systems, mixing product scope with aircraft function.",
         ["KN-0021", "KN-0019", "PS-0002", "SYS-0025"], "Curated", "Resolved",
         "Ground Support Equipment is now Product Scope 'Ground Equipment'. Flight Test Instrumentation is installed on the aircraft, so it is its own System "
-        "(SYS-0025, new group Test & Instrumentation). The System facet applies across all Product Scopes.")
+        "(SYS-0025, new group Test & Instrumentation). One shared System list is used for all Product Scopes, and each System records the scopes it applies to.")
     add("Tracker mapping questions answered (Ground Support Equipment, Flight Test Instrumentation, Power Generation & Distribution)",
         "Earlier mapping notes asked how Systems apply to ground equipment, whether on-aircraft test installations need a System, and whether 'Power Generation & Distribution' covered non-electrical power.",
         ["KN-0021", "KN-0019", "KN-0028", "SYS-0025", "SYS-0008"], "Curated", "Resolved",
-        "Systems apply across all Product Scopes, so ground equipment takes Systems like the aircraft; Flight Test Instrumentation is its own System; the System is renamed "
+        "One shared System list applies across Product Scopes, so ground equipment takes Systems like the aircraft; Flight Test Instrumentation is its own System; the System is renamed "
         "'Electrical Power Generation & Distribution (electrical only)' (hydraulic and pneumatic power belong to Hydraulics and Pneumatics). These three now map cleanly.")
     add("Overlaps between facets",
         "Some options repeat across facets: Discipline 'Maintainability / Reliability / Ground Equipment' vs Aircraft System 'Ground Support Equipment'; "
@@ -569,9 +709,14 @@ def find_issues(values, raw, lookups, rows):
         nodesc, "Auto-detected")
     add("Discipline options overlapping the new Design Type facet or treated as design properties",
         "Discipline 'Mechanical Systems' (KN-0050) conflicts with the decision that mechanical, flexible, kinematic and similar aspects are design properties, not categories. "
-        "'Standard Parts & Supply Chain' (KN-0054) overlaps Design Type 'Standard Parts'; 'Environmental Factors / Protection Treatments / ... Tank Sealing' (KN-0043) overlaps "
-        "'Coatings, Sealants & Treatments'; 'Materials Engineering' (KN-0049) and 'Manufacturing Methods' (KN-0048) overlap the material/process basis of Design Type.",
-        ["KN-0050", "KN-0054", "DT-0012", "KN-0043", "DT-0011", "KN-0049", "KN-0048"], "Curated", "Open")
+        "'Standard Parts & Supply Chain' (KN-0054) overlaps Source option 'Standard Part' (formerly Design Type DT-0012, retired 4 Oct 2026); 'Environmental Factors / Protection Treatments / ... Tank Sealing' (KN-0043) overlaps "
+        "Finish Specification records (formerly Design Type DT-0011, retired); 'Materials Engineering' (KN-0049) and 'Manufacturing Methods' (KN-0048) overlap the material/process basis of Design Type.",
+        ["KN-0050", "KN-0054", "SRC-0002", "KN-0043", "HUB-FINISH", "KN-0049", "KN-0048"], "Curated", "Open")
+    unconf = [v["id"] for v in values if v["facet"] == "system" and not v.get("scopesConfirmed")]
+    add("System applicability to Product Scopes is a first proposal (%d of %d Systems unconfirmed)" % (len(unconf), sum(1 for v in values if v["facet"] == "system")),
+        "Each System records the Product Scopes it applies to (decision of 4 Oct 2026). Fuel (Aircraft, Ground Equipment, Facilities) and the Mission Systems (Aircraft only) were stated; "
+        "the scopes shown for the other Systems are an initial proposal for confirmation. Systems for other scopes, such as Building Services, may be added later.",
+        unconf, "Curated", "Open")
     return issues
 
 
