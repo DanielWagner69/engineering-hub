@@ -37,14 +37,26 @@ D.pages.forEach(p => (p.images || []).forEach(im => {
   if (!im.alt || !im.caption) errs.push(p.id + ": image needs alt text and caption");
 }));
 ["HUB-FRAMEWORK", "HUB-PRODEX", "HUB-LESSONS", "HUB-ISSUES", "HUB-GLOSSARY", "HUB-BUILDLEVELS", "HUB-FINISH"].forEach(id => { if (!byId[id]) errs.push("missing hub page " + id); });
-if ((D.meta || {}).hubKind !== "Framework") errs.push("meta.hubKind must be 'Framework'");
+if (!["Framework","Production"].includes((D.meta || {}).hubKind)) errs.push("meta.hubKind must be Framework or Production");
+if (D.meta.hubKind === "Production") {
+  if (!D.meta.frameworkVersion) errs.push("Production Hub needs frameworkVersion");
+  if (!D.production) errs.push("Production Hub needs production overlay");
+  ["HUB-PROJECT","HUB-CONTACTS","HUB-AUTHORITY","HUB-MODEL","HUB-REQUIREMENTS","HUB-ITEMS","HUB-ISSUES-DEMO","HUB-FEEDBACK"].forEach(id => { if (!byId[id]) errs.push("missing demo page " + id); });
+  D.pages.filter(p => p.type === "prodrecord").forEach(p => {
+    if (!p.effectivity || typeof p.effectivity !== "object" || !p.effectivity.type) errs.push(p.id + ": effectivity must be structured");
+    if (!(p.requirements || []).length) errs.push(p.id + ": production record needs Requirement link");
+  });
+  if ((D.meta.version||"").includes("demo") && D.pages.filter(p => p.type === "finish").length < 1) errs.push("demo should include Finish Specification records");
+}
 D.pages.forEach(p => { if (p.productionData) errs.push(p.id + ": production data is not allowed in the Framework Hub"); });
 // v0.7 (requirements v13 decisions)
 const of = t => D.pages.filter(p => p.type === t);
 const dt = of("designtype").map(p => p.title);
-if (dt.length !== 10) errs.push("expected 10 Design Types, got " + dt.length);
+if (dt.length !== 11) errs.push("expected 11 Design Types, got " + dt.length);
 ["DT-0011", "DT-0012", "DT-0013"].forEach(id => { if (byId[id]) errs.push(id + " is retired and must not be used"); });
-if (dt.some(t => /standard|bought|coating/i.test(t))) errs.push("Design Type must not contain Standard Parts, Bought-in or Coatings");
+if (dt.some(t => /standard part|coating/i.test(t))) errs.push("Design Type must not contain Standard Parts or Coatings");
+if (!dt.includes("Bought-in Equipment")) errs.push("Design Type must include Bought-in Equipment (DT-0014)");
+if (byId["DT-0014"] && byId["DT-0014"].title !== "Bought-in Equipment") errs.push("DT-0014 must be Bought-in Equipment");
 const src = of("itemsource").map(p => p.title).join("|"); if (src !== "Make|Standard Part|Bought-in Equipment") errs.push("Source options wrong: " + src);
 const mu = of("majorunit").map(p => p.title).join("|"); if (mu !== "Front Fuselage|Centre Fuselage|Rear Fuselage|Wings|Fins|Final Assembly") errs.push("Major Unit options wrong: " + mu);
 of("majorunit").forEach(p => { if (JSON.stringify(p.scopes) !== '["PS-0001"]') errs.push(p.id + ": Major Unit must be Aircraft scope only"); });
@@ -68,7 +80,8 @@ D.pages.filter(p => p.tags).forEach(p => {
 });
 const gl = (byId["HUB-GLOSSARY"] || {}).glossary || [], terms = gl.map(g => g[0].toLowerCase());
 ["data object", "item", "record", "page", "facet / option", "facet level", "build level", "tier", "data type", "link type"].forEach(t => { if (!terms.includes(t)) errs.push("glossary missing " + t); });
-if (!/^0\.7/.test(D.meta.version)) errs.push("version should be 0.7");
+if (D.meta.hubKind === "Framework" && !/^0\.8/.test(D.meta.version)) errs.push("version should be 0.8");
+if (D.meta.hubKind === "Production" && !/demo/.test(D.meta.version)) errs.push("demo version should mention demo");
 const counts = {}; D.pages.forEach(p => counts[p.type] = (counts[p.type] || 0) + 1);
 console.log("Pages:", JSON.stringify(counts), "Issues:", D.issues.length);
 if (errs.length) { console.log("ERRORS:\n" + errs.join("\n")); process.exit(1); } else console.log("Data checks passed: all IDs unique, all tags and links resolve.");

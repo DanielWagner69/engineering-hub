@@ -44,6 +44,15 @@ if (!document.querySelector("#page input[data-filter='PS-0004']")) errs.push("Le
 if (txt().indexOf("1 of 7 lessons match") < 0) errs.push("Product Scope filter on Lessons did not filter (expected 1 of 7)");
 history.replaceState(null, "", "#/p/SYS-0002?v=lifecycle"); EH.render(); if (txt().indexOf("Supported by") >= 0) errs.push("Secondary Structure should not be listed as supported");
 history.replaceState(null, "", "#/p/SYS-0009?v=lifecycle"); EH.render(); if (txt().indexOf("Supported by") < 0) errs.push("Hydraulics page should list items that support it");
+// v0.8
+history.replaceState(null, "", "#/f/designtype"); EH.render();
+if (txt().indexOf("Bought-in Equipment") < 0) errs.push("Design Type list missing Bought-in Equipment");
+history.replaceState(null, "", "#/home?v=majorunit"); EH.render();
+// Expand Final Assembly path by rendering a derived loom page in majorunit view
+history.replaceState(null, "", "#/p/EX-0003?v=majorunit"); EH.render();
+if (!document.querySelector("#tree .derived-tag")) errs.push("Major Unit tree should show derived badge on loom EX-0003");
+history.replaceState(null, "", "#/p/SYS-0007"); EH.render();
+if (txt().indexOf("Requirement") < 0) errs.push("Production links table should include Requirement column header");
 if (window.HUB_AI_ENDPOINT !== null) errs.push("HUB_AI_ENDPOINT should default to null");
 EH.openAsk("fuel system");
 HubAI.askHub("fuel system").then(function (r) {

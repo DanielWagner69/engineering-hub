@@ -30,7 +30,7 @@ FACETS = [
     {"key": "system", "level": "L1", "levelLabel": "Facet level 1: directly below any Product Scope option, e.g. the Aircraft scope (lower tier of the System facet)", "label": "System", "plural": "Systems", "source": "Agreed System facet (2 Oct 2026), lower tier; mapped from tracker Aircraft System list",
      "note": "Rule: a System is a set of items that work together to perform one function. Every Part Instance has exactly one home System, the System it is part of (a bracket is Secondary Structure), and may have typed supports links to the Systems it carries or serves. Assemblies derive their Systems from their parts (derived tags), so a loom shows the Systems of its wires. Part Definitions carry no System. One shared System list is used for all Product Scopes, and each System records the Product Scopes it applies to."},
     {"key": "designtype", "level": "L1", "levelLabel": "Facet level 1: directly below any Product Scope option, e.g. the Aircraft scope", "label": "Design Type", "plural": "Design Types", "source": "Agreed Design Type facet (2 Oct 2026; revised 4 Oct 2026)",
-     "note": "The kind of design work: material, process or item kind only. Bought-in items normally have no Design Type. Coatings, sealants and treatments are not Design Types: they are finish-specification records linked to the parts they are applied to. Status: agreed for now, subject to refinement."},
+     "note": "The kind of design work: material, process or item kind, plus Bought-in Equipment for supplier equipment. Standard Parts are recorded on the Source facet and normally have no Design Type (unless a material kind applies). Coatings, sealants and treatments are not Design Types: they are finish-specification records linked to the parts they are applied to. Status: agreed for now, subject to refinement."},
     {"key": "productscope", "level": "L0", "levelLabel": "Facet level 0: the top facet. Aircraft, Ground Equipment, Test Equipment and Facilities are peers; Full Aircraft is the top item of the Aircraft scope", "label": "Product Scope", "plural": "Product Scopes", "source": "Agreed Product Scope facet (2 Oct 2026; boundaries 4 Oct 2026)",
      "note": "Which product an item belongs to; facet level 0. The four options are peers. Facilities are fixed infrastructure (buildings, fuel farms, fixed rigs); Test Equipment is movable test kit; Ground Equipment is movable support kit that is not test kit. Each System records the Product Scopes it applies to; connections between items in different scopes are links (interfaces), not a parent build level."},
     {"key": "majorunit", "level": "BUILD", "levelLabel": "Build Level 1 of the Aircraft scope (a build level, not a facet level; Aircraft scope only)", "label": "Major Unit", "plural": "Major Units", "source": "Agreed Major Unit facet (4 Oct 2026)",
@@ -73,15 +73,16 @@ DESIGN_TYPES = [
     ("DT-0008", "Glazing", "Includes canopy and windscreen transparencies."),
     ("DT-0009", "Pipework", None),
     ("DT-0010", "Electrical Looms", "Looms are a Design Type, not a System: each wire's home System is the System it serves, and a loom shows the Systems of its wires (derived tags)."),
+    ("DT-0014", "Bought-in Equipment", "Equipment bought from a supplier to a specification (pumps, LRUs, actuators). Tag with Source 'Bought-in Equipment' as well. (DT-0013 was retired in v0.7 and is never reused; this option was restored as DT-0014 on 5 Oct 2026.)"),
 ]
-# DT-0011 (Coatings, Sealants & Treatments), DT-0012 (Standard Parts) and DT-0013 (Bought-in Equipment) were retired on
-# 4 Oct 2026 (v0.7). IDs are permanent, so these three are never reused. Standard parts and bought-in equipment are now
-# options of the Source facet; coatings, sealants and treatments are finish-specification records (HUB-FINISH).
+# DT-0011 (Coatings), DT-0012 (Standard Parts) and DT-0013 (Bought-in Equipment) were retired on 4 Oct 2026 (v0.7).
+# IDs are permanent and never reused. Bought-in Equipment returned as Design Type DT-0014 (v0.8). Standard Parts stay
+# on the Source facet only (unless a material kind Design Type also applies). Coatings remain finish-specification records.
 RETIRED_DESIGN_TYPES = {"DT-0011": "Coatings, Sealants & Treatments", "DT-0012": "Standard Parts", "DT-0013": "Bought-in Equipment"}
 SOURCES = [
     ("SRC-0001", "Make", "Designed and made by or for the project to its own design (machined, sheet, composite, moulded, looms, pipework and so on)."),
-    ("SRC-0002", "Standard Part", "Catalogue parts to a published standard, such as fasteners, seals and fittings."),
-    ("SRC-0003", "Bought-in Equipment", "Equipment bought from a supplier to a specification, such as pumps, LRUs and actuators. Normally has no Design Type."),
+    ("SRC-0002", "Standard Part", "Catalogue parts to a published standard, such as fasteners, seals and fittings. Normally has no Design Type unless a material kind applies."),
+    ("SRC-0003", "Bought-in Equipment", "Equipment bought from a supplier to a specification, such as pumps, LRUs and actuators. Also tagged Design Type 'Bought-in Equipment' (DT-0014)."),
 ]
 MAJOR_UNITS = [
     ("MU-0001", "Front Fuselage", "Items built into the front fuselage major unit before final assembly."),
@@ -118,7 +119,7 @@ KN_MAP = {
     "KN-0012": ({"system": ["SYS-0018"]}, True, ""),
     "KN-0013": ({"system": ["SYS-0023"]}, True, ""),
     "KN-0014": ({"designtype": ["DT-0010"]}, False, "No longer a System. Maps to Design Type 'Electrical Looms'; each wire's home System is the System it serves, and a loom's Systems are derived from its wires."),
-    "KN-0015": ({"itemsource": ["SRC-0003"], "system": ["SYS-0008"]}, False, "Split across two facets: Source 'Bought-in Equipment' plus System 'Electrical Power Generation & Distribution (electrical only)'. Electrical equipment that serves another function (e.g. a sensor's power supply) takes that function's System as its home System, so this System tag is a default, not a certainty. (Until 4 Oct 2026 this mapped to the retired Design Type DT-0013.)"),
+    "KN-0015": ({"itemsource": ["SRC-0003"], "designtype": ["DT-0014"], "system": ["SYS-0008"]}, False, "Split across facets: Source 'Bought-in Equipment', Design Type 'Bought-in Equipment' (DT-0014) and System 'Electrical Power Generation & Distribution (electrical only)'. Electrical equipment that serves another function takes that function's System as its home System, so this System tag is a default, not a certainty."),
     "KN-0016": ({"system": ["SYS-0021"]}, True, ""),
     "KN-0017": ({"system": ["SYS-0015"]}, True, ""),
     "KN-0018": ({"system": ["SYS-0011"]}, True, ""),
@@ -166,7 +167,7 @@ SAMPLES = [
          "- Has the design been considered as part of the whole aircraft rather than in isolation? ([[TR-0006]])"],
      ]},
     {"id": "EX-0002", "title": "Landing Gear in Preliminary Design",
-     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0002"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0050", "KN-0056", "KN-0058"],
+     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0002", "DT-0014"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0050", "KN-0056", "KN-0058"],
               "skill": ["SK-0003", "SK-0005"], "trait": ["TR-0008"]},
      "summary": "An example of how a major mechanical system is shaped during [[KN-0004]].",
      "sections": [
@@ -201,7 +202,7 @@ SAMPLES = [
          "- Is the change traceable to the original requirement and design intent? ([[TR-0055]])"],
      ]},
     {"id": "EX-0004", "title": "Hydraulics System in Qualification / Certification",
-     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0009", "DT-0007"], "itemsource": ["SRC-0001", "SRC-0002", "SRC-0003"], "productscope": ["PS-0001"], "discipline": ["KN-0057", "KN-0039", "KN-0052"],
+     "tags": {"stage": ["KN-0006"], "system": ["SYS-0009"], "designtype": ["DT-0009", "DT-0007", "DT-0014"], "itemsource": ["SRC-0001", "SRC-0002", "SRC-0003"], "productscope": ["PS-0001"], "discipline": ["KN-0057", "KN-0039", "KN-0052"],
               "skill": ["SK-0008", "SK-0010"], "trait": ["TR-0051", "TR-0053"]},
      "all": ["majorunit"],
      "summary": "An example of the evidence-focused work typical of [[KN-0006]] for a fluid system.",
@@ -287,14 +288,14 @@ LESSONS = [
      "recommendation": "Assess loom supports and clearances for maintenance actions as well as the installed state; add edge protection where panels are removed regularly.",
      "applicability": "Looms and pipes near removable panels and doors; check in Detailed Design and when maintenance procedures change."},
     {"id": "LL-0004", "title": "Mass growth from unrecorded assumptions",
-     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0004"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0058"]},
+     "tags": {"stage": ["KN-0004"], "system": ["SYS-0013"], "designtype": ["DT-0004", "DT-0014"], "itemsource": ["SRC-0001", "SRC-0003"], "productscope": ["PS-0001"], "majorunit": ["MU-0002"], "discipline": ["KN-0058"]},
      "summary": "Early mass estimates grew significantly because the assumptions behind them were not recorded.",
      "whatHappened": "The mass of a mechanism grew steadily as the design matured. Reviewers could not tell which items had been included in the early estimate, so growth could not be predicted or challenged.",
      "rootCause": "Mass estimates were recorded as single numbers without their scope, assumptions or maturity.",
      "recommendation": "Store each mass estimate with its scope, assumptions and maturity level, and hold a growth allowance appropriate to that maturity.",
      "applicability": "All systems and structure from Initial System Design to Detailed Design."},
     {"id": "LL-0005", "title": "Maintenance access not considered for equipment replacement",
-     "tags": {"stage": ["KN-0005"], "system": ["SYS-0009", "SYS-0007"], "designtype": ["DT-0009"], "itemsource": ["SRC-0003", "SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0003"], "discipline": ["KN-0047", "KN-0045"]},
+     "tags": {"stage": ["KN-0005"], "system": ["SYS-0009", "SYS-0007"], "designtype": ["DT-0009", "DT-0014"], "itemsource": ["SRC-0003", "SRC-0001"], "productscope": ["PS-0001"], "majorunit": ["MU-0003"], "discipline": ["KN-0047", "KN-0045"]},
      "summary": "A replaceable item could only be removed after removing several other items.",
      "whatHappened": "During a maintainability review it was found that removing one line-replaceable item required disconnecting neighbouring pipes and equipment, increasing maintenance time and the risk of errors.",
      "rootCause": "Removal paths were not modelled or reviewed; maintainability was assessed after the installation layout had been fixed.",
@@ -461,7 +462,7 @@ def main(xlsx):
                              "so that the controlled lists can be corrected at source."})
 
     data = {
-        "meta": {"title": "Engineering Hub", "hubKind": "Framework", "version": "0.7 (prototype)",
+        "meta": {"title": "Engineering Hub", "hubKind": "Framework", "version": "0.8 (prototype)",
                  "generated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
                  "source": "Tracker workbook: " + ", ".join(ALLOWED_SHEETS),
                  "exampleNote": EXAMPLE_NOTE},
@@ -518,7 +519,8 @@ FINISH_SECTIONS = [
              "Related knowledge areas: [[KN-0043]] and [[KN-0049]]."},
     {"heading": "Retired Design Type IDs",
      "body": "Until 4 Oct 2026 the Design Type facet also had DT-0011 Coatings, Sealants & Treatments, DT-0012 Standard Parts and DT-0013 Bought-in Equipment. "
-             "These IDs are retired and never reused. Standard parts and bought-in equipment are now options of the Source facet ([[SRC-0002]], [[SRC-0003]]); coatings, sealants and treatments are Finish Specification records."},
+             "Those three IDs are retired and never reused. Coatings remain Finish Specification records. Standard Parts stay on the Source facet ([[SRC-0002]]) and normally have no Design Type. "
+             "Bought-in Equipment was restored as Design Type [[DT-0014]] (5 Oct 2026), used together with Source [[SRC-0003]]."},
 ]
 GLOSSARY = [
     ["Data object", "Anything stored with a unique, permanent identifier. Every item, record and page is a data object."],
@@ -709,9 +711,10 @@ def find_issues(values, raw, lookups, rows):
         nodesc, "Auto-detected")
     add("Discipline options overlapping the new Design Type facet or treated as design properties",
         "Discipline 'Mechanical Systems' (KN-0050) conflicts with the decision that mechanical, flexible, kinematic and similar aspects are design properties, not categories. "
-        "'Standard Parts & Supply Chain' (KN-0054) overlaps Source option 'Standard Part' (formerly Design Type DT-0012, retired 4 Oct 2026); 'Environmental Factors / Protection Treatments / ... Tank Sealing' (KN-0043) overlaps "
-        "Finish Specification records (formerly Design Type DT-0011, retired); 'Materials Engineering' (KN-0049) and 'Manufacturing Methods' (KN-0048) overlap the material/process basis of Design Type.",
-        ["KN-0050", "KN-0054", "SRC-0002", "KN-0043", "HUB-FINISH", "KN-0049", "KN-0048"], "Curated", "Open")
+        "'Standard Parts & Supply Chain' (KN-0054) overlaps Source option 'Standard Part' (formerly Design Type DT-0012, retired); 'Environmental Factors / Protection Treatments / ... Tank Sealing' (KN-0043) overlaps "
+        "Finish Specification records (formerly Design Type DT-0011, retired); 'Materials Engineering' (KN-0049) and 'Manufacturing Methods' (KN-0048) overlap the material/process basis of Design Type. "
+        "Bought-in Equipment is again a Design Type (DT-0014) as well as a Source option.",
+        ["KN-0050", "KN-0054", "SRC-0002", "DT-0014", "KN-0043", "HUB-FINISH", "KN-0049", "KN-0048"], "Curated", "Open")
     unconf = [v["id"] for v in values if v["facet"] == "system" and not v.get("scopesConfirmed")]
     add("System applicability to Product Scopes is a first proposal (%d of %d Systems unconfirmed)" % (len(unconf), sum(1 for v in values if v["facet"] == "system")),
         "Each System records the Product Scopes it applies to (decision of 4 Oct 2026). Fuel (Aircraft, Ground Equipment, Facilities) and the Mission Systems (Aircraft only) were stated; "

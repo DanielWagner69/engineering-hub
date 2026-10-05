@@ -1,4 +1,4 @@
-/* Engineering Hub (Framework) prototype v0.7 - vanilla JS, hash routing, no external dependencies.
+/* Engineering Hub (Framework) prototype v0.8 - vanilla JS, hash routing, no external dependencies.
    All content lives once in window.HUB_DATA.pages (flat). Trees are views generated from tags. */
 (function () {
   "use strict";
@@ -79,12 +79,57 @@
         '<img src="' + esc(im.src) + '" alt="' + esc(im.alt) + '" loading="lazy"><span class="fig-zoom" aria-hidden="true">\u2922 Enlarge</span></button><figcaption>' + esc(im.caption) + "</figcaption></figure>";
     }).join("");
   }
+  function formatEffectivity(eff) {
+    if (eff == null || eff === "") return "\u2014";
+    if (typeof eff === "string") return esc(eff);
+    var t = eff.type || "", fr = eff.from || "", to = eff.to || "", notes = eff.notes || "";
+    var label = t === "serial range" ? "Serial" : t === "build standard" ? "Build std" : t === "configuration" ? "Config" : esc(t);
+    var range = fr && to ? (fr === to ? esc(fr) : esc(fr) + "\u2013" + esc(to)) : esc(fr || to || "");
+    return '<span class="eff" title="' + esc(notes || t) + '"><span class="eff-type">' + label + "</span> " + range +
+      (notes ? ' <span class="eff-notes">(' + esc(notes) + ")</span>" : "") + "</span>";
+  }
+  function scopesFromAffects(affects) {
+    var scopes = [], seen = {};
+    (affects || []).forEach(function (id) {
+      var o = byId[id]; if (!o) return;
+      (o.tags && o.tags.productscope || []).forEach(function (ps) { if (!seen[ps]) { seen[ps] = 1; scopes.push(ps); } });
+    });
+    return scopes;
+  }
+  function reqCell(ids) {
+    ids = ids || [];
+    if (!ids.length) return '<span class="empty">\u2014</span>';
+    return ids.map(function (id) {
+      var r = byId[id];
+      if (!r) return '<span class="warn">' + esc(id) + "</span>";
+      return '<a href="' + href(id) + '" class="req-link"><span class="mono">' + esc(id) + "</span> " + esc(r.title.length > 48 ? r.title.slice(0, 46) + "\u2026" : r.title) + "</a>";
+    }).join("<br>");
+  }
   function prodLinksSection(p) {
     var what = TYPE_LABEL[p.type].toLowerCase();
-    return '<h2>Production data links</h2><p class="section-note">In a project\'s Production Hub this table lists the production records linked to this ' + esc(what) +
-      ' (models, calculations, test records), each under configuration control, with its current master from the authority register. The Framework Hub holds no production data, so it is empty here. See ' + link("HUB-FRAMEWORK") + ".</p>" +
-      '<div class="table-wrap"><table class="list prod-links"><thead><tr><th>Production record</th><th>Type</th><th>Current master</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th><th>Status</th></tr></thead>' +
-      '<tbody><tr><td colspan="7" class="empty-row"><span class="ph-tag">EMPTY IN FRAMEWORK</span>No production data. A Production Hub would show linked records here, e.g. part models (PLM/CAD), calculation documents and verification records, with their applicability by build standard, serial or configuration.</td></tr></tbody></table></div>';
+    var ids = p.productionLinks || [];
+    var head = "<h2>Production data links</h2>";
+    var thead = '<div class="table-wrap"><table class="list prod-links"><thead><tr><th>Production record</th><th>Type</th><th>Requirement</th><th>Current master</th><th>Version / issue</th><th>Baseline</th><th>Effectivity</th><th>Status</th></tr></thead>';
+    if (!(typeof IS_PROD !== "undefined" && IS_PROD) || !ids.length) {
+      // Framework (or empty): show schema headers; empty body
+      if (!(typeof IS_PROD !== "undefined" && IS_PROD)) {
+        return head + '<p class="section-note">In a project\'s Production Hub this table lists the production records linked to this ' + esc(what) +
+          ' (models, calculations, test records), each under configuration control, with the Requirement it supports and structured effectivity. The Framework Hub holds no production data. See ' + link("HUB-FRAMEWORK") + ".</p>" +
+          thead + '<tbody><tr><td colspan="8" class="empty-row"><span class="ph-tag">EMPTY IN FRAMEWORK</span>No production data. A Production Hub would show linked records here with Requirement (ID + title), version, baseline and structured effectivity (serial range, build standard or configuration).</td></tr></tbody></table></div>';
+      }
+      return head + '<p class="section-note">Production records linked to this ' + esc(what) + ".</p>" +
+        thead + '<tbody><tr><td colspan="8" class="empty-row"><span class="ph-tag">EMPTY</span>No production records linked.</td></tr></tbody></table></div>';
+    }
+    var rows = ids.map(function (id) {
+      var r = byId[id]; if (!r) return "";
+      var st = r.status === "Verified" || r.status === "Released" ? "Resolved" : r.status === "In work" ? "Open" : "Partlyresolved";
+      return "<tr><td>" + link(id) + ' <span class="mono nid">' + esc(id) + "</span></td><td>" + esc(r.recType) + "</td><td>" + reqCell(r.requirements) +
+        "</td><td>" + esc(r.master) + '</td><td class="mono">' + esc(r.version) + "</td><td>" + esc(r.baseline) +
+        "</td><td>" + formatEffectivity(r.effectivity) + '</td><td><span class="status s-' + st + '">' + esc(r.status) + "</span></td></tr>";
+    }).join("");
+    return head + '<p class="section-note">Demo production records linked to this ' + esc(what) +
+      ". Requirement column links to the Requirement each record supports. Effectivity is structured (type, from, to). Current master from the " +
+      (byId["HUB-AUTHORITY"] ? link("HUB-AUTHORITY") : "authority register") + ". All records are fictional.</p>" + thead + "<tbody>" + rows + "</tbody></table></div>";
   }
   function ph(text) { return '<div class="ph"><span class="ph-tag">PLACEHOLDER</span>' + esc(text) + "</div>"; }
 
@@ -167,8 +212,14 @@
       var cur = p && p.id === state.id && sameCtx(n.ctx || [], state.ctx) ? " current" : "";
       var label = p ? '<span class="dot t-' + p.type + '"></span><a href="' + href(p.id, n.ctx) + '" title="' + esc(p.id + " " + p.title) + '">' + esc(p.title) + "</a>"
                     : '<span class="dot t-' + (n.facet || "trait") + '"></span><a href="' + (n.facet ? "#/f/" + n.facet + "?v=" + state.view : "javascript:void 0") + '" data-toggle="' + esc(n.key) + '">' + esc(n.label) + "</a>";
+      // Derived badge: item/page whose System tags are derived, when shown under a System in a build/view tree
+      var der = "";
+      if (p && p.derived && p.derived.system) {
+        var underSys = (n.ctx || []).some(function (id) { return byId[id] && byId[id].type === "system"; });
+        if (underSys || state.view === "majorunit") der = ' <span class="derived-tag" title="' + esc(p.derived.system) + '">derived</span>';
+      }
       var badge = n.count != null ? '<span class="badge' + (n.count ? " has" : "") + '" title="topic pages and lessons tagged here">' + n.count + "</span>" : "";
-      return '<li><div class="node' + cur + '"><button class="twisty' + (has ? "" : " leaf") + '" data-toggle="' + esc(n.key) + '" aria-label="expand">' + (open ? "\u25BC" : "\u25B6") + "</button>" + label + badge + "</div>" +
+      return '<li><div class="node' + cur + '"><button class="twisty' + (has ? "" : " leaf") + '" data-toggle="' + esc(n.key) + '" aria-label="expand">' + (open ? "\u25BC" : "\u25B6") + "</button>" + label + der + badge + "</div>" +
              (has && open ? renderNodes(n.children) : "") + "</li>";
     }).join("") + "</ul>";
   }
