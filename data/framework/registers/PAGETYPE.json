@@ -1,0 +1,161 @@
+{
+ "register": "PAGETYPE",
+ "entries": [
+  {
+   "id": "VR-PAGETYPE-0001",
+   "register": "PAGETYPE",
+   "code": "1",
+   "label": "Lifecycle Stage",
+   "definition": "Lifecycle Stage",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-PAGETYPE-0002",
+   "register": "PAGETYPE",
+   "code": "2",
+   "label": "Major Unit",
+   "definition": "Major Unit",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-PAGETYPE-0003",
+   "register": "PAGETYPE",
+   "code": "3",
+   "label": "Build Station",
+   "definition": "Build Station",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-PAGETYPE-0004",
+   "register": "PAGETYPE",
+   "code": "4",
+   "label": "Design Team",
+   "definition": "Design Team",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-PAGETYPE-0005",
+   "register": "PAGETYPE",
+   "code": "5",
+   "label": "Design Sub-team",
+   "definition": "Design Sub-team",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-PAGETYPE-0006",
+   "register": "PAGETYPE",
+   "code": "6",
+   "label": "FDPS",
+   "definition": "FDPS",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-PAGETYPE-0007",
+   "register": "PAGETYPE",
+   "code": "7",
+   "label": "System Group",
+   "definition": "System Group",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 7
+  },
+  {
+   "id": "VR-PAGETYPE-0008",
+   "register": "PAGETYPE",
+   "code": "8",
+   "label": "System",
+   "definition": "System",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 8
+  },
+  {
+   "id": "VR-PAGETYPE-0009",
+   "register": "PAGETYPE",
+   "code": "9",
+   "label": "Sub-system",
+   "definition": "Sub-system",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 9
+  },
+  {
+   "id": "VR-PAGETYPE-0010",
+   "register": "PAGETYPE",
+   "code": "10",
+   "label": "Discipline",
+   "definition": "Discipline",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 10
+  },
+  {
+   "id": "VR-PAGETYPE-0011",
+   "register": "PAGETYPE",
+   "code": "11",
+   "label": "Skill",
+   "definition": "Skill",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 11,
+   "reserved": "Page type kept for later; register not yet populated (decision 6)"
+  },
+  {
+   "id": "VR-PAGETYPE-0012",
+   "register": "PAGETYPE",
+   "code": "12",
+   "label": "Trait",
+   "definition": "Trait",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 12,
+   "reserved": "Page type kept for later; register not yet populated (decision 6)"
+  },
+  {
+   "id": "VR-PAGETYPE-0013",
+   "register": "PAGETYPE",
+   "code": "13",
+   "label": "Topic",
+   "definition": "Topic",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 13
+  },
+  {
+   "id": "VR-PAGETYPE-0014",
+   "register": "PAGETYPE",
+   "code": "14",
+   "label": "Lesson Learned",
+   "definition": "Lesson Learned",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 14
+  }
+ ]
+}

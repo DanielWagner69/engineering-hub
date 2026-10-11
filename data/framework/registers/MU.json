@@ -1,0 +1,107 @@
+{
+ "register": "MU",
+ "entries": [
+  {
+   "id": "VR-MU-0001",
+   "register": "MU",
+   "code": "1",
+   "label": "Front Fuselage",
+   "definition": "Front Fuselage",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 1
+  },
+  {
+   "id": "VR-MU-0002",
+   "register": "MU",
+   "code": "2",
+   "label": "Centre Fuselage",
+   "definition": "Centre Fuselage",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 2
+  },
+  {
+   "id": "VR-MU-0003",
+   "register": "MU",
+   "code": "3",
+   "label": "Rear Fuselage",
+   "definition": "Rear Fuselage",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 3
+  },
+  {
+   "id": "VR-MU-0004",
+   "register": "MU",
+   "code": "4",
+   "label": "Wings",
+   "definition": "Wings",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 4
+  },
+  {
+   "id": "VR-MU-0005",
+   "register": "MU",
+   "code": "5",
+   "label": "Fins",
+   "definition": "Fins",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 5
+  },
+  {
+   "id": "VR-MU-0006",
+   "register": "MU",
+   "code": "6",
+   "label": "Final Assembly",
+   "definition": "Final Assembly (catch-all: items fitted at final assembly that belong to no single Major Unit)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": true,
+   "placeholder": true,
+   "facet_level": 1,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Major Unit",
+   "sort_order": 6
+  }
+ ]
+}

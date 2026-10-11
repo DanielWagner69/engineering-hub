@@ -1,0 +1,41 @@
+{
+ "register": "VERIFICATION_STATUS",
+ "entries": [
+  {
+   "id": "VR-VSTATUS-0001",
+   "register": "VERIFICATION_STATUS",
+   "code": "1",
+   "label": "Unverified",
+   "definition": "Unverified",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-VSTATUS-0002",
+   "register": "VERIFICATION_STATUS",
+   "code": "2",
+   "label": "Verified",
+   "definition": "Verified",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-VSTATUS-0003",
+   "register": "VERIFICATION_STATUS",
+   "code": "3",
+   "label": "Rejected",
+   "definition": "Rejected",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  }
+ ]
+}

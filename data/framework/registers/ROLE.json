@@ -1,0 +1,65 @@
+{
+ "register": "ROLE",
+ "entries": [
+  {
+   "id": "VR-ROLE-0001",
+   "register": "ROLE",
+   "code": "1",
+   "label": "Technical Authority for Design (Design Licence Holder)",
+   "definition": "Technical Authority for Design (Design Licence Holder)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-ROLE-0002",
+   "register": "ROLE",
+   "code": "2",
+   "label": "Design Authority",
+   "definition": "Design Authority",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-ROLE-0003",
+   "register": "ROLE",
+   "code": "3",
+   "label": "Design Lead",
+   "definition": "Design Lead",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-ROLE-0004",
+   "register": "ROLE",
+   "code": "4",
+   "label": "Design Approver",
+   "definition": "Design Approver",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-ROLE-0005",
+   "register": "ROLE",
+   "code": "5",
+   "label": "Discipline Lead",
+   "definition": "Discipline Lead",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5
+  }
+ ]
+}

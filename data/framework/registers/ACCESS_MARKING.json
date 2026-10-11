@@ -1,0 +1,16 @@
+{
+ "register": "ACCESS_MARKING",
+ "entries": [
+  {
+   "id": "VR-ACCESS-0000",
+   "register": "ACCESS_MARKING",
+   "code": "PUB",
+   "label": "Public (framework)",
+   "definition": "Generic framework content with no access restriction.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  }
+ ]
+}

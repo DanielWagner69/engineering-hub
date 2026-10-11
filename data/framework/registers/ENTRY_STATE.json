@@ -1,0 +1,41 @@
+{
+ "register": "ENTRY_STATE",
+ "entries": [
+  {
+   "id": "VR-ESTATE-0001",
+   "register": "ENTRY_STATE",
+   "code": "1",
+   "label": "Active",
+   "definition": "Active",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-ESTATE-0002",
+   "register": "ENTRY_STATE",
+   "code": "2",
+   "label": "Deprecated",
+   "definition": "Deprecated",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-ESTATE-0003",
+   "register": "ENTRY_STATE",
+   "code": "3",
+   "label": "Retired",
+   "definition": "Retired",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  }
+ ]
+}

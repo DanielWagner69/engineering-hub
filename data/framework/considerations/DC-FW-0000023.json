@@ -1,0 +1,102 @@
+{
+ "id": "DC-FW-0000023",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "System Layout and Integration",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0023",
+ "discipline": "VR-DISC-0023",
+ "description": "System Layout and Integration as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "SLI-A-01",
+     "question": "Is space allocated for the route, including maintenance access?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SLI-A-02",
+     "question": "Are the installation's spatial interfaces with other Systems identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SLI-A-03",
+     "question": "Thermal (environment): are heat sources near the installation and temperature limits identified?",
+     "item_status": "Draft",
+     "topic": "Thermal"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "SLI-B-T01",
+     "question": "Thermal (environment): are heat sources near fuel lines identified and fuel temperature limits stated?",
+     "item_status": "Draft",
+     "topic": "Thermal",
+     "applies_to": [
+      "VR-DTY-0009"
+     ]
+    },
+    {
+     "item_id": "SLI-B-01",
+     "question": "Is the preliminary layout clash-free in the integrated model?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SLI-B-02",
+     "question": "Are routing corridors agreed with the interfacing Systems?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "SLI-C-T02",
+     "question": "Thermal (environment): is fuel temperature at the engine interface within limits under ground heat soak?",
+     "item_status": "Draft",
+     "topic": "Thermal",
+     "applies_to": [
+      "VR-DTY-0009"
+     ]
+    },
+    {
+     "item_id": "SLI-C-01",
+     "question": "Are all routing clearances confirmed in the integrated model?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SLI-C-02",
+     "question": "Are clearances to moving parts and thermal sources confirmed?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

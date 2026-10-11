@@ -1,0 +1,36 @@
+{
+ "id": "LL-FW-0000040",
+ "type": "Lesson Learned",
+ "schema_version": "6.0",
+ "title": "Set pipe clamp spacing from the installed vibration spectrum (generic)",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "summary": "Clamp spacing set from static loads alone can lead to fatigue of rigid pipework.",
+ "what_happened": "Generic: fatigue indications on rigid pipework adjacent to clamps after first running.",
+ "root_cause": "Installed vibration spectrum not used for clamp spacing.",
+ "recommendation": "Require installed-spectrum evidence, or an agreed conservative envelope, before accepting clamp spacing.",
+ "applicability": "Rigid pipework supported by clamps in vibration zones.",
+ "lifecycle_stage": [
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "system": [
+  "ALL"
+ ],
+ "discipline": [
+  "VR-DISC-0022"
+ ],
+ "origin": {
+  "kind": "Human",
+  "source_ref": "Promotion of a project lesson (project data removed)",
+  "source_issue_or_revision": "1"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "record_version": 1,
+ "created_at": "2026-08-21T09:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-08-21T09:00:00Z",
+ "modified_by": "user:framework_owner"
+}

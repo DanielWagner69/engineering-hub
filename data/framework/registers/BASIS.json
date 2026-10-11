@@ -1,0 +1,65 @@
+{
+ "register": "BASIS",
+ "entries": [
+  {
+   "id": "VR-BASIS-0001",
+   "register": "BASIS",
+   "code": "1",
+   "label": "Direct",
+   "definition": "Direct",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-BASIS-0002",
+   "register": "BASIS",
+   "code": "2",
+   "label": "Inherited via System tree node",
+   "definition": "Inherited via System tree node",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-BASIS-0003",
+   "register": "BASIS",
+   "code": "3",
+   "label": "Inherited via Design Type",
+   "definition": "Inherited via Design Type",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-BASIS-0004",
+   "register": "BASIS",
+   "code": "4",
+   "label": "Inherited via System",
+   "definition": "Inherited via System",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-BASIS-0005",
+   "register": "BASIS",
+   "code": "5",
+   "label": "Inherited via Discipline",
+   "definition": "Inherited via Discipline",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5
+  }
+ ]
+}

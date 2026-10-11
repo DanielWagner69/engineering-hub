@@ -1,0 +1,49 @@
+{
+ "register": "REQLVL",
+ "entries": [
+  {
+   "id": "VR-REQLVL-0001",
+   "register": "REQLVL",
+   "code": "1",
+   "label": "Air System",
+   "definition": "Air System",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-REQLVL-0002",
+   "register": "REQLVL",
+   "code": "2",
+   "label": "System",
+   "definition": "System",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-REQLVL-0003",
+   "register": "REQLVL",
+   "code": "3",
+   "label": "Sub-system",
+   "definition": "Sub-system",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-REQLVL-0004",
+   "register": "REQLVL",
+   "code": "4",
+   "label": "Item",
+   "definition": "Item",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  }
+ ]
+}

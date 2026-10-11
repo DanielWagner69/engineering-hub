@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000008",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Electro-Magnetic Compatibility",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0008",
+ "discipline": "VR-DISC-0008",
+ "description": "Electro-Magnetic Compatibility as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "EMC-A-01",
+     "question": "Are EMC-sensitive and EMC-emitting items in or near the installation identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-A-02",
+     "question": "Is the EMC zone of the installation identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-A-03",
+     "question": "Are lightning strike and static discharge considerations identified?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "EMC-B-01",
+     "question": "Are screening, segregation and bonding measures defined for the EMC zone?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-B-02",
+     "question": "Is lightning current path continuity assessed for external and fuel-zone items?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-B-03",
+     "question": "Are EMC requirements flowed to bought-in equipment specifications?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "EMC-C-01",
+     "question": "Are EMC and lightning protection features shown on the released definitions?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-C-02",
+     "question": "Is EMC qualification evidence available or planned for bought-in equipment?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "EMC-C-03",
+     "question": "Are EMC test requirements for the installed configuration defined?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

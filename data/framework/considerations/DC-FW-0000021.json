@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000021",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Standard Parts and Supply Chain",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0021",
+ "discipline": "VR-DISC-0021",
+ "description": "Standard Parts and Supply Chain as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "SPS-A-01",
+     "question": "Are standard parts and catalogue items expected to be used identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-A-02",
+     "question": "Are bought-in equipment items and candidate suppliers identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-A-03",
+     "question": "Are long-lead items identified?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "SPS-B-01",
+     "question": "Are standard parts selected from the approved catalogue?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-B-02",
+     "question": "Are bought-in items allocated project control numbers?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-B-03",
+     "question": "Are supply risks recorded for single-source or long-lead items?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "SPS-C-01",
+     "question": "Are all standard parts and catalogue items called up by their catalogue designations?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-C-02",
+     "question": "Are bought-in item specifications and supplier part numbers recorded?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SPS-C-03",
+     "question": "Are alternate standard parts recorded where approved?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

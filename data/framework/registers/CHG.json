@@ -1,0 +1,126 @@
+{
+ "register": "CHG",
+ "entries": [
+  {
+   "id": "VR-CHG-0001",
+   "register": "CHG",
+   "code": "1",
+   "label": "Link change",
+   "definition": "Link change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-CHG-0002",
+   "register": "CHG",
+   "code": "2",
+   "label": "FDPS transfer",
+   "definition": "FDPS transfer",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-CHG-0003",
+   "register": "CHG",
+   "code": "3",
+   "label": "FDPS ownership change",
+   "definition": "FDPS ownership change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-CHG-0004",
+   "register": "CHG",
+   "code": "4",
+   "label": "Up-revision",
+   "definition": "Up-revision",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-CHG-0005",
+   "register": "CHG",
+   "code": "5",
+   "label": "New part number",
+   "definition": "New part number",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-CHG-0006",
+   "register": "CHG",
+   "code": "6",
+   "label": "Effectivity change",
+   "definition": "Effectivity change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-CHG-0007",
+   "register": "CHG",
+   "code": "7",
+   "label": "Improvement after review",
+   "definition": "Improvement after review",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 7
+  },
+  {
+   "id": "VR-CHG-0008",
+   "register": "CHG",
+   "code": "8",
+   "label": "Population change",
+   "definition": "Population change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 8
+  },
+  {
+   "id": "VR-CHG-0009",
+   "register": "CHG",
+   "code": "9",
+   "label": "Interface change",
+   "definition": "Interface change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 9
+  },
+  {
+   "id": "VR-CHG-0010",
+   "register": "CHG",
+   "code": "10",
+   "label": "Other",
+   "definition": "Other",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 10
+  },
+  {
+   "id": "VR-CHG-0011",
+   "register": "CHG",
+   "code": "11",
+   "label": "Lead Sub-system change",
+   "definition": "Change of an FDPS's lead Sub-system or lead Sub-structure (R-15). Re-runs interface inheritance and flags existing interface breaks for re-confirmation.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 11
+  }
+ ]
+}

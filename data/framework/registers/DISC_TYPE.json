@@ -1,0 +1,29 @@
+{
+ "register": "DISC_TYPE",
+ "entries": [
+  {
+   "id": "VR-DISCTYPE-0001",
+   "register": "DISC_TYPE",
+   "code": "SOT",
+   "label": "Sign-off team",
+   "definition": "Agreement required at each review stage it is listed against (6C.19).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-DISCTYPE-0002",
+   "register": "DISC_TYPE",
+   "code": "CON",
+   "label": "Consideration only",
+   "definition": "Checked by the designer through its checklist (4.5); no separate sign-off.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  }
+ ]
+}

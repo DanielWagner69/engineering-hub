@@ -1,0 +1,83 @@
+{
+ "register": "DT",
+ "entries": [
+  {
+   "id": "VR-DT-0001",
+   "register": "DT",
+   "code": "STR",
+   "label": "Structures",
+   "definition": "Design Team Structures.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-DT-0002",
+   "register": "DT",
+   "code": "FLU",
+   "label": "Fluid Systems",
+   "definition": "Design Team Fluid Systems.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-DT-0003",
+   "register": "DT",
+   "code": "ELE",
+   "label": "Electrical Systems",
+   "definition": "Design Team Electrical Systems.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-DT-0005",
+   "register": "DT",
+   "code": "PRI",
+   "label": "Propulsion Integration",
+   "definition": "Design Team Propulsion Integration.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-DT-0004",
+   "register": "DT",
+   "code": "MEC",
+   "label": "Mechanical Systems",
+   "definition": "Design Team Mechanical Systems.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-DT-0006",
+   "register": "DT",
+   "code": "AVM",
+   "label": "Avionics and Mission Integration",
+   "definition": "Design Team Avionics and Mission Integration.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "facet_level": 1,
+   "sort_order": 6
+  }
+ ]
+}

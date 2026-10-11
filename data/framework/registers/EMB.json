@@ -1,0 +1,44 @@
+{
+ "register": "EMB",
+ "entries": [
+  {
+   "id": "VR-EMB-0001",
+   "register": "EMB",
+   "code": "1",
+   "label": "Planned",
+   "definition": "Planned",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "reserved": "Future Development (section 7)",
+   "sort_order": 1
+  },
+  {
+   "id": "VR-EMB-0002",
+   "register": "EMB",
+   "code": "2",
+   "label": "Embodied",
+   "definition": "Embodied",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "reserved": "Future Development (section 7)",
+   "sort_order": 2
+  },
+  {
+   "id": "VR-EMB-0003",
+   "register": "EMB",
+   "code": "3",
+   "label": "Not embodied",
+   "definition": "Not embodied",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "reserved": "Future Development (section 7)",
+   "sort_order": 3
+  }
+ ]
+}

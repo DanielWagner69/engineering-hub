@@ -1,0 +1,53 @@
+{
+ "register": "ORIGIN_KIND",
+ "entries": [
+  {
+   "id": "VR-ORIGIN-0001",
+   "register": "ORIGIN_KIND",
+   "code": "1",
+   "label": "Human",
+   "definition": "Human",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-ORIGIN-0002",
+   "register": "ORIGIN_KIND",
+   "code": "2",
+   "label": "AI",
+   "definition": "AI",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-ORIGIN-0003",
+   "register": "ORIGIN_KIND",
+   "code": "3",
+   "label": "Derived",
+   "definition": "Derived",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-ORIGIN-0004",
+   "register": "ORIGIN_KIND",
+   "code": "4",
+   "label": "Imported",
+   "definition": "Imported",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  }
+ ]
+}

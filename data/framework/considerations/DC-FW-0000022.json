@@ -1,0 +1,102 @@
+{
+ "id": "DC-FW-0000022",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Structural Analysis (Stress)",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0022",
+ "discipline": "VR-DISC-0022",
+ "description": "Structural Analysis (Stress) as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "SA-A-01",
+     "question": "Are load cases for the installation identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SA-A-02",
+     "question": "Are structural attachment points and load paths proposed?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SA-A-03",
+     "question": "Vibration and Shock: is the vibration and shock environment of the installation zone identified?",
+     "item_status": "Draft",
+     "topic": "Vibration and Shock"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "SA-B-V01",
+     "question": "Vibration and Shock: is clamp and support spacing assessed against the installed vibration spectrum?",
+     "item_status": "Draft",
+     "topic": "Vibration and Shock",
+     "applies_to": [
+      "VR-DTY-0009"
+     ]
+    },
+    {
+     "item_id": "SA-B-01",
+     "question": "Are preliminary strength and stiffness margins positive?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SA-B-02",
+     "question": "Are fatigue and damage tolerance needs assessed?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "SA-C-V02",
+     "question": "Vibration and Shock: are shock loads on heavy equipment mounts assessed?",
+     "item_status": "Draft",
+     "topic": "Vibration and Shock",
+     "applies_to": [
+      "VR-DTY-0011"
+     ]
+    },
+    {
+     "item_id": "SA-C-01",
+     "question": "Are final stress margins positive for all load cases, with the analysis recorded?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "SA-C-02",
+     "question": "Are fastener and joint allowables confirmed?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

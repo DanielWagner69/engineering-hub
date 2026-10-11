@@ -1,0 +1,60 @@
+{
+ "register": "IMPACT",
+ "entries": [
+  {
+   "id": "VR-IMPACT-0001",
+   "register": "IMPACT",
+   "code": "1",
+   "label": "Effort",
+   "definition": "Effort",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-IMPACT-0002",
+   "register": "IMPACT",
+   "code": "2",
+   "label": "Cost",
+   "definition": "Cost",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-IMPACT-0003",
+   "register": "IMPACT",
+   "code": "3",
+   "label": "Schedule",
+   "definition": "Schedule",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-IMPACT-0004",
+   "register": "IMPACT",
+   "code": "4",
+   "label": "Safety or certification",
+   "definition": "Safety or certification",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-IMPACT-0005",
+   "register": "IMPACT",
+   "code": "5",
+   "label": "Scope",
+   "definition": "Scope",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000001",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Aerodynamics",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0001",
+ "discipline": "VR-DISC-0001",
+ "description": "Aerodynamics as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "AER-A-01",
+     "question": "Does the installation affect any external aerodynamic surface?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-A-02",
+     "question": "Are any external protrusions, inlets, outlets or drains identified and their positions agreed?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-A-03",
+     "question": "Are aerodynamic loads on externally exposed items estimated for the flight envelope?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "AER-B-01",
+     "question": "Are external mould line changes, steps and gaps within the agreed aerodynamic tolerances?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-B-02",
+     "question": "Are inlet and outlet flows (vents, drains, cooling air) assessed for effect on drag and local flow?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-B-03",
+     "question": "Are aerodynamic loads provided to Structural Analysis for the preliminary sizing?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "AER-C-01",
+     "question": "Are surface finish, step and gap tolerances on the external surface stated on the drawings?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-C-02",
+     "question": "Are final aerodynamic loads confirmed against the released aerodynamic data set?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AER-C-03",
+     "question": "Are any items in disturbed flow (for example behind protrusions) assessed for buffet and fatigue?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

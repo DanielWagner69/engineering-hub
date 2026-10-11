@@ -1,0 +1,70 @@
+{
+ "register": "RFDEC",
+ "entries": [
+  {
+   "id": "VR-RFDEC-0001",
+   "register": "RFDEC",
+   "code": "UPD",
+   "label": "Updated",
+   "definition": "Updated",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1,
+   "applies_to": "Other Review Flags"
+  },
+  {
+   "id": "VR-RFDEC-0002",
+   "register": "RFDEC",
+   "code": "NI",
+   "label": "No impact",
+   "definition": "No impact",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2,
+   "applies_to": "Other Review Flags"
+  },
+  {
+   "id": "VR-RFDEC-0003",
+   "register": "RFDEC",
+   "code": "PASS",
+   "label": "Passed on",
+   "definition": "Passed on",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3,
+   "applies_to": "Other Review Flags"
+  },
+  {
+   "id": "VR-RFDEC-0004",
+   "register": "RFDEC",
+   "code": "ACC",
+   "label": "Accept",
+   "definition": "Accept: decision on an FDPS-interface Review Flag raised by a cross-FDPS Secures link (R-18). The other FDPS's owner accepts the interface.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4,
+   "applies_to": "FDPS-interface flags only"
+  },
+  {
+   "id": "VR-RFDEC-0005",
+   "register": "RFDEC",
+   "code": "QRY",
+   "label": "Query",
+   "definition": "Query: decision on an FDPS-interface Review Flag raised by a cross-FDPS Secures link (R-18). A Query stays open and is shown on both FDPS pages; it does not block the link.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5,
+   "applies_to": "FDPS-interface flags only"
+  }
+ ]
+}
