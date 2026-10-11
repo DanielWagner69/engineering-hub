@@ -70,7 +70,7 @@ def run(store, cfg):
     r16 = {}
     for f in I.of("FDPS"):
         if not I.is_structural(f): continue
-        mine = set(I.members(f)); mounted = {}
+        mine = sorted(set(I.members(f))); mounted = {}
         for o in I.of("FDPS"):
             if o["id"] == f["id"]: continue
             for m in I.members(o):
