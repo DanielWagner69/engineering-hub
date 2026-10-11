@@ -70,14 +70,14 @@ def run(store, cfg):
     r16 = {}
     for f in I.of("FDPS"):
         if not I.is_structural(f): continue
-        mine = sorted(set(I.members(f))); mounted = {}
+        mine = set(I.members(f)); mounted = {}
         for o in I.of("FDPS"):
             if o["id"] == f["id"]: continue
             for m in I.members(o):
                 if not m.startswith("PI"): continue
                 tgt = set(I.lk(I.IDX[m], "Secures")) & mine
                 if tgt or (set(I.lk(I.IDX[m], "Supports")) & set(I.systems(f))): mounted.setdefault(I.PAR[I.home(m)], []).append(m)
-        for m in mine:  # this FDPS's fasteners holding other FDPSs' parts
+        for m in sorted(mine):  # this FDPS's fasteners holding other FDPSs' parts
             for t in I.lk(I.IDX[m], "Secures"):
                 if t not in mine and t.startswith("PI"): mounted.setdefault(I.PAR[I.home(t)], []).append(t)
                 if t not in mine and t.startswith("PI"):

@@ -46,13 +46,13 @@ class Infer:
     def unbroken(s, f): return sorted(set(s.interfaces(f)) - {b["system"] for b in f.get("interface_breaks", [])})
     def fdps_interfaces(s, f):
         """Cross-FDPS Secures links in either direction (1.6.6, 6C.24)."""
-        out = []; mine = sorted(set(s.members(f)))
+        out = []; mine = set(s.members(f))
         for o in s.of("FDPS"):
             if o["id"] == f["id"]: continue
             for m in s.members(o):
                 for t in s.lk(s.IDX[m], "Secures"):
                     if t in mine: out.append({"fdps": o["id"], "fastener": m, "held": t, "direction": "in"})
-            for m in mine:
+            for m in sorted(mine):
                 for t in s.lk(s.IDX[m], "Secures"):
                     if t in s.members(o): out.append({"fdps": o["id"], "fastener": m, "held": t, "direction": "out"})
         return out
