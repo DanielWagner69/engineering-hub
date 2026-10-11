@@ -7,19 +7,10 @@ import argparse, html, json, os, re, shutil, sys, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import validate, purity
 SITE = os.path.join(HERE, "..", "site")
-VERSION_LABEL = "Framework v1.0 (release candidate 1.0.0-rc.1)"
+VERSION_LABEL = "Framework v1.0 (release candidate 1.0.0-rc.2)"
 DEMO = "https://danielwagner69.github.io/engineering-hub-demo/"
 E = html.escape
 def slug(s): return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower().replace("&", "and"))).strip("-")
-# Placeholder Design Team lists (Annex A.4; generic, fictional)
-TEAM = {"STR": (["Metallic - Machined","Metallic - Sheet","Metallic - Cast / Forged","Metallic - Additive","Carbon Fibre Composite","Other Composite","Glazing"], ["SA"]),
- "FLU": (["Pipework","Bought-in Equipment","Metallic - Machined","Metallic - Sheet","Non-metallic - Moulded"], ["FLU"]),
- "ELE": (["Electrical Looms","Bought-in Equipment","Metallic - Sheet"], ["ELE"]),
- "PRI": (["Pipework","Metallic - Machined","Metallic - Sheet","Carbon Fibre Composite","Bought-in Equipment"], ["FLU","MEC"]),
- "MEC": (["Metallic - Machined","Metallic - Cast / Forged","Non-metallic - Moulded","Bought-in Equipment"], ["MEC"]),
- "AVM": (["Bought-in Equipment","Metallic - Sheet","Electrical Looms","Other Composite"], ["ELE","EMC"])}
-CORE_SIGNOFF = ["DES", "SAF", "AWC", "CM", "QUA", "WGT"]
-STAGE_SIGNOFF = {"A": [], "B": ["MFG", "SA", "MP"], "C": ["MFG", "SA", "MP", "TST", "MRG", "SPS"]}
 ENTRY = {"A": ["Allocated Requirements and interfacing Systems identified", "Concept layout in the integrated model", "Risks and design options recorded"],
          "B": ["Stage A passed and its Actions closed or planned", "Preliminary sizing and routing in the integrated model", "Applicable TSMs identified with their applicable statements"],
          "C": ["Stage B passed and its Actions closed or planned", "Detail definitions ready for release", "Compliance Statements recorded for every inherited and direct Requirement and TSM", "Verification evidence complete or planned"]}
@@ -31,6 +22,8 @@ class Site:
         for e in st["register_entries"]: self.by.setdefault(e["register"], []).append(e)
         for v in self.by.values(): v.sort(key=lambda e: e.get("sort_order", 0))
         self.R = st["records"]; self.url = {}
+    def page_of(self, node):
+        return next(p for p in self.R if p["type"] == "Hub Page" and p.get("framework_node") == node and p.get("hub") == "FW")
     def kids(self, reg, parent): return [e for e in self.by.get(reg, []) if e.get("parent") == parent]
     def lab(self, i): return self.REG[i]["label"] if i in self.REG else i
     def link(self, frm, i, text=None):
@@ -112,7 +105,7 @@ class Site:
         dfa = "design/"; dcode = {e["code"]: e["id"] for e in B["DISC"]}; dty = {e["label"].split(" (")[0]: e["id"] for e in B["DTY"]}
         self.add(dfa, "Design tree: Full Aircraft", "<p>Full Aircraft &gt; Design Team &gt; Design Sub-team &gt; FDPS (1.4). Design Teams are Hub levels, not facet tags on items: a Part Instance reaches a Design Team only through the FDPS that contains it (2B.8). FDPS pages exist only in a Production Hub. %s</p><ul>%s</ul>" % (ph, "".join("<li>%s: %s</li>" % (L(dfa, t["id"]), ", ".join(L(dfa, s["id"]) for s in self.kids("DST", t["id"]))) for t in B["DT"])), "TREE-DES", "tree", [("", "Home")], self.metap("TREE-DES"), trees=[("Design", "Full Aircraft")], preview=True)
         for t in B["DT"]:
-            p = U[t["id"]]; dts, ds = TEAM[t["code"]]; dts = [dty[x] for x in dts] + [dty["Standard Part"]]; ds = [dcode[x] for x in ds]
+            p = U[t["id"]]; tpg = self.page_of(t["id"]); dts = tpg["applicable_design_types"]; ds = tpg["applicable_disciplines"]
             body = "<p>%s %s</p><h2>Applicable Design Types</h2><p>%s</p><h2>Applicable Disciplines</h2><p>%s</p><p>TSMs reach the team's FDPSs when any tag matches: a Design Type in an FDPS, a System of its home Sub-systems, or a Discipline on this list (6B.5).</p><h2>Design Sub-teams</h2><ul>%s</ul>" % (
                 E(t["definition"]), ph, " ".join('<a class="chip" href="%s">%s</a>' % (self.rel(p, U[x]), E(self.lab(x))) for x in dts), " ".join('<a class="chip" href="%s">%s</a>' % (self.rel(p, U[x]), E(self.lab(x))) for x in ds), "".join("<li>%s</li>" % L(p, s["id"]) for s in self.kids("DST", t["id"])))
             self.add(p, "Design Team: " + t["label"], body, t["id"], "tree", [("", "Home"), (dfa, "Design")], self.metap(t["id"]), trees=[("Design", "Full Aircraft > " + t["label"])], preview=True)
@@ -123,8 +116,7 @@ class Site:
                          s["id"], "tree", [("", "Home"), (dfa, "Design"), (p, t["label"])], self.metap(s["id"]), trees=[("Design", "Full Aircraft > %s > %s" % (t["label"], s["label"]))], preview=True)
                 for g in B["STAGE"]:
                     r = q + "stage-%s/" % g["code"].lower(); stid = g["id"]
-                    so = [dcode[x] for x in CORE_SIGNOFF + STAGE_SIGNOFF[g["code"]] + TEAM[t["code"]][1]]
-                    so = list(dict.fromkeys(x for x in so if self.REG[x]["discipline_type"] == "VR-DISCTYPE-0001"))
+                    so = next(x for x in self.page_of(s["id"])["stage_sections"] if x["stage"] == stid)["sign_off_disciplines"]
                     rows = []
                     for d in B["DISC"]:
                         for c in dc[d["id"]]["checklists"]:
@@ -167,7 +159,7 @@ class Site:
         for g in B["STAGE"]:
             p = U[g["id"]]; n = sum(len(c["items"]) for d in dc.values() for c in d["checklists"] if c["stage"] == g["id"])
             self.add(p, "Review stage %s: %s" % (g["code"], g["label"]), "<p>Aligned with %s. Generic entry criteria:</p><ul>%s</ul><p>Default Sign-off team Disciplines on every Sub-team template: %s, plus stage additions (%s) and the team's own Disciplines.</p><p>%d Draft checklist items across the 26 Disciplines for this stage; see each <a href='%s'>Discipline</a> page or the Sub-team stage pages.</p>" % (
-                L(p, g["lifecycle_stage"]), "".join("<li>%s</li>" % E(x) for x in ENTRY[g["code"]]), ", ".join(L(p, dcode[x], self.lab(dcode[x])) for x in CORE_SIGNOFF), ", ".join(self.lab(dcode[x]) for x in STAGE_SIGNOFF[g["code"]]) or "none", n, self.rel(p, "disciplines/")), g["id"], "review", [("", "Home"), ("reviews/", "Reviews")], self.metap(g["id"]))
+                L(p, g["lifecycle_stage"]), "".join("<li>%s</li>" % E(x) for x in ENTRY[g["code"]]), ", ".join(L(p, x) for x in sorted(set.intersection(*[set(next(y for y in self.page_of(st["id"])["stage_sections"] if y["stage"] == g["id"])["sign_off_disciplines"]) for st in B["DST"]]))), " (placeholder template lists; the team's own Disciplines are added on each Sub-team page)", n, self.rel(p, "disciplines/")), g["id"], "review", [("", "Home"), ("reviews/", "Reviews")], self.metap(g["id"]))
         # Disciplines
         self.add("disciplines/", "Disciplines", "<p>One list of 26 Disciplines; every Discipline is also a design consideration that all designs address (4.2). Sign-off team Disciplines give agreement at the review stages they are listed against; Consideration only Disciplines are checked by the designer.</p>" + self.regrow("disciplines/", B["DISC"], [("Discipline", lambda e: L("disciplines/", e["id"])), ("Type", lambda e: "<span class='badge %s'>%s</span>" % ("so" if e["discipline_type"].endswith("1") else "co", E(self.lab(e["discipline_type"]))))]), "VR-DISC", "index", [("", "Home")], self.metap("register DISC"))
         for d in B["DISC"]:
@@ -275,7 +267,7 @@ class Site:
         missing = [p["id"] for p in old["pages"] if p["id"] not in A]
         assert not missing, missing
         self.aliases = A
-def checks(site, out, repo):
+def checks(site, out, repo, project=False):
     res = []
     def chk(n, ok, d=""): res.append(("W", n, bool(ok), d))
     broken = []
@@ -301,10 +293,11 @@ def checks(site, out, repo):
     low = [(a, b, round(cr(a, b), 2)) for a, b in pairs if cr(a, b) < 4.5]
     chk("Colour contrast of every text/background pair in the stylesheet at least 4.5:1 (WCAG 2.1 AA)", not low, low)
     css = open(os.path.join(SITE, "style.css")).read()
-    chk("Brand palette kept (#00405E primary, #46C1BE accent, #9EDEDC light); no external or CDN dependency", all(c in css for c in ("#00405E", "#46C1BE", "#9EDEDC")) and not any(re.search(r'(?:src|href)="https?://(?!danielwagner69\.github\.io)', open(os.path.join(out, p, "index.html")).read()) for p in site.pages))
+    chk("Brand palette kept (#00405E primary, #46C1BE accent, #9EDEDC light); no external or CDN dependency", all(c in css for c in ("#00405E", "#46C1BE", "#9EDEDC")) and not any(re.search(r'(?:src|href)="https?://(?!danielwagner69\.github\.io)', open(os.path.join(out, p, "index.html"), encoding="utf-8").read()) for p in site.pages))
     allt = "".join(open(os.path.join(out, p, "index.html"), encoding="utf-8").read() for p in site.pages) + open(os.path.join(out, "assets", "search-index.js")).read()
     H = purity.blocked_hashes()
-    chk("Built site holds no project record identifier and no blocked term (6.10)", not purity.PROJ_ID.search(allt) and not purity.blocked_hits(allt, H), purity.PROJ_ID.findall(allt)[:5])
+    if project: chk("Built site holds no blocked term (real programme or employer) (6.10)", not purity.blocked_hits(allt, H))
+    else: chk("Built site holds no project record identifier and no blocked term (6.10)", not purity.PROJ_ID.search(allt) and not purity.blocked_hits(allt, H), purity.PROJ_ID.findall(allt)[:5])
     chk("Every v0.8 page identifier has a redirect to a v1.0 page", all((t == "" or t in site.pages) for t in site.aliases.values()))
     chk("Readable addresses: no permanent identifier in any page path (decision 5)", not [p for p in site.pages if re.search(r"VR-|-FW-\d", p)])
     return res

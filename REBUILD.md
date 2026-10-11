@@ -29,3 +29,7 @@ The gate exits non-zero on any failure. Public builds never read a workbook: the
 ## Phase 2 (done)
 
 The Framework Hub is generated into `docs/` (`make site`) and served by GitHub Pages from `main:/docs`. 374 pages at readable addresses (for example `systems/fuel/fuel-feed/`). v0.8 links (`#/p/ID`, `#/f/facet`) redirect through `assets/aliases.js` (`aliases.json`). Rules and reference pages are Hub Page records (`data/framework/pages/`, written by `tools/authoring/make_pages.py` from Requirements v23); the seven generic v0.8 example lessons are LL-FW-0000001 to 7. Design Team applicable Design Types and Disciplines and the default Sign-off lists are placeholders in `tools/build_site.py`. Rollback: `git checkout v0.8` content and set Pages back to `main:/`.
+
+## Phase 3 (framework side, 1.0.0-rc.2)
+
+Design Team and Sub-team template pages (PG-FW-0000201 to 206, PG-FW-0000221 to 240) now hold the placeholder applicable Design Types, Disciplines and stage sign-off lists as data. `tools/infer.py` (generic inference) and `tools/checks/per_fdps.py` (rule checks run over every FDPS of a project, plus R-16 evidence) are new; the carried WE4 checks in `checks/core.py` are scoped to the FDPS under test. `tools/build_demo.py` generates the Demo Production Hub from a pinned bundle.

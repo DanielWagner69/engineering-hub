@@ -1,0 +1,50 @@
+{
+ "id": "PG-FW-0000202",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Design Team: Fluid Systems",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0004",
+ "framework_node": "VR-DT-0002",
+ "template": "TPL-0004",
+ "body": {
+  "blocks": [
+   {
+    "text": "Placeholder (generic, fictional) starter lists from Annex A.4; each project replaces them on its own Design Team and Sub-team pages."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "placeholder": true,
+ "applicable_design_types": [
+  "VR-DTY-0009",
+  "VR-DTY-0011",
+  "VR-DTY-0002",
+  "VR-DTY-0003",
+  "VR-DTY-0007",
+  "VR-DTY-0012"
+ ],
+ "applicable_disciplines": [
+  "VR-DISC-0026"
+ ]
+}

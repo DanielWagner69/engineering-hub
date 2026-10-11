@@ -14,7 +14,7 @@ def run(store, cfg):
     EMAX = PRJ["effectivity_max"]
     def rng(e): return range(e["from"], min(e["to"], EMAX) + 1)
     def inr(e, n): return e["from"] <= n <= e["to"]
-    def page_for(node): return [p for p in of("Hub Page") if p.get("framework_node") == node][0]
+    def page_for(node): return sorted([p for p in of("Hub Page") if p.get("framework_node") == node], key=lambda p: p.get("hub") == "FW")[0]  # project page overrides the framework template
     # version resolution (frozen copies)
     def at(ref):
         id,v=ref.split("@"); v=int(v); r=IDX[id]
@@ -146,7 +146,7 @@ def run(store, cfg):
         m=[l for l in by.get(inst,[]) if inr(l["effectivity"],n)]; return m[0]["revision"] if len(m)==1 else None
     def config(n,members):
         return frozenset((m,eff_rev(m,n)) for m in members if inr(IDX[m]["existence"],n))
-    FRs=sorted(of("FDPS Revision"),key=lambda x:x["effectivity"]["from"])
+    FRs=sorted([x for x in of("FDPS Revision") if x["fdps"]==FD["id"]],key=lambda x:x["effectivity"]["from"]); FRID={x["id"] for x in FRs}  # scoped to the FDPS under test (Phase 3)
     cur=1; ok=True
     for f in FRs:
         if f["effectivity"]["from"]!=cur: ok=False
@@ -169,7 +169,7 @@ def run(store, cfg):
         if {(a,b[0]) for a,b in fro}!=set(lv): okc=False
         INFO["fr_cfg"].append((f["revision"],f["effectivity"],len(fro)))
     chk("D","Configuration constant within each FDPS revision range, and frozen population equals the live as-designed configuration (6A.11)",okc)
-    BLs=of("Baseline"); okb=True
+    BLs=[b for b in of("Baseline") if b["fdps_revision"] in FRID]; okb=True
     for f in FRs:
         seq=sorted(IDX[b]["sequence_no"] for b in f["baselines"])
         if seq!=list(range(1,len(seq)+1)): okb=False
@@ -183,7 +183,7 @@ def run(store, cfg):
             for n in rng(inst["existence"]):
                 if inr(b["effectivity"],n) and len([1 for i in p["irl"] if inr(at(i)["effectivity"],n)])!=1: okr=False
     chk("D","Each baseline resolves every member to exactly one revision at every effectivity in its range, from frozen copies (6A.10, 6A.15)",okr)
-    rs=of("Review Snapshot")
+    rs=[s for s in of("Review Snapshot") if IDX[s["baseline"]]["fdps_revision"] in FRID]
     chk("D","Review snapshots reference frozen copies and their baseline, and include interfacing Systems, breaks and agreements (6C.9, 6C.23)",all("@" in json.dumps(s["content"]["population"]) and s.get("baseline") in IDX and "interface_agreements" in s["content"] and "interface_breaks" in s["content"] for s in rs))
     chk("D","Retrofit, Concession and as-embodied records out of scope: none held, and no Compliance Statement references one (6A.16, 7, R-03, R-13)",not of("Retrofit") and not of("Concession") and all("retrofit" not in c and "concession" not in c for c in of("Compliance Statement")))
     # status at a selected effectivity (6A.18)
@@ -328,13 +328,13 @@ def run(store, cfg):
             if not(has_role(c["approved_by"],"Design Authority","Design Team",team,c["approved_at"]) or any(has_role(c["approved_by"],"Design Authority","Design Type",d,c["approved_at"]) for d in dtys)): okna=False
             if c.get("statements_claimed"): okna=False
     chk("E","Not applicable: Requirement approved by a Design Lead covering every Sub-system it reaches through; TSM (no statement applies) by a Design Authority for the owning Design Team or a Design Type it reaches through (6C.13, F-19, R-02)",okna and any(c["requirement"].startswith("TSM") for c in na))
-    okiss=True; ncs=[c for c in of("Compliance Statement") if c["position"]=="Non-compliant"]
+    okiss=True; ncs=[c for c in CSs if c["position"]=="Non-compliant"]
     for c in ncs:
         i=IDX.get(c.get("issue"))
         if not i or i["type"]!="Issue" or not ({c["requirement"],c["id"]}&set(lk(i,"Affects"))) or i["status"]=="Closed": okiss=False
     chk("E","Every Non-compliant Compliance Statement references an open Issue that Affects the Requirement (2F.12, 6A.17, R-13)",ncs and okiss)
     okblk=True; INFO["release_cs"]=[]
-    for f in of("FDPS Revision"):
+    for f in FRs:
         for b in f["baselines"]:
             B=IDX[b]
             if B["trigger"]["kind"]!="Release": continue
@@ -346,7 +346,7 @@ def run(store, cfg):
     # ---- F. considerations, reviews, release
     pg=SPG; NA={t["payload"]["discipline"] for t in of("Tailoring Record") if t["action"]=="mark Discipline not applicable" and has_role(t["approved_by"],"Technical Authority for Design")}
     chk("F","Project non-applicability of a Discipline approved by the Technical Authority for Design (2B.14, F-01)",NA==set(EX.get("project_na_disciplines",NA)))
-    DRs=sorted(of("Design Review"),key=lambda d:d["review_date"]); CKs=of("Checklist Response")
+    DRs=sorted([d for d in of("Design Review") if set(lk(d,"Covers"))&FRID],key=lambda d:d["review_date"]); DRID={d["id"] for d in DRs}; CKs=[c for c in of("Checklist Response") if c["fdps_revision"] in FRID]
     okck=True
     for d in DRs[:3]:
         sec=[s for s in pg["stage_sections"] if s["stage"]==d["stage"]][0]
@@ -412,7 +412,7 @@ def run(store, cfg):
     rr_=[d for d in DRs if d.get("re_review")]
     okrr=all(d["stage"]=="VR-STAGE-0003" and IDX[d["re_review"]["follows_review"]]["stage"]==d["stage"] and all(("carried_forward_from" in a)==(int(a["discipline"][-4:]) not in d["re_review"]["affected_disciplines"]) for a in d["discipline_agreements"]) and all(("carried_forward_from" in a)==(a["system"] not in d["re_review"]["affected_systems"]) for a in d["interface_agreements"]) for d in rr_)
     chk("F","Re-review at the current stage (C), scoped: affected agreements given, others carried forward (6C.12, F-28)",rr_ and okrr)
-    ACT=of("Action")
+    ACT=[a for a in of("Action") if set(lk(a,"Raised at"))&DRID]
     chk("F","Every Action has raised_by; closure accepted by the raiser or the review chair (6C.8, F-29)",all(a.get("raised_by") and a["closure"]["accepted_by"] in(a["raised_by"],IDX[lk(a,"Raised at")[0]]["chair"]) for a in ACT))
     okg=True
     for f in FRs:
