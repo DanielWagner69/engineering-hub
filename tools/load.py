@@ -18,6 +18,8 @@ def load_framework(src):
 def load_project(d):
     recs = []
     for f in sorted(glob.glob(os.path.join(d, "records", "*.json"))): recs += _read(f)
+    # Tailoring Records live beside the project data (data/tailoring/, plan 2.2)
+    for f in sorted(glob.glob(os.path.join(d, "..", "tailoring", "*.json"))): recs += _read(f)
     regs = _read(os.path.join(d, "register_entries.json")) if os.path.exists(os.path.join(d, "register_entries.json")) else []
     meta = _read(os.path.join(d, "project.json"))
     return meta, regs, recs
