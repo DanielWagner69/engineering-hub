@@ -20,7 +20,7 @@ class Demo(Site):
     def __init__(s, st, out, inf):
         super().__init__(st, out); s.I = inf; s.P = inf.PRJ
         s.PR = [r for r in s.R if r.get("hub") not in ("FW", None) and r["type"] != "Hub Page" or (r["type"] == "Hub Page" and r.get("hub") != "FW")]
-    NAV = [("Project D", [("fdps/", "FDPSs"), ("records/", "Record registers"), ("reports/coverage/", "Coverage report"), ("reports/release-gate/", "Release gate"), ("reports/open-flags/", "Review Flags"), ("tailoring/", "Tailoring"), ("feedback/", "Framework gaps")])] + Site.NAV
+    NAV = [("Project", [("fdps/", "FDPSs"), ("records/", "Record registers"), ("reports/coverage/", "Coverage report"), ("reports/release-gate/", "Release gate"), ("reports/open-flags/", "Review Flags"), ("tailoring/", "Tailoring"), ("feedback/", "Framework gaps")])] + Site.NAV
     def page_of(s, node):
         c = [p for p in s.R if p["type"] == "Hub Page" and p.get("framework_node") == node]
         return sorted(c, key=lambda p: p.get("hub") == "FW")[0]
@@ -42,26 +42,26 @@ class Demo(Site):
         super().build(); I = s.I; U = s.url; L = s.link; R = s.rl
         P = s.P; fds = sorted(I.of("FDPS"), key=lambda f: f["fdps_number"])
         effs = sorted(I.of("Effectivity"), key=lambda e: e["number"])
-        ph = '<span class="badge co">Project D (fictional)</span>'
+        ph = '<span class="badge co">{PROJ} (fictional)</span>'
         # ---- project home replaces the framework home
         cs = [c for c in I.of("Compliance Statement")]; openiss = [i for i in I.of("Issue") if i["status"] != "Closed"]; openact = [a for a in I.of("Action") if a["status"] != "Closed"]
         cards = [("FDPSs", "fdps/", len(fds)), ("Part Instances", "records/part-instances/", len(I.of("Part Instance"))), ("Requirements and TSMs", "records/requirements/", len(I.of("Requirement")) + len(I.of("TSM"))),
                  ("Compliance Statements", "reports/coverage/", len(cs)), ("Open Issues", "records/issues/", len(openiss)), ("Open Actions", "records/actions/", len(openact)), ("Design Reviews", "records/design-reviews/", len(I.of("Design Review"))), ("Effectivities", "records/effectivities/", len(effs))]
-        body = '<div class="note"><b>Demo content.</b> Project D, the Sparrow Light Trainer, is entirely fictional. Every person, part, requirement, analysis and issue is invented to exercise the Production Hub and is not real engineering data.</div>'
-        body += "<p>Production Hub for %s, built on %s (Framework Version %s). Framework pages below carry Project D's tailoring; production data appears on tree pages, FDPS pages, record registers and reports.</p>" % (E(P["name"]), E(build_site.VERSION_LABEL), E(P["framework_version"]))
+        body = '<div class="note"><b>Demo content.</b> {PROJ}, {PNAME}, is entirely fictional. Every person, part, requirement, analysis and issue is invented to exercise the Production Hub and is not real engineering data.</div>'
+        body += "<p>Production Hub for %s, built on %s (Framework Version %s). Framework pages below carry {PROJ}'s tailoring; production data appears on tree pages, FDPS pages, record registers and reports.</p>" % (E(P["name"]), E(build_site.VERSION_LABEL), E(P["framework_version"]))
         body += '<div class="cards">' + "".join('<a class="card" href="%s"><div class="n">%d</div><div>%s</div></a>' % (u, n, E(t)) for t, u, n in cards) + "</div>"
         body += "<h2>FDPSs</h2>" + s.fdps_table("", fds)
         body += "<h2>Release status by effectivity</h2>" + s.eff_table("", fds, effs)
         body += '<h2>Where to go</h2><ul><li><a href="reports/coverage/">Requirement coverage</a>, <a href="reports/release-gate/">release gate status</a>, <a href="reports/open-flags/">open Review Flags</a></li><li><a href="records/">Record registers</a> and <a href="tailoring/">Tailoring Records</a></li><li><a href="feedback/">Framework gaps found while filling the Demo</a></li><li>Framework (generic, public): <a href="%s">Engineering Hub Framework</a></li></ul>' % FW_URL
         body += "<h2>Masters</h2><p>Part and FDPS revisions are released in the PLM system (release master); the Hub records frozen copies and baselines (6A.13). Effectivity maximum: %d. Effectivity selector with Present / Not present arrives in Phase 4; ranges are shown on every record.</p>" % P.get("effectivity_max", 60)
-        s.pages[""].update(title="Project D Production Hub: Sparrow Light Trainer (fictional)", body=body, rid=P["id"], meta=s.metap(P["id"], owner=P["owner"], vs=P["verification_status"], reviewed=P["modified_at"][:10]))
+        s.pages[""].update(title="{PROJ} Production Hub: {PNAME}", body=body, rid=P["id"], meta=s.metap(P["id"], owner=P["owner"], vs=P["verification_status"], reviewed=P["modified_at"][:10]))
         # ---- FDPS index and pages
-        s.add("fdps/", "FDPSs", "<p>Every FDPS of Project D. An FDPS is a released installation design package of Part Instances owned by one Design Sub-team (1.7). Part Instances have no pages of their own: they are listed in the FDPS population and the <a href='../records/part-instances/'>Part Instance register</a>.</p>" + s.fdps_table("fdps/", fds), "FDPS", "index", [("", "Home")], s.metap("register FDPS", owner="Project D"))
+        s.add("fdps/", "FDPSs", "<p>Every FDPS of {PROJ}. An FDPS is a released installation design package of Part Instances owned by one Design Sub-team (1.7). Part Instances have no pages of their own: they are listed in the FDPS population and the <a href='../records/part-instances/'>Part Instance register</a>.</p>" + s.fdps_table("fdps/", fds), "FDPS", "index", [("", "Home")], s.metap("register FDPS", owner="{PROJ}"))
         for f in fds: s.fdps_page(f, effs)
         # ---- production data on tree pages
         pis = I.of("Part Instance"); ais = I.of("Assembly Instance")
         def inst_rows(frm, items):
-            if not items: return "<p>No Part Instance of Project D here yet.</p>"
+            if not items: return "<p>No Part Instance of {PROJ} here yet.</p>"
             h = "<table><thead><tr><th scope=col>Instance</th><th scope=col>Position</th><th scope=col>Part</th><th scope=col>FDPS</th><th scope=col>Located at</th><th scope=col>Homed in</th><th scope=col>Exists</th></tr></thead><tbody>"
             for p in sorted(items, key=lambda x: x["id"]):
                 d = (I.lk(p, "Instance of") or [None])[0]; fd = I.fdps_of(p["id"]) or next((I.fdps_of(a["id"]) for a in ais if p["id"] in I.lk(a, "Contains")), None)
@@ -71,7 +71,7 @@ class Demo(Site):
             path = U[sub["id"]]; here = [p for p in pis if I.lk(p, "Homed in") == [sub["id"]]]
             pg = I.pages.get(sub["id"]); ex = ""
             if pg and pg.get("hub") != "FW":
-                ex += "<h2>Project D interface list %s</h2><p>From %s (%s). %s</p><ul>%s</ul>" % (ph, R(path, pg["id"]), E(pg["title"]), "Flows to every FDPS whose lead Sub-system is a Sub-structure with a Part Instance homed here (R-09)." if I.PAR[sub["id"]] in I.STR else "Flows to every FDPS with a Part Instance homed here.", "".join("<li>%s</li>" % L(path, y) for y in pg["interfaces"]))
+                ex += "<h2>{PROJ} interface list %s</h2><p>From %s (%s). %s</p><ul>%s</ul>" % (ph, R(path, pg["id"]), E(pg["title"]), "Flows to every FDPS whose lead Sub-system is a Sub-structure with a Part Instance homed here (R-09)." if I.PAR[sub["id"]] in I.STR else "Flows to every FDPS with a Part Instance homed here.", "".join("<li>%s</li>" % L(path, y) for y in pg["interfaces"]))
             fl = sorted({I.fdps_of(p["id"]) for p in here} - {None})
             if here or ex:
                 ex += "<h2>Part Instances homed here %s</h2>%s<h2>FDPSs with Part Instances here</h2><ul>%s</ul>" % (ph, inst_rows(path, here), "".join("<li>%s</li>" % R(path, x, "%s %s" % (I.IDX[x]["fdps_number"], I.IDX[x]["title"])) for x in fl) or "<li>None</li>")
@@ -83,38 +83,38 @@ class Demo(Site):
         for y in s.by["SYS"]:
             path = U[y["id"]]; fl = [f for f in fds if y["id"] in I.systems(f)]
             rq = [r for r in I.of("Requirement") if y["id"] in I.lk(r, "Allocated to")]
-            if fl or rq: s.pages[path]["body"] += "<h2>Project D FDPSs with Part Instances in this System %s</h2><ul>%s</ul><h2>Requirements allocated to the System</h2><ul>%s</ul>" % (ph, "".join("<li>%s</li>" % R(path, f["id"], "%s %s" % (f["fdps_number"], f["title"])) for f in fl) or "<li>None</li>", "".join("<li>%s</li>" % R(path, r["id"], "%s %s" % (r["req_number"], r["title"])) for r in rq) or "<li>None</li>")
+            if fl or rq: s.pages[path]["body"] += "<h2>{PROJ} FDPSs with Part Instances in this System %s</h2><ul>%s</ul><h2>Requirements allocated to the System</h2><ul>%s</ul>" % (ph, "".join("<li>%s</li>" % R(path, f["id"], "%s %s" % (f["fdps_number"], f["title"])) for f in fl) or "<li>None</li>", "".join("<li>%s</li>" % R(path, r["id"], "%s %s" % (r["req_number"], r["title"])) for r in rq) or "<li>None</li>")
         for st in s.by["DST"]:
             path = U[st["id"]]; fl = [f for f in fds if f["owning_sub_team"] == st["id"]]
             pg = I.pages.get(st["id"])
             if fl or (pg and pg.get("hub") != "FW"):
                 s.pages[path]["body"] += "<h2>FDPSs owned %s</h2>%s" % (ph, s.fdps_table(path, fl) if fl else "<p>None</p>")
                 if pg and pg.get("hub") != "FW":
-                    s.pages[path]["body"] += "<h2>Project D stage sections</h2><p>Tailored on %s.</p>%s" % (R(path, pg["id"]), "".join("<h3>Stage %s</h3><p>Sign-off: %s</p><p>Checklist items: %s</p>" % (I.REG[x["stage"]]["code"], ", ".join(L(path, d, I.lab(d).split(" (")[0]) for d in x["sign_off_disciplines"]), ", ".join(E(c["item_id"]) for c in x["checklist_items"])) for x in pg["stage_sections"]))
+                    s.pages[path]["body"] += "<h2>{PROJ} stage sections</h2><p>Tailored on %s.</p>%s" % (R(path, pg["id"]), "".join("<h3>Stage %s</h3><p>Sign-off: %s</p><p>Checklist items: %s</p>" % (I.REG[x["stage"]]["code"], ", ".join(L(path, d, I.lab(d).split(" (")[0]) for d in x["sign_off_disciplines"]), ", ".join(E(c["item_id"]) for c in x["checklist_items"])) for x in pg["stage_sections"]))
         for t in s.by["DT"]:
             pg = I.pages.get(t["id"])
             if pg and pg.get("hub") != "FW":
                 path = U[t["id"]]
-                s.pages[path]["body"] += "<h2>Project D lists %s</h2><p>Design Types: %s</p><p>Disciplines: %s</p><p>Tailored on %s.</p>" % (ph, ", ".join(L(path, x) for x in pg["applicable_design_types"]), ", ".join(L(path, x) for x in pg["applicable_disciplines"]), R(path, pg["id"]))
+                s.pages[path]["body"] += "<h2>{PROJ} lists %s</h2><p>Design Types: %s</p><p>Disciplines: %s</p><p>Tailored on %s.</p>" % (ph, ", ".join(L(path, x) for x in pg["applicable_design_types"]), ", ".join(L(path, x) for x in pg["applicable_disciplines"]), R(path, pg["id"]))
         na = I.na_disciplines()
         for d in na:
             tr = next(t for t in I.of("Tailoring Record") if isinstance(t.get("payload"), dict) and t["payload"].get("discipline") == d)
-            s.pages[U[d]]["body"] = "<div class='note'><b>Not applicable to Project D</b> (%s, approved by %s). Its checklist items are removed from Project D review templates.</div>" % (R(U[d], tr["id"]), E(tr.get("approved_by", ""))) + s.pages[U[d]]["body"]
+            s.pages[U[d]]["body"] = "<div class='note'><b>Not applicable to {PROJ}</b> (%s, approved by %s). Its checklist items are removed from {PROJ} review templates.</div>" % (R(U[d], tr["id"]), E(tr.get("approved_by", ""))) + s.pages[U[d]]["body"]
         # ---- registers of records
-        s.add("records/", "Record registers", "<p>Every Project D record type. Each register row opens a record detail panel inside the register; there are no pages for individual Part Instances or records (plan 3.2).</p><ul>%s</ul>" % "".join("<li><a href='%s/'>%s</a> (%d)</li>" % (u, E(t), len(I.of(t))) for t, u in TYPES if I.of(t)), "RECORDS", "index", [("", "Home")], s.metap("RECORDS", owner="Project D"))
+        s.add("records/", "Record registers", "<p>Every {PROJ} record type. Each register row opens a record detail panel inside the register; there are no pages for individual Part Instances or records (plan 3.2).</p><ul>%s</ul>" % "".join("<li><a href='%s/'>%s</a> (%d)</li>" % (u, E(t), len(I.of(t))) for t, u in TYPES if I.of(t)), "RECORDS", "index", [("", "Home")], s.metap("RECORDS", owner="{PROJ}"))
         for t, u in TYPES:
             rs = sorted(I.of(t), key=lambda r: r["id"])
             if not rs: continue
-            s.add("records/%s/" % u, t + " register", s.register_html("records/%s/" % u, t, rs), "register " + t, "register", [("", "Home"), ("records/", "Records")], s.metap("register " + t, owner="Project D"), text=" ".join(r["id"] + " " + r["title"] for r in rs))
+            s.add("records/%s/" % u, t + " register", s.register_html("records/%s/" % u, t, rs), "register " + t, "register", [("", "Home"), ("records/", "Records")], s.metap("register " + t, owner="{PROJ}"), text=" ".join(r["id"] + " " + r["title"] for r in rs))
         # ---- tailoring
         trs = I.of("Tailoring Record")
-        s.add("tailoring/", "Tailoring Records", "<p>Project D's changes to the framework it adopted (6.4, 6.11). Annex A placeholder lists and interface lists are replaced; Low Observability is not applicable.</p>" + s.register_html("tailoring/", "Tailoring Record", trs), "TAILORING", "register", [("", "Home")], s.metap("TAILORING", owner="Project D"))
+        s.add("tailoring/", "Tailoring Records", "<p>{PROJ}'s changes to the framework it adopted (6.4, 6.11). Annex A placeholder lists and interface lists are replaced; Low Observability is not applicable.</p>" + s.register_html("tailoring/", "Tailoring Record", trs), "TAILORING", "register", [("", "Home")], s.metap("TAILORING", owner="{PROJ}"))
         # ---- reports
         s.add("reports/coverage/", "Requirement coverage", s.coverage(fds), "REPORT-COVERAGE", "report", [("", "Home")], s.metap("REPORT-COVERAGE", owner="Hub (derived)", vs="Derived from verified records"))
         s.add("reports/release-gate/", "Release gate status", s.gate_report(fds, effs), "REPORT-GATE", "report", [("", "Home")], s.metap("REPORT-GATE", owner="Hub (derived)", vs="Derived from verified records"))
         fl = I.of("Review Flag")
         s.add("reports/open-flags/", "Review Flags", "<p>Flags raised by changes along links (2I.2) and by cross-FDPS Secures links (R-18: no confirmation; the other owner records Accept or Query).</p>" + s.register_html("reports/open-flags/", "Review Flag", fl), "REPORT-FLAGS", "report", [("", "Home")], s.metap("REPORT-FLAGS", owner="Hub (derived)"))
-        s.add("feedback/", "Framework gaps found while filling the Demo", s.feedback(), "FEEDBACK", "reference", [("", "Home")], s.metap("FEEDBACK", owner="Project D"))
+        s.add("feedback/", "Framework gaps found while filling the Demo", s.feedback(), "FEEDBACK", "reference", [("", "Home")], s.metap("FEEDBACK", owner="{PROJ}"))
     # ------------------------------------------------------------------
     def fdps_table(s, frm, fds):
         I = s.I; h = "<table><thead><tr><th scope=col>FDPS</th><th scope=col>Title</th><th scope=col>Owning Sub-team</th><th scope=col>Lead Sub-system</th><th scope=col>Status</th><th scope=col>Revisions</th></tr></thead><tbody>"
@@ -255,9 +255,7 @@ class Demo(Site):
         for k, v in r16.items():
             h += "<p>%s: Systems physically mounted on it through other FDPSs' Supports or Secures links: %s. Not prompted by its Sub-structure lists: <b>%s</b>. Inherited but with no mounted item in the current population (over-inclusion, agreed at reviews as no physical interface): %s.</p>" % (
                 s.rl("feedback/", k, I.IDX[k]["fdps_number"]), ", ".join("%s (%s)" % (s.link("feedback/", y), ", ".join(E(x) for x in xs)) for y, xs in v["mounted"].items()) or "none", ", ".join(s.link("feedback/", y) for y in v["not_prompted"]) or "none", ", ".join(s.link("feedback/", y) for y in v["inherited_not_mounted"]))
-        h += "<p><b>Finding.</b> The Sub-structure lists alone prompted every System mounted on frames 14 to 15A (Fuel through the clamp bolts on the frame 15A boss and the bracket fasteners at frame 14; Secondary Structure is its own). Adding the home Systems of parts that Secure to its parts would add nothing here. Hydraulics, carried by the twin-pipe bracket at frame 15, is not detectable from links at all, because the bracket's fasteners secure the bracket, not the frame; only the list prompts it. Recommendation: confirm the Sub-structure list as the only route (over-inclusion accepted) and keep the per-FDPS R-16 evidence check as an advisory report.</p>"
-        h += "<h2>R-19: scope of the example</h2><p>Closed. FD-D-0000009 now carries frames 14, 15 and 15A, Requirements (inherited through Frames and Bulkheads, Primary Structure and Brackets and Supports), TSMs by Design Type, Compliance Statements with evidence, reviews A to C with snapshots, agreements, checklist responses and an Action, and a released rev A with four baselines. It passes every per-FDPS check, and 11 new negative tests on it are caught.</p>"
-        h += "<h2>Other gaps</h2><ul><li>Annex A lists and Design Team lists remain placeholders in the framework; Project D replaces them for the two modelled Design Teams only.</li><li>The interface agreement for a System inherited only by over-inclusion has no 'No physical interface' position; reviewers record Agree with that reason. Consider a position value for it.</li><li>Effectivity selector, review template generator and baseline compare are Phase 4.</li></ul>"
+        h += s.site_cfg.get("feedback_html", "")
         return h
 def main():
     a = argparse.ArgumentParser(); a.add_argument("--framework", required=True); a.add_argument("--project", required=True); a.add_argument("--schema"); a.add_argument("--out", required=True); a.add_argument("--repo"); a.add_argument("--old", required=True); a.add_argument("--fw-old", default=os.path.join(HERE, "..", "site", "v08_ids.json")); o = a.parse_args()
@@ -266,11 +264,10 @@ def main():
     build_site.VERSION_LABEL = "Demo Production Hub v1.0-demo (Phase 3) · Framework %s" % json.load(open(o.framework))["meta"]["framework_version"] if o.framework.endswith(".json") else build_site.VERSION_LABEL
     build_site.DEMO = build_site.FW_HOME = FW_URL
     tmp = o.out.rstrip("/") + ".tmp"; I = Infer(st)
-    s = Demo(st, tmp, I); s.r16 = info.get("r16", {}); s.build()
+    s = Demo(st, tmp, I); s.site_cfg = json.load(open(os.path.join(o.project, "site.json"))) if os.path.exists(os.path.join(o.project, "site.json")) else {}; s.r16 = info.get("r16", {}); s.build()
     s.make_aliases(json.load(open(o.fw_old)))
     old = json.load(open(o.old)); A = s.aliases
-    for k, v in {"HUB-PROJECT": "", "HUB-CONTACTS": "records/role-register/", "HUB-AUTHORITY": "records/authority-register/", "HUB-REQUIREMENTS": "records/requirements/", "HUB-ITEMS": "records/part-instances/",
-                 "HUB-ISSUES-DEMO": "records/issues/", "HUB-FEEDBACK": "feedback/", "HUB-MODEL": "fdps/", "HUB-ISSUES": "feedback/", "HUB-PRODEX": "fdps/"}.items(): A[k] = v
+    for k, v in old.get("aliases", {}).items(): A[k] = v
     for p in old["pages"]:
         if p["id"] in A: continue
         A[p["id"]] = {"PR": "records/part-definitions/", "PI": "records/part-instances/", "REQ": "records/requirements/", "VER": "records/verifications/", "ISS": "records/issues/", "FS": "records/finish-specifications/"}.get(p["id"].split("-")[0], "retired/")
@@ -278,10 +275,11 @@ def main():
     # demo pages: relabel header link text and footer
     for root, _, files in os.walk(tmp):
         for fn in files:
-            if fn.endswith(".html"):
+            if fn.endswith((".html", ".js")):
                 fp = os.path.join(root, fn); t = open(fp, encoding="utf-8").read()
+                t = t.replace("{PROJ}", "Project " + I.PRJ.get("project_letter", "")).replace("{PNAME}", I.PRJ.get("name", ""))
                 t = t.replace("Engineering Hub · Framework</a>", "Engineering Hub · Demo Production Hub</a>").replace("· Engineering Hub Framework</title>", "· Demo Production Hub (fictional)</title>")
-                t = t.replace("Generic framework content only; no project data. <a href=\"%s\">Demo Production Hub (fictional)</a>" % FW_URL, "Project D is entirely fictional. <a href=\"%s\">Engineering Hub Framework</a>" % FW_URL)
+                t = t.replace("Generic framework content only; no project data. <a href=\"%s\">Demo Production Hub (fictional)</a>" % FW_URL, "Project " + I.PRJ.get("project_letter", "") + " is entirely fictional. <a href=\"%s\">Engineering Hub Framework</a>" % FW_URL)
                 t = t.replace("/engineering-hub/", "/engineering-hub-demo/") if fn == "404.html" else t
                 open(fp, "w", encoding="utf-8").write(t)
     w = build_site.checks(s, tmp, o.repo, project=True)
