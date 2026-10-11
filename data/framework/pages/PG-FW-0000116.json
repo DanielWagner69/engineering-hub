@@ -1,0 +1,177 @@
+{
+ "id": "PG-FW-0000116",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Glossary",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "glossary",
+ "body": {
+  "blocks": [
+   {
+    "text": "Terms used with these meanings throughout (Requirements v23 0.4 and 1.1)."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "glossary": [
+  {
+   "term": "Data object",
+   "definition": "anything stored in the software with a unique, permanent identifier (2A.4). Every item, record and page is a data object."
+  },
+  {
+   "term": "Data type",
+   "definition": "the kind of data object, defining its schema (2A.1), for example Requirement, Part Definition, Part Instance, FDPS, Verification, Issue, Lesson Learned, Finish Specification, Hub page."
+  },
+  {
+   "term": "Item",
+   "definition": "a physical product item, meaning a Part Instance or an Assembly Instance (1.8). Each Part Instance owns exactly one Build Station link and one Sub-system link; the item directly below the FDPS links to an aircraft Build Station, and a Part Instance within an Assembly Instance links to a Bench Build Station (1.6)."
+  },
+  {
+   "term": "Product data",
+   "definition": "Part Definitions, Assembly Definitions and items together."
+  },
+  {
+   "term": "Record",
+   "definition": "a data object that is not an item, for example a Requirement, Verification, Issue, Lesson Learned or Finish Specification. Knowledge records (pages, lessons, issues and requirements) may take several options per facet (2F.3). A production record is a record holding project production data (6.3)."
+  },
+  {
+   "term": "Page",
+   "definition": "a Hub page (section 5), a data object that presents knowledge and links to other data objects."
+  },
+  {
+   "term": "Facet, Category, Level, Register, Type, Link, Mapping level, Hub level and Product level",
+   "definition": "as defined in 1.1. Option: a Category of a Facet."
+  },
+  {
+   "term": "Facet level",
+   "definition": "the position of a Facet in a tree (1.1 Level). Product Scope is facet level 0. Major Unit and System are alternative splits at facet level 1 (1.3)."
+  },
+  {
+   "term": "Tier",
+   "definition": "a level within one facet that has two tiers, for example System Group (upper tier) and System (lower tier) of the System facet."
+  },
+  {
+   "term": "Link type",
+   "definition": "the controlled type of a link between data objects, which sets the direction and depth of change flags (2I.2)."
+  },
+  {
+   "term": "FDPS",
+   "definition": "a released installation design package of Part Instances, owned by one Design Sub-team (1.7)."
+  },
+  {
+   "term": "Assembly",
+   "definition": "a set of parts assembled off-aircraft before installation (1.8). An Assembly Definition defines an assembly once; an Assembly Instance is a single occurrence of it on the product, in the same way as a Part Definition and a Part Instance."
+  },
+  {
+   "term": "Revision",
+   "definition": "a controlled change state of a Part Definition, Assembly Definition or FDPS (6A.6)."
+  },
+  {
+   "term": "Issue (of a document)",
+   "definition": "a controlled change state of a document (6A.6). Not to be confused with the Issue data type (2E)."
+  },
+  {
+   "term": "Effectivity",
+   "definition": "the range of product effectivity numbers for which a link, Part Instance, FDPS revision, Compliance Statement or Verification applies (6A)."
+  },
+  {
+   "term": "Baseline",
+   "definition": "a frozen, read-only record of the configuration of one FDPS revision, taken at each FDPS release and at each review snapshot (6A.10)."
+  },
+  {
+   "term": "TSM",
+   "definition": "Technical Standards Manual, a requirement data type holding governing design standards (6B.4). A TSM is a broad document holding many statements (6B.11)."
+  },
+  {
+   "term": "Structural System",
+   "definition": "a System of the Airframe System Group (Primary Structure; Secondary Structure; Skins, Doors & Panels; Windscreen & Canopy). Structure means the structural Systems."
+  },
+  {
+   "term": "Sub-structure",
+   "definition": "a Sub-system of a structural System (2B.11). Sub-structures are the sections into which Structure is split; each Sub-structure page lists its interfacing Systems (6C.20). Sub-system, used alone, includes Sub-structures unless the text says non-structural."
+  },
+  {
+   "term": "Lead Sub-system",
+   "definition": "the one Sub-system or Sub-structure recorded on an FDPS that sets which Design Lead approves breaks of its inherited interfaces (1.7.7). A Sub-structure FDPS is an FDPS whose lead Sub-system is a Sub-structure; any other FDPS is a non-structural FDPS."
+  },
+  {
+   "term": "FDPS interface",
+   "definition": "an interface between two FDPSs, created by a Secures link from a fastener in one FDPS to a Part Instance in the other (1.6.6, 6C.24)."
+  },
+  {
+   "term": "Compliance Statement",
+   "definition": "the record of one FDPS's compliance position against one Requirement or TSM over one effectivity range (6B.8)."
+  },
+  {
+   "term": "Interfacing System",
+   "definition": "a System with which an FDPS interfaces, inherited from the interface lists of the Sub-system and Sub-structure pages that apply to it and from the Supports links of its items (6C.20, 6C.21)."
+  },
+  {
+   "term": "Non-compliance",
+   "definition": "a Compliance Statement with position Non-compliant (6A.17). Concession records, Retrofit records and as-embodied or as-manufactured configuration belong to the manufacturing standard and are not in the current scope (section 7)."
+  },
+  {
+   "term": "Role register",
+   "definition": "the record of which person holds which role, with what delegated authority, for which area (6C.14)."
+  },
+  {
+   "term": "Level",
+   "definition": "one position in a tree, counted from the top node (Full Aircraft). Each level holds nodes of one kind only (for example every node at a given level of the System tree is a System)."
+  },
+  {
+   "term": "Category",
+   "definition": "one node at a level, into which data is classified. For example, Fuel is a Category at the System level. The Categories at a level are the options of that level's Facet."
+  },
+  {
+   "term": "Register",
+   "definition": "a controlled list held in the software. There are two kinds, and they shall be kept distinct:"
+  },
+  {
+   "term": "Type",
+   "definition": "the kind of a data object, which sets its schema (for example Part, Part Instance, FDPS or Requirement). Type is distinct from the Design Type attribute (1.10)."
+  },
+  {
+   "term": "Link",
+   "definition": "a typed, directed relationship between two data objects, with a defined cardinality (one-to-one, many-to-one or many-to-many). Links are drawn from the controlled link types (2I.2)."
+  },
+  {
+   "term": "Facet",
+   "definition": "a classification dimension whose permitted values (Categories) are held in a value register. Each Facet sits at one level of one tree, or is cross-cutting (applying at every level, for example Lifecycle Stage)."
+  },
+  {
+   "term": "Mapping level",
+   "definition": "the level at which a Part Instance is linked to a tree (Build Station in the Manufacturing tree, Sub-system in the System tree, and FDPS in the Design tree). The Categories at all higher levels are inferred from that link and are not stored again."
+  },
+  {
+   "term": "Hub level",
+   "definition": "a tree level that exists as Hub pages. Hub levels form the control framework and carry guidance, ownership, metadata and live model previews (5.16)."
+  },
+  {
+   "term": "Product level",
+   "definition": "a tree level that exists as product data records (for example Part and Part Instance). Product levels are not Hub pages."
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "id": "LL-FW-0000006",
+ "type": "Lesson Learned",
+ "schema_version": "6.0",
+ "title": "Ambiguous requirement led to rework",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "summary": "A requirement that could be read two ways was implemented differently by two teams.",
+ "what_happened": "Two teams interpreted the same requirement differently. The difference was found at integration, and one design had to be reworked.",
+ "root_cause": "The requirement used undefined terms and had no stated verification method, so its meaning was never tested before design started.",
+ "recommendation": "Review each requirement for single interpretation and define its verification method when it is written; hold requirements as linked structured data rather than prose.",
+ "applicability": "All systems; most important at Requirements Capture / Concept.",
+ "lifecycle_stage": [
+  "VR-LCS-0002"
+ ],
+ "system": [
+  "VR-SYS-0009"
+ ],
+ "discipline": [
+  "VR-DISC-0003",
+  "VR-DISC-0017"
+ ],
+ "design_type": [],
+ "source": [],
+ "product_scope": [
+  "VR-SCOPE-0001"
+ ],
+ "major_unit": [],
+ "example_note": "Generic, fictional example lesson (from v0.8, re-tagged to the v1.0 registers). Not authoritative engineering guidance.",
+ "alias_of": "LL-0006",
+ "origin": {
+  "kind": "Human",
+  "source_ref": "Framework Hub v0.8 example lesson LL-0006"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "record_version": 1,
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner"
+}

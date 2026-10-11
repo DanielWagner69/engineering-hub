@@ -1,0 +1,59 @@
+{
+ "id": "PG-FW-0000114",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Part attributes: Design Type, Source, Safety Classification, Item Property",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "part-attributes",
+ "body": {
+  "blocks": [
+   {
+    "text": "Design Type, Safety Classification and Item Property are Part attributes and filters, not trees. Source is a cross-cutting facet."
+   },
+   {
+    "clause": "2B.7",
+    "text": "Product scope, location, function and source shall be separate dimensions, each recorded as its own facet. The kind of design work is recorded as the Design Type attribute of a Part (1.10), not as a facet."
+   },
+   {
+    "clause": "2B.10",
+    "text": "Modified bought-in items. A bought-in item that is modified in-house shall be recorded as a new Part with Source Make, and shall carry a Derived from link (2I.2) to the bought-in source Part. A change to the source Part shall flag the modified Part for review. A modified bought-in Part shall keep the Design Type Bought-in Equipment, and with it the TSMs of that Design Type, and shall also record the Design Type of the modification (for example Metallic - Machined), whose TSMs it shall also bring to its FDPS (6B.5)."
+   },
+   {
+    "clause": "1.10.1",
+    "text": "Design Type (the kind of design work, for example a material or process kind) shall be an attribute of every Part, with its permitted values held in a value register. Catalogue items (Source Standard Part) shall take the Design Type Standard Part, so that they reach the TSMs tagged with it (6B.5)."
+   },
+   {
+    "clause": "1.10.2",
+    "text": "Safety Classification shall be an attribute of a Part, with its permitted values held in a value register. A Part used in several places (for example a standard fastener) shall take the highest Safety Classification required by any of its uses. The software shall flag a Part whose classification is lower than that required by any use, for reassignment by a person (0.5)."
+   },
+   {
+    "clause": "4.6",
+    "text": "Property values. Item properties under 4.1 shall be recorded as structured attributes of the Part, drawn from a value register, and may be used to filter considerations and checklists. The item property Fastener shall mark the Parts whose Part Instances require a Secures link (1.6.6). The software shall flag any Part Instance of a Fastener Part that has no Secures link, and any Part Instance with a Secures link whose Part is not a Fastener Part."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

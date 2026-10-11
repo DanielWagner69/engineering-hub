@@ -1,0 +1,79 @@
+{
+ "id": "PG-FW-0000111",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Issue escalation",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "issues/escalation",
+ "body": {
+  "blocks": [
+   {
+    "text": "Every Issue is scored 1 to 5 on five criteria; its escalation level is the highest score, which sets its forum."
+   },
+   {
+    "clause": "2E.1",
+    "text": "The software shall include an Issue data type for recording problems, linked to the Requirements, items and Verification records it affects."
+   },
+   {
+    "clause": "2E.2",
+    "text": "Every Issue shall be assessed against a defined, standard set of impact criteria. Each criterion shall use exhaustive, mutually exclusive options as set out in 2B, worded so that they do not overlap. Where more than one option of a criterion fits an Issue, the highest shall apply."
+   },
+   {
+    "clause": "2E.3",
+    "text": "The software shall determine the escalation level of each Issue from its impact assessment using defined rules, not from the judgement or confidence of the person raising it. An Issue's escalation level shall be its highest score on any single impact criterion."
+   },
+   {
+    "clause": "2E.4",
+    "text": "Each escalation forum or owner shall cover a defined band of escalation levels. The bands shall not overlap and shall together cover every level."
+   },
+   {
+    "clause": "2E.5",
+    "text": "Every Issue shall appear on the agenda of exactly one forum, the one whose band contains its escalation level, whoever raised it. Issues shall be visible read-only to all other forums."
+   },
+   {
+    "clause": "2E.6",
+    "text": "The software shall rank Issues within each forum by impact, so that limited senior attention goes to the highest-impact topics first."
+   },
+   {
+    "clause": "2E.7",
+    "text": "Every Issue page shall show the Product Scopes of the items it links to (and any Product Scope tags on the Issue itself). There shall be no separate cross-scope badge."
+   },
+   {
+    "clause": "2E.8",
+    "text": "Impact criteria. Every Issue shall be scored 1 to 5 on each of the following five criteria: effort, cost, schedule, safety or certification, and scope. Lower limits are exclusive and upper limits inclusive. Threshold values for effort and cost shall be tailorable per Production Hub as project data (6.4); the criteria and scores shall be fixed in the framework."
+   },
+   {
+    "clause": "2E.9",
+    "text": "Escalation bands. The forums and their bands shall be:"
+   },
+   {
+    "clause": "2E.10",
+    "text": "Resolution link. An Issue shall be linked to each Change Record that resolves it, by a Resolved by link (2I.2)."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

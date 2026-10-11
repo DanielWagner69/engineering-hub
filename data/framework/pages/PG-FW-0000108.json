@@ -1,0 +1,63 @@
+{
+ "id": "PG-FW-0000108",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Interfaces: lists, inheritance, breaks and FDPS interfaces",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/interfaces",
+ "body": {
+  "blocks": [
+   {
+    "text": "Interfaces are set on Sub-system and Sub-structure pages as finite lists. FDPSs inherit them; a break is recorded with a reason and approved by a Design Lead of the FDPS's lead Sub-system. Late decisions applied: R-15 (the lead Sub-system is set by the owning Design Sub-team and approved by a Design Lead of that Sub-system; a change re-runs inheritance and flags breaks for re-confirmation) and R-18 (a cross-FDPS Secures link needs no confirmation; the other FDPS's owner gets a Review Flag and records Accept or Query)."
+   },
+   {
+    "clause": "6C.20",
+    "text": "Interface definition. Interfaces shall be defined at Sub-system level, on the Sub-system pages and Sub-structure pages: each page shall list the Systems, or the Sub-systems, with which the items of that Sub-system or Sub-structure interface. Every list shall be finite and decided per System; there shall be no 'interfaces with all' entry. A non-structural Sub-system page shall name the structural Systems or Sub-structures to which its items attach, so that every non-structural FDPS inherits its structural interfaces (R-10). A Sub-structure page shall name the Systems whose items are installed on or attach to that Sub-structure. Interfacing Systems shall be taken from these lists and from Supports links only; they shall not be derived from physical links such as Secures links or geometry (a cross-FDPS Secures link gives an FDPS interface instead, 6C.24). A Sub-structure list may include Systems that some of its FDPSs do not interface with; this over-inclusion is accepted and handled by breaks (6C.21)."
+   },
+   {
+    "clause": "6C.21",
+    "text": "Inherited interfacing Systems. An FDPS shall inherit as interfacing Systems: (a) the Systems listed on the Sub-system pages of the non-structural Sub-systems in which its Part Instances are homed; (b) for a Sub-structure FDPS (1.7.7), the Systems listed on the Sub-structure pages of every Sub-structure in which its Part Instances are homed, so that a Sub-structure's list flows down to all the Sub-structure FDPSs in it; and (c) the Systems named in the Supports links of its items. A non-structural FDPS does not inherit the list of a Sub-structure page: its Part Instances homed in a Sub-structure (for example a bracket) contribute only through (c), as before. No inheritance goes beyond what each page lists (R-01). The FDPS's own home Systems are not interfacing Systems. An inherited interface may be broken for an FDPS where it does not apply. Every break shall be approved by a Design Lead whose area is the FDPS's lead Sub-system, or for a Sub-structure FDPS its lead Sub-structure (6C.14), and recorded with its reason, its author, the approver and the date. A broken interface stays visible and shall be flagged for re-confirmation when the FDPS population changes. A change to the interface list of a Sub-system or Sub-structure page shall flag the FDPSs that inherit from it."
+   },
+   {
+    "clause": "6C.22",
+    "text": "Interface agreement. At each review, the position of each interfacing System of the FDPS that is not broken shall be recorded as structured data, with the same positions as Discipline agreement (6C.19), by a person holding a Design Lead role for that System or one of its Sub-systems (6C.14), with the date. Each condition shall be raised as an Action. A Pass shall not be recorded while any required interface position is missing or is Disagree."
+   },
+   {
+    "clause": "6C.23",
+    "text": "Interfaces in snapshots. The review snapshot (6C.9) and the structured difference (6C.18) shall include the FDPS's interfacing Systems, its broken interfaces, its FDPS interfaces (6C.24) and the recorded interface agreements."
+   },
+   {
+    "clause": "6C.24",
+    "text": "FDPS interfaces. Each FDPS shall show its FDPS interfaces, derived from Secures links between its Part Instances and those of other FDPSs (1.6.6), with the other FDPS, the fastener and the held Part Instance. FDPS interfaces shall be included in the review template of each FDPS concerned, for information, and in its snapshots and baselines (6A.10, 6C.23). An FDPS interface is not an interfacing System and needs no interface agreement of its own (6C.22); the interfacing Systems of each FDPS are still set by 6C.21."
+   },
+   {
+    "clause": "1.7.7",
+    "text": "Lead Sub-system. Each FDPS shall record exactly one lead Sub-system, which may be a Sub-structure, chosen when the FDPS is created and changed only by a recorded change. At least one Part Instance of the FDPS shall be homed in it once the FDPS is populated; the software shall flag an FDPS for which this is not so. The lead Sub-system sets which Design Lead approves breaks of the FDPS's inherited interfaces (6C.21) and whether the FDPS is a Sub-structure FDPS (6C.21). It does not change the Systems of the FDPS, which are still derived from its Part Instances (1.7.3), and it is not inferred from the FDPS number (1.11.1)."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

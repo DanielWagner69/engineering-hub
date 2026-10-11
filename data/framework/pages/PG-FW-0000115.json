@@ -1,0 +1,39 @@
+{
+ "id": "PG-FW-0000115",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Retired v0.8 pages",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "retired",
+ "body": {
+  "blocks": [
+   {
+    "text": "This v0.8 page has been retired in Framework v1.0. Skill and Trait pages are dropped until their registers are populated; tracker source entries, the illustrative Production Hub page, worked examples and the v0.8 framework issues list are retired. Use the trees, registers or search instead."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

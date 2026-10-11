@@ -1,0 +1,52 @@
+{
+ "id": "LL-FW-0000007",
+ "type": "Lesson Learned",
+ "schema_version": "6.0",
+ "title": "Refuelling coupling tolerances agreed separately on each side",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "summary": "Aircraft, ground refuelling equipment and the fuel farm were each designed to their own tolerances at a shared coupling.",
+ "what_happened": "During an interface check the aircraft refuelling coupling, the ground equipment nozzle and the fuel farm connection were found to have been toleranced separately, so some combinations would not connect reliably.",
+ "root_cause": "The interface between items in different Product Scopes was not recorded as one linked interface record, so no single owner saw all three sides.",
+ "recommendation": "Record cross-scope interfaces once, as typed interface links between the items on each side, so a change on one side flags the others for review.",
+ "applicability": "Any System that crosses Product Scopes (for example Fuel across Aircraft, Ground Equipment and Facilities).",
+ "lifecycle_stage": [
+  "VR-LCS-0006"
+ ],
+ "system": [
+  "VR-SYS-0010"
+ ],
+ "discipline": [
+  "VR-DISC-0004",
+  "VR-DISC-0019"
+ ],
+ "design_type": [
+  "VR-DTY-0009"
+ ],
+ "source": [
+  "VR-SRC-0001",
+  "VR-SRC-0002"
+ ],
+ "product_scope": [
+  "VR-SCOPE-0001",
+  "VR-SCOPE-0002",
+  "VR-SCOPE-0004"
+ ],
+ "major_unit": [
+  "VR-MU-0004"
+ ],
+ "example_note": "Generic, fictional example lesson (from v0.8, re-tagged to the v1.0 registers). Not authoritative engineering guidance.",
+ "alias_of": "LL-0007",
+ "origin": {
+  "kind": "Human",
+  "source_ref": "Framework Hub v0.8 example lesson LL-0007"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "record_version": 1,
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner"
+}

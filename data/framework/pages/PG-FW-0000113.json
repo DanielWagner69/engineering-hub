@@ -1,0 +1,83 @@
+{
+ "id": "PG-FW-0000113",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Framework vs Production",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "framework-vs-production",
+ "body": {
+  "blocks": [
+   {
+    "text": "The Framework Hub holds only generic, project-independent content and is public. Each Production Hub is a versioned instance of a framework release; project changes to the framework are Tailoring Records. The Demo Production Hub is entirely fictional."
+   },
+   {
+    "clause": "6.1",
+    "text": "There shall be one standard Engineering Hub framework (the Framework Hub). It defines the page types, templates, controlled facets, link types and generic descriptions that every project uses."
+   },
+   {
+    "clause": "6.2",
+    "text": "Framework data is the project-independent content of the Framework Hub: the controlled facets and their options (2B, 2F), page templates (5.2), generic page descriptions (5.8), link types (2I.2), schemas (2A.1), and generic guidance and lessons learned that apply to any project. Framework data shall contain no project data."
+   },
+   {
+    "clause": "6.3",
+    "text": "Production data is the project-specific working data of one project: for example points of contact, project statistics, live views of the product models, part models, calculation documents, project lessons learned, configuration and effectivity records, and the project's tailoring of the framework (6.4)."
+   },
+   {
+    "clause": "6.4",
+    "text": "A Production Hub is a versioned instance of the Framework Hub, created from a numbered framework version and tailored to the project it serves. Tailoring (for example a project's added facet options, page additions or hidden sections) shall be stored as separate project data that references the framework version and the framework page identifiers it modifies; framework pages shall never be edited in a Production Hub. Rationale: keeps framework content stored once (0.3) and lets framework updates be applied without losing tailoring."
+   },
+   {
+    "clause": "6.5",
+    "text": "Production data shall link to framework pages through the same controlled facets (2F) and by referencing framework page identifiers (2A.4). Framework pages shall never contain or embed production data; a Production Hub shall display the production data linked to each framework page alongside that page. The Production data links table shall include a Requirement column showing the permanent identifier and short title of each Requirement the record supports, as a click-through link."
+   },
+   {
+    "clause": "6.6",
+    "text": "Production Hub mastery. A Production Hub shall become master of the project's production data data type by data type, as recorded in its authority register (2J). Until a data type has moved, its current master (for example a PLM or CAD system, or released documents) remains authoritative and the Hub holds a typed production link to each record with its identifier and revision or issue."
+   },
+   {
+    "clause": "6.7",
+    "text": "Configuration control and effectivity. The Production Hub shall manage configuration control and effectivity for the production data it stores or links to: each production record shall carry its revision or issue, the baseline(s) it belongs to, and its applicability (effectivity). Effectivity shall be structured, not free text: a type, a from value, a to value (the placeholder upper value 999 for an open-ended range, 6A.12), and optional notes. Effectivity shall be filterable (for example all records effective for a given effectivity number). Until configuration and effectivity have moved to the Hub (2J), the Hub shall reflect the effectivity set by their current master; afterwards the Hub is master and the integrated tools synchronise with it. The Hub shall show which revision and effectivity apply in each view, including image views of the product (5.10). The detailed configuration control model is set out in 6A."
+   },
+   {
+    "clause": "6.8",
+    "text": "When a linked production record is superseded or its effectivity changes, the Production Hub shall flag the linked pages and data objects for review, following the link-type table (2I.2)."
+   },
+   {
+    "clause": "6.9",
+    "text": "Framework updates. Updates to the Framework Hub shall be released as numbered framework versions. Each Production Hub shall record the framework version it uses, and shall be able to adopt a newer version in a controlled way: the changes shall be shown, the project's tailoring (6.4) shall be preserved, conflicts shall be flagged for human decision, and adoption shall require human approval."
+   },
+   {
+    "clause": "6.10",
+    "text": "Security. The Framework Hub shall be hosted publicly. Production Hubs shall be hosted on internal, access-controlled infrastructure, and production data shall never be placed in the Framework Hub. Before each framework version is published, its owner shall complete a content review confirming that it contains no project data or sensitive information."
+   },
+   {
+    "clause": "6.11",
+    "text": "Framework merge rules. When a Production Hub adopts a new framework version:"
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

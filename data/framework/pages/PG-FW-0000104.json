@@ -1,0 +1,47 @@
+{
+ "id": "PG-FW-0000104",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Verification and methods",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/verification",
+ "body": {
+  "blocks": [
+   {
+    "text": "Each Verification carries its effectivity and the revisions it is based on. Methods come from the Verification method register."
+   },
+   {
+    "clause": "6B.9",
+    "text": "Verification effectivity. Each Verification shall carry the effectivity range over which it is valid evidence. At every effectivity in that range, each of its basis revisions shall be the effective revision of the instances of its definition that exist there. The evidence of a Compliant statement shall cover its range with no gaps. A Verification that supersedes another for the same FDPS and Requirement shall close the range of the one it supersedes, so that their ranges do not overlap."
+   },
+   {
+    "clause": "2.5",
+    "text": "Verification data shall hold the analysis that supports Product data. Every Verification record shall be linked both to the item(s) it supports and to the Requirement(s) it demonstrates are met, shall state its verification method from the Verification method register (2B.15), and shall carry the effectivity range over which it is valid evidence (6B.9)."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

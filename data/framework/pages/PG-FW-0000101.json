@@ -1,0 +1,63 @@
+{
+ "id": "PG-FW-0000101",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Requirements and flow-down",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/requirements",
+ "body": {
+  "blocks": [
+   {
+    "text": "How Requirements are allocated to the System tree and flow to FDPSs. Compliance is claimed once per FDPS, never per part."
+   },
+   {
+    "clause": "6B.1",
+    "text": "Requirements shall be stored as data records and tagged to framework nodes in the Engineering Hub. Requirements shall keep their own levels (2C.7) according to what they are written against. Requirements and TSMs shall flow down to FDPS level only: Parts, Assemblies and items reach their Requirements and TSMs through the FDPS that contains them."
+   },
+   {
+    "clause": "6B.2",
+    "text": "Allocation. Each Requirement shall be allocated to one or more nodes of the System tree: a Sub-system, a System or a System Group. A Requirement shall flow to every FDPS that has at least one Part Instance homed in a Sub-system at or below an allocated node. Example: a Fuel System usable storage requirement is allocated to the Fuel Storage Sub-system, and every FDPS containing a Part Instance homed in Fuel Storage inherits it. A Requirement may also be linked directly to an FDPS, or to an item for traceability, by a Satisfied by link; the FDPS concerned then holds the Requirement directly."
+   },
+   {
+    "clause": "6B.3",
+    "text": "The FDPSs that inherit a Requirement or are directly linked to it shall form the set that must claim compliance against it."
+   },
+   {
+    "clause": "6B.6",
+    "text": "Display and bases. Inherited Requirements and TSMs shall be shown distinctly from directly linked ones. Where a Requirement or TSM reaches an FDPS by several routes (for example directly, and through a Sub-system), every route shall be recorded as a basis of its Compliance Statement."
+   },
+   {
+    "clause": "6B.7",
+    "text": "Non-applicability. An FDPS may record that an inherited Requirement or TSM does not apply, with a reason and approval (6C.13). The inheritance shall not be deleted. For a TSM, a non-applicability record is required only where none of its statements applies to the FDPS (6B.11)."
+   },
+   {
+    "clause": "6B.10",
+    "text": "Change flags. A changed Requirement or TSM shall flag the Compliance Statements of every FDPS that inherits it or is directly linked to it. A changed item, revision or Verification shall flag the Compliance Statements whose evidence it affects."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

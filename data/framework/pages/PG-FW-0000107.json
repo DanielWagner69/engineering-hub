@@ -1,0 +1,51 @@
+{
+ "id": "PG-FW-0000107",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Baselines and frozen copies",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/baselines",
+ "body": {
+  "blocks": [
+   {
+    "text": "A baseline is frozen at each FDPS release and review snapshot; frozen records reference only frozen copies (id@version)."
+   },
+   {
+    "clause": "6A.10",
+    "text": "Baselines. A baseline shall be frozen for an FDPS at each FDPS release and at each review snapshot (6C.9). Baselines shall be numbered in sequence within each FDPS revision (for example D2822001-801 rev A, baseline 3). Each baseline shall record the FDPS revision, its effectivity range (6A.11), its population, the revision links and owned links of every member, its Compliance Statements, its interfacing Systems, its FDPS interfaces and the derived views at the time of freezing (for example the Systems of the FDPS and the inferred Categories). A baseline shall point only to frozen copies of records (6A.15), never to live records. Baselines shall never be edited, and the software shall compare any two baselines. The configuration of a product effectivity shall be given by the latest release baselines of the FDPS revisions effective at that effectivity."
+   },
+   {
+    "clause": "6A.15",
+    "text": "Frozen copies. Every saved change to a record shall create a new record version, and earlier versions shall be kept unchanged. Baselines, review snapshots and released FDPS revisions shall reference records by identifier and record version, so that a later change (for example closing the effectivity range of a revision link) never changes what a frozen record shows."
+   },
+   {
+    "clause": "6A.13",
+    "text": "Release master. Until configuration data moves to the Hub (2J.6), the PLM system shall issue revisions and releases, and the Hub shall reflect them. Afterwards the Hub shall issue them and PLM shall synchronise with it."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}
