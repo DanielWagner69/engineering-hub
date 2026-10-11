@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000004",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Assembly, Interfaces, Tolerances and Interchangeability",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0004",
+ "discipline": "VR-DISC-0004",
+ "description": "Assembly, Interfaces, Tolerances and Interchangeability as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "AIT-A-01",
+     "question": "Are the installation's physical interfaces with other FDPSs and Systems identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-A-02",
+     "question": "Is the build sequence (aircraft Build Station or Bench) proposed for each item?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-A-03",
+     "question": "Are interchangeability or replaceability needs identified?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "AIT-B-01",
+     "question": "Is a tolerance stack-up done for each critical interface?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-B-02",
+     "question": "Are datum and location features defined consistently with the mating items?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-B-03",
+     "question": "Can the installation be assembled in the proposed sequence without disturbing other installations?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "AIT-C-01",
+     "question": "Are interchangeable items interchangeable at every interface?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-C-02",
+     "question": "Are all interface dimensions and tolerances shown on the released definitions?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AIT-C-03",
+     "question": "Are shimming or fettling allowances defined where tolerance stacks cannot be closed by design?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

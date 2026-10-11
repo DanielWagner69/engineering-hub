@@ -1,0 +1,53 @@
+{
+ "register": "PROP",
+ "entries": [
+  {
+   "id": "VR-PROP-0001",
+   "register": "PROP",
+   "code": "1",
+   "label": "Mechanical",
+   "definition": "Mechanical",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "part_attribute": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-PROP-0002",
+   "register": "PROP",
+   "code": "2",
+   "label": "Flexible",
+   "definition": "Flexible",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "part_attribute": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-PROP-0003",
+   "register": "PROP",
+   "code": "3",
+   "label": "Kinematic",
+   "definition": "Kinematic",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "part_attribute": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-PROP-0004",
+   "register": "PROP",
+   "code": "4",
+   "label": "Fastener",
+   "definition": "Fastener",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "part_attribute": true,
+   "sort_order": 4
+  }
+ ]
+}

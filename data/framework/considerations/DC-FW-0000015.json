@@ -1,0 +1,95 @@
+{
+ "id": "DC-FW-0000015",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Materials and Processes",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0015",
+ "discipline": "VR-DISC-0015",
+ "description": "Materials and Processes as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "MP-A-01",
+     "question": "Are candidate materials identified for each item?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "MP-A-02",
+     "question": "Are material compatibility risks (fluids, galvanic, temperature) identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "MP-A-03",
+     "question": "Environmental Impact and Sustainability: are restricted or hazardous substances identified for avoidance?",
+     "item_status": "Draft",
+     "topic": "Environmental Impact and Sustainability"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "MP-B-01",
+     "question": "Are materials and processes selected from approved specifications?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "MP-B-02",
+     "question": "Are design allowables available for the selected materials?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "MP-B-03",
+     "question": "Are finishes and protective treatments compatible with the materials?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "MP-C-E01",
+     "question": "Environmental Impact and Sustainability: are restricted substances avoided in all finishes?",
+     "item_status": "Draft",
+     "topic": "Environmental Impact and Sustainability"
+    },
+    {
+     "item_id": "MP-C-01",
+     "question": "Are material and process specifications called up on every released definition?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "MP-C-02",
+     "question": "Are material qualification and test needs met or planned?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

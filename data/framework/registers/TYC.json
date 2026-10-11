@@ -1,0 +1,89 @@
+{
+ "register": "TYC",
+ "entries": [
+  {
+   "id": "VR-TYC-0001",
+   "register": "TYC",
+   "code": "FS",
+   "label": "Fastener",
+   "definition": "Fastener",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-TYC-0002",
+   "register": "TYC",
+   "code": "SL",
+   "label": "Seal",
+   "definition": "Seal",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-TYC-0003",
+   "register": "TYC",
+   "code": "BR",
+   "label": "Common bracket",
+   "definition": "Common bracket",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-TYC-0004",
+   "register": "TYC",
+   "code": "CL",
+   "label": "Clip or clamp",
+   "definition": "Clip or clamp",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-TYC-0005",
+   "register": "TYC",
+   "code": "FT",
+   "label": "Fluid fitting",
+   "definition": "Fluid fitting",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-TYC-0006",
+   "register": "TYC",
+   "code": "EC",
+   "label": "Electrical connector or component",
+   "definition": "Electrical connector or component",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-TYC-0007",
+   "register": "TYC",
+   "code": "SP",
+   "label": "Spacer or shim",
+   "definition": "Spacer or shim",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "sort_order": 7
+  }
+ ]
+}

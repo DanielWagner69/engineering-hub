@@ -1,0 +1,38 @@
+{
+ "register": "EFFTYPE",
+ "entries": [
+  {
+   "id": "VR-EFFTYPE-0001",
+   "register": "EFFTYPE",
+   "code": "1",
+   "label": "Effectivity Number",
+   "definition": "Effectivity Number",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-EFFTYPE-0002",
+   "register": "EFFTYPE",
+   "code": "2",
+   "label": "Serial Range",
+   "definition": "Serial Range",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-EFFTYPE-0003",
+   "register": "EFFTYPE",
+   "code": "3",
+   "label": "Build Standard",
+   "definition": "Build Standard",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  }
+ ]
+}

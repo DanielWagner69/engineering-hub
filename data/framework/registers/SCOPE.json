@@ -1,0 +1,53 @@
+{
+ "register": "SCOPE",
+ "entries": [
+  {
+   "id": "VR-SCOPE-0001",
+   "register": "SCOPE",
+   "code": "AC",
+   "label": "Aircraft",
+   "definition": "The air vehicle and everything installed on it.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 0,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-SCOPE-0002",
+   "register": "SCOPE",
+   "code": "GE",
+   "label": "Ground Equipment",
+   "definition": "Equipment used on the ground to handle, service or support the aircraft.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 0,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-SCOPE-0003",
+   "register": "SCOPE",
+   "code": "TE",
+   "label": "Test Equipment",
+   "definition": "Rigs, test sets and instrumentation used to test the aircraft or its parts.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 0,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-SCOPE-0004",
+   "register": "SCOPE",
+   "code": "FAC",
+   "label": "Facilities",
+   "definition": "Buildings, sites and fixed installations.",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 0,
+   "sort_order": 4
+  }
+ ]
+}

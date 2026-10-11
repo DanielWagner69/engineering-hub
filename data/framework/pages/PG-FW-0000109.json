@@ -1,0 +1,83 @@
+{
+ "id": "PG-FW-0000109",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Design reviews: stages A, B and C",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "reviews",
+ "body": {
+  "blocks": [
+   {
+    "text": "Every FDPS passes three review stages, aligned with Lifecycle Stages 4, 5 and 6. Sign-off team Disciplines listed against a stage give their agreement; Consideration only Disciplines are checked by the designer through the checklist."
+   },
+   {
+    "clause": "6C.1",
+    "text": "Every FDPS shall pass three review stages: A Initial System Design, B Preliminary and C Detail (Scheme Reviews A, B and C). The review stages align with Lifecycle Stages 4 (Initial System Design), 5 (Preliminary Design) and 6 (Detailed Design) respectively (2B.13)."
+   },
+   {
+    "clause": "6C.2",
+    "text": "A design review shall cover whole FDPSs. Review documentation shall be linked to every FDPS it covers."
+   },
+   {
+    "clause": "6C.3",
+    "text": "One review may cover several FDPSs. Its template shall be generated from all the FDPSs it covers."
+   },
+   {
+    "clause": "6C.4",
+    "text": "Review content shall include: an introduction, with a structured attendee list giving each person, the Discipline or team represented and the role held, and the review scope; the status of the FDPS's Requirements, with any non-compliances; confirmation of TSMs adhered to, with any non-conformances; agreement from each interfacing System (6C.22); agreement from every Sign-off team Discipline listed against the stage (6C.19); the designer's checklist responses, including the checks of Consideration only Disciplines (4.5); and known risks, held as structured Risk records."
+   },
+   {
+    "clause": "6C.5",
+    "text": "The content required at each stage shall vary as the design matures, and shall be defined in the Engineering Hub."
+   },
+   {
+    "clause": "6C.6",
+    "text": "Each Design Sub-team page shall be split into Initial System Design, Preliminary and Detail stages. Each stage shall list the checklist items to be answered at that stage (4.4), the Sign-off team Disciplines (2B.14) whose agreement is required at that stage and the stage-specific entry criteria (6C.15), and shall link to the relevant guidance and stakeholders. The Requirements, TSMs and interfacing Systems of each FDPS are inferred (6B, 6C.21) and are not listed on the stage page. Together these shall generate the review template for an FDPS at that stage. Design Sub-team stage pages shall be framework templates (generic stage guidance and default item lists) held in the Framework Hub, and shall be tailored for each project in its Production Hub through Tailoring Records (6.4); the tailored pages are production data."
+   },
+   {
+    "clause": "6C.7",
+    "text": "Review material shall be issued to supporting disciplines at least 2 weeks before the review."
+   },
+   {
+    "clause": "6C.8",
+    "text": "Every review shall be minuted. Actions shall be recorded as structured records using the action tracker template and tagged against the FDPSs covered. Each Action shall record who raised it. An Action shall be closed only when its closure evidence has been accepted by the person who raised it or by the review chair; the acceptance shall be recorded with the person and the date."
+   },
+   {
+    "clause": "6C.9",
+    "text": "Each review shall record a snapshot of the relevant design at that point in time, covering content and interfacing Systems, and shall freeze a baseline of each FDPS revision it covers (6A.10)."
+   },
+   {
+    "clause": "6C.10",
+    "text": "The exit criterion shall be a Pass or Fail decision by the Technical Authority for Design. Each review shall record its chair."
+   },
+   {
+    "clause": "6C.19",
+    "text": "Discipline agreement. Each Sign-off team Discipline listed against a review stage on the Design Sub-team page (6C.6), other than a Discipline the project has marked not applicable (2B.14), shall record its position before the Technical Authority for Design gives the Pass or Fail decision (6C.10): Agree; Agree with conditions; or Disagree, with reasons. Each condition shall be raised as an Action, to be closed before release (6C.11). The position shall be recorded as structured data on the review, with the person giving it and the date. A Pass shall not be recorded while any required position is missing or is Disagree. Consideration only Disciplines need no agreement at the review; the designer's checklist responses (4.5) are their record."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

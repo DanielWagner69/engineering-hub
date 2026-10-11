@@ -1,0 +1,41 @@
+{
+ "register": "CKFU",
+ "entries": [
+  {
+   "id": "VR-CKFU-0001",
+   "register": "CKFU",
+   "code": "1",
+   "label": "Action",
+   "definition": "Action",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-CKFU-0002",
+   "register": "CKFU",
+   "code": "2",
+   "label": "Risk",
+   "definition": "Risk",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-CKFU-0003",
+   "register": "CKFU",
+   "code": "3",
+   "label": "Approved justification",
+   "definition": "Approved justification",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  }
+ ]
+}

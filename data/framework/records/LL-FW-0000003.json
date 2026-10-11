@@ -1,0 +1,52 @@
+{
+ "id": "LL-FW-0000003",
+ "type": "Lesson Learned",
+ "schema_version": "6.0",
+ "title": "Loom chafing at panel edges",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "summary": "Electrical looms rubbed against panel edges after repeated panel removal for maintenance.",
+ "what_happened": "Inspections found wear on loom sleeving near a frequently removed access panel. The loom was correctly installed but moved each time the panel was removed and refitted.",
+ "root_cause": "Loom support design considered the installed state only, not the movement caused by maintenance access.",
+ "recommendation": "Assess loom supports and clearances for maintenance actions as well as the installed state; add edge protection where panels are removed regularly.",
+ "applicability": "Looms and pipes near removable panels and doors; check in Detailed Design and when maintenance procedures change.",
+ "lifecycle_stage": [
+  "VR-LCS-0009",
+  "VR-LCS-0010"
+ ],
+ "system": [
+  "VR-SYS-0003",
+  "VR-SYS-0007",
+  "VR-SYS-0014"
+ ],
+ "discipline": [
+  "VR-DISC-0004",
+  "VR-DISC-0013"
+ ],
+ "design_type": [
+  "VR-DTY-0010"
+ ],
+ "source": [
+  "VR-SRC-0001"
+ ],
+ "product_scope": [
+  "VR-SCOPE-0001"
+ ],
+ "major_unit": [
+  "VR-MU-0001"
+ ],
+ "example_note": "Generic, fictional example lesson (from v0.8, re-tagged to the v1.0 registers). Not authoritative engineering guidance.",
+ "alias_of": "LL-0003",
+ "origin": {
+  "kind": "Human",
+  "source_ref": "Framework Hub v0.8 example lesson LL-0003"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "record_version": 1,
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner"
+}

@@ -1,0 +1,170 @@
+{
+ "register": "UNIT",
+ "entries": [
+  {
+   "id": "VR-UNIT-0001",
+   "register": "UNIT",
+   "code": "1",
+   "label": "m",
+   "definition": "m",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-UNIT-0002",
+   "register": "UNIT",
+   "code": "2",
+   "label": "mm",
+   "definition": "mm",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-UNIT-0003",
+   "register": "UNIT",
+   "code": "3",
+   "label": "kg",
+   "definition": "kg",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-UNIT-0004",
+   "register": "UNIT",
+   "code": "4",
+   "label": "N",
+   "definition": "N",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-UNIT-0005",
+   "register": "UNIT",
+   "code": "5",
+   "label": "Pa",
+   "definition": "Pa",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-UNIT-0006",
+   "register": "UNIT",
+   "code": "6",
+   "label": "K",
+   "definition": "K",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-UNIT-0007",
+   "register": "UNIT",
+   "code": "7",
+   "label": "s",
+   "definition": "s",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 7
+  },
+  {
+   "id": "VR-UNIT-0008",
+   "register": "UNIT",
+   "code": "8",
+   "label": "h",
+   "definition": "h",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 8
+  },
+  {
+   "id": "VR-UNIT-0009",
+   "register": "UNIT",
+   "code": "9",
+   "label": "A",
+   "definition": "A",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 9
+  },
+  {
+   "id": "VR-UNIT-0010",
+   "register": "UNIT",
+   "code": "10",
+   "label": "V",
+   "definition": "V",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 10
+  },
+  {
+   "id": "VR-UNIT-0011",
+   "register": "UNIT",
+   "code": "11",
+   "label": "ohm",
+   "definition": "ohm",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 11
+  },
+  {
+   "id": "VR-UNIT-0012",
+   "register": "UNIT",
+   "code": "12",
+   "label": "GBP",
+   "definition": "GBP",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 12
+  },
+  {
+   "id": "VR-UNIT-0013",
+   "register": "UNIT",
+   "code": "13",
+   "label": "person-day",
+   "definition": "person-day",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 13
+  },
+  {
+   "id": "VR-UNIT-0014",
+   "register": "UNIT",
+   "code": "14",
+   "label": "day",
+   "definition": "day",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 14
+  },
+  {
+   "id": "VR-UNIT-0015",
+   "register": "UNIT",
+   "code": "15",
+   "label": "week",
+   "definition": "week",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 15
+  }
+ ]
+}

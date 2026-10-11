@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000002",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Affordability and Cost",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0002",
+ "discipline": "VR-DISC-0002",
+ "description": "Affordability and Cost as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "AFF-A-01",
+     "question": "Is a cost target for the installation set and agreed with the Sub-team?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-A-02",
+     "question": "Are the main cost drivers (bought-in equipment, materials, processes) identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-A-03",
+     "question": "Have lower-cost architecture options been considered and the choice recorded?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "AFF-B-01",
+     "question": "Is the cost of the installation within the Sub-team allocation?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-B-02",
+     "question": "Are part count and the number of unique parts minimised where practicable?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-B-03",
+     "question": "Are tooling and test equipment costs estimated and included?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "AFF-C-01",
+     "question": "Is the final cost estimate within target, or is any overrun recorded as an Issue?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-C-02",
+     "question": "Are standard and common parts used in preference to new made parts where they meet the need?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "AFF-C-03",
+     "question": "Are tolerances no tighter than function requires, to avoid unnecessary manufacturing cost?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

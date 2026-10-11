@@ -1,0 +1,41 @@
+{
+ "register": "SRC",
+ "entries": [
+  {
+   "id": "VR-SRC-0001",
+   "register": "SRC",
+   "code": "MAKE",
+   "label": "Make",
+   "definition": "Make",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": "cross-cutting",
+   "sort_order": 1
+  },
+  {
+   "id": "VR-SRC-0002",
+   "register": "SRC",
+   "code": "STD",
+   "label": "Standard Part",
+   "definition": "Standard Part",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": "cross-cutting",
+   "sort_order": 2
+  },
+  {
+   "id": "VR-SRC-0003",
+   "register": "SRC",
+   "code": "BI",
+   "label": "Bought-in Equipment",
+   "definition": "Bought-in Equipment",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": "cross-cutting",
+   "sort_order": 3
+  }
+ ]
+}

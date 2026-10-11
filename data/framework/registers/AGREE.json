@@ -1,0 +1,41 @@
+{
+ "register": "AGREE",
+ "entries": [
+  {
+   "id": "VR-AGREE-0001",
+   "register": "AGREE",
+   "code": "1",
+   "label": "Agree",
+   "definition": "Agree",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-AGREE-0002",
+   "register": "AGREE",
+   "code": "2",
+   "label": "Agree with conditions",
+   "definition": "Agree with conditions",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-AGREE-0003",
+   "register": "AGREE",
+   "code": "3",
+   "label": "Disagree",
+   "definition": "Disagree",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "register": "STAGE",
+ "entries": [
+  {
+   "id": "VR-STAGE-0001",
+   "register": "STAGE",
+   "code": "A",
+   "label": "Initial System Design",
+   "definition": "Initial System Design",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1,
+   "lifecycle_stage": "VR-LCS-0004"
+  },
+  {
+   "id": "VR-STAGE-0002",
+   "register": "STAGE",
+   "code": "B",
+   "label": "Preliminary",
+   "definition": "Preliminary",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2,
+   "lifecycle_stage": "VR-LCS-0005"
+  },
+  {
+   "id": "VR-STAGE-0003",
+   "register": "STAGE",
+   "code": "C",
+   "label": "Detail",
+   "definition": "Detail",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3,
+   "lifecycle_stage": "VR-LCS-0006"
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "id": "DC-FW-0000012",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Low Observability",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0012",
+ "discipline": "VR-DISC-0012",
+ "description": "Low Observability as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "LO-A-01",
+     "question": "Are signature requirements applicable to the installation identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "LO-A-02",
+     "question": "Are external features that could affect signature identified?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "LO-A-03",
+     "question": "Thermal (heat signature): are heat sources visible from outside the aircraft identified?",
+     "item_status": "Draft",
+     "topic": "Thermal"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "LO-B-T01",
+     "question": "Thermal (heat signature): are external hot surfaces and exhaust-visible heat sources identified?",
+     "item_status": "Draft",
+     "topic": "Thermal"
+    },
+    {
+     "item_id": "LO-B-01",
+     "question": "Are gaps, steps and fastener patterns on external surfaces controlled to the signature requirements?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "LO-B-02",
+     "question": "Are signature treatments selected and compatible with other finishes?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "LO-C-01",
+     "question": "Are signature requirements for the installation met?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "LO-C-02",
+     "question": "Are signature treatments and external surface tolerances shown on the released definitions?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "LO-C-03",
+     "question": "Are signature verification requirements defined?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

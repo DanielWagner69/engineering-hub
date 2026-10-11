@@ -1,0 +1,60 @@
+{
+ "register": "MASTER",
+ "entries": [
+  {
+   "id": "VR-MASTER-0001",
+   "register": "MASTER",
+   "code": "1",
+   "label": "PLM",
+   "definition": "PLM",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-MASTER-0002",
+   "register": "MASTER",
+   "code": "2",
+   "label": "CAD",
+   "definition": "CAD",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-MASTER-0003",
+   "register": "MASTER",
+   "code": "3",
+   "label": "Released Documents",
+   "definition": "Released Documents",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-MASTER-0004",
+   "register": "MASTER",
+   "code": "4",
+   "label": "Analysis Tool",
+   "definition": "Analysis Tool",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-MASTER-0005",
+   "register": "MASTER",
+   "code": "5",
+   "label": "Hub",
+   "definition": "Hub",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "id": "PG-FW-0000103",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Compliance Statements",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/compliance",
+ "body": {
+  "blocks": [
+   {
+    "text": "One Compliance Statement per FDPS per Requirement or TSM per effectivity range. A Non-compliant statement references its Issue and blocks release over its range."
+   },
+   {
+    "clause": "6B.8",
+    "text": "Compliance Statements. Compliance shall be stated per FDPS per Requirement or TSM, not per Part Instance. Each Compliance Statement shall carry an effectivity range. For any one FDPS and Requirement or TSM, the ranges of its Compliance Statements shall not overlap and shall together cover, with no gaps, the effectivity over which the FDPS's released revisions apply. There shall be one Compliance Statement per FDPS, Requirement or TSM and effectivity range, whatever the number of routes or Part Instances through which the Requirement or TSM reaches the FDPS."
+   },
+   {
+    "clause": "6A.17",
+    "text": "Non-compliance and release. Concessions are part of the manufacturing standard, not the design standard, and Concession records are not in the current scope (section 7). A known non-compliance of the design with a Requirement or TSM shall be recorded as a Compliance Statement with position Non-compliant over the effectivity range concerned, linked to the Issue that records it (2E). No FDPS revision shall be released for any effectivity at which a Compliance Statement of the FDPS is Non-compliant (6C.11). Where a non-compliance is found after a revision has been released, that released revision and its baselines shall stay unchanged as the as-designed record of the effectivities built to it; the Non-compliant statement shall be shown at those effectivities in every view and report (5.17, 2.8), and release for those effectivities shall stay blocked until a Compliance Statement restores compliance. How a built aircraft is recovered or accepted is outside the software until section 7 is in scope."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

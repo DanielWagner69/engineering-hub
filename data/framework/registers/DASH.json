@@ -1,0 +1,62 @@
+{
+ "register": "DASH",
+ "entries": [
+  {
+   "id": "VR-DASH-0001",
+   "register": "DASH",
+   "code": "PART",
+   "label": "Made part -001 to -399",
+   "definition": "Made part -001 to -399",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1,
+   "range": {
+    "lower": 1,
+    "lower_inclusive": true,
+    "upper": 399,
+    "upper_inclusive": true,
+    "unit": null
+   }
+  },
+  {
+   "id": "VR-DASH-0002",
+   "register": "DASH",
+   "code": "ASM",
+   "label": "Assembly -401 to -799",
+   "definition": "Assembly -401 to -799",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2,
+   "range": {
+    "lower": 401,
+    "lower_inclusive": true,
+    "upper": 799,
+    "upper_inclusive": true,
+    "unit": null
+   }
+  },
+  {
+   "id": "VR-DASH-0003",
+   "register": "DASH",
+   "code": "FDPS",
+   "label": "FDPS -801 and above",
+   "definition": "FDPS -801 and above",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3,
+   "range": {
+    "lower": 801,
+    "lower_inclusive": true,
+    "upper": null,
+    "upper_inclusive": true,
+    "unit": null
+   }
+  }
+ ]
+}

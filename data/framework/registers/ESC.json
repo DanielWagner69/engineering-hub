@@ -1,0 +1,60 @@
+{
+ "register": "ESC",
+ "entries": [
+  {
+   "id": "VR-ESC-0001",
+   "register": "ESC",
+   "code": "1",
+   "label": "Level 1: Engineer (Issue owner)",
+   "definition": "Level 1: Engineer (Issue owner)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-ESC-0002",
+   "register": "ESC",
+   "code": "2",
+   "label": "Level 2: Engineer (Issue owner)",
+   "definition": "Level 2: Engineer (Issue owner)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-ESC-0003",
+   "register": "ESC",
+   "code": "3",
+   "label": "Level 3: Team Leader",
+   "definition": "Level 3: Team Leader",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-ESC-0004",
+   "register": "ESC",
+   "code": "4",
+   "label": "Level 4: Chief Engineer",
+   "definition": "Level 4: Chief Engineer",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-ESC-0005",
+   "register": "ESC",
+   "code": "5",
+   "label": "Level 5: Programme Board",
+   "definition": "Level 5: Programme Board",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "id": "PG-FW-0000112",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Lessons Learned",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0014",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "lessons",
+ "body": {
+  "blocks": [
+   {
+    "text": "One template for every lesson, tagged from the controlled facets and filterable by any combination. Framework lessons are generic; project lessons may be proposed for promotion without project data."
+   },
+   {
+    "clause": "2G.1",
+    "text": "The software shall include a Lessons Learned data type, stored once with a unique, permanent identifier (2A.4)."
+   },
+   {
+    "clause": "2G.2",
+    "text": "Every Lesson Learned shall use one standard template: title, summary, what happened, root cause, recommendation, applicability, origin (a source document with its issue or revision and a link, or a data object such as an Issue, by its permanent identifier) and verification status."
+   },
+   {
+    "clause": "2G.3",
+    "text": "Every Lesson Learned shall be tagged from the controlled facets of 2F. Its mandatory tags are at least one Lifecycle Stage and at least one System (or All), per 2F.3 and 2F.12; a lesson without its mandatory tags shall be flagged as invalid."
+   },
+   {
+    "clause": "2G.4",
+    "text": "Users shall be able to filter Lessons Learned by any combination of facets, so that they see all applicable lessons and only applicable lessons."
+   },
+   {
+    "clause": "2G.5",
+    "text": "Promotion to the framework. A project lesson may be proposed for promotion to the framework. It shall first be rewritten in generic form with all project data removed, and shall pass the framework content review (6.10) before it is published as a framework lesson, which may then inform framework Design Considerations and TSMs. The project lesson shall record the framework lesson it was promoted to; the framework lesson shall not reference the project lesson."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

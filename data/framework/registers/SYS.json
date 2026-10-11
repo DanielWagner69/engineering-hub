@@ -1,0 +1,501 @@
+{
+ "register": "SYS",
+ "entries": [
+  {
+   "id": "VR-SYS-0001",
+   "register": "SYS",
+   "code": "50",
+   "label": "Primary Structure",
+   "definition": "Primary Structure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0001",
+   "is_structural": true,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-SYS-0002",
+   "register": "SYS",
+   "code": "51",
+   "label": "Secondary Structure",
+   "definition": "Secondary Structure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0001",
+   "is_structural": true,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-SYS-0003",
+   "register": "SYS",
+   "code": "52",
+   "label": "Skins, Doors & Panels",
+   "definition": "Skins, Doors & Panels",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0001",
+   "is_structural": true,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-SYS-0004",
+   "register": "SYS",
+   "code": "56",
+   "label": "Windscreen & Canopy",
+   "definition": "Windscreen & Canopy",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0001",
+   "is_structural": true,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-SYS-0005",
+   "register": "SYS",
+   "code": "71",
+   "label": "Propulsion",
+   "definition": "Propulsion",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003",
+    "VR-SCOPE-0004"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-SYS-0006",
+   "register": "SYS",
+   "code": "72",
+   "label": "Intake & Ducts",
+   "definition": "Intake & Ducts",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-SYS-0007",
+   "register": "SYS",
+   "code": "24",
+   "label": "Electrical Power Generation & Distribution",
+   "definition": "Electrical Power Generation & Distribution (electrical power only)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002",
+    "VR-SCOPE-0003",
+    "VR-SCOPE-0004"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 7
+  },
+  {
+   "id": "VR-SYS-0008",
+   "register": "SYS",
+   "code": "36",
+   "label": "Pneumatics",
+   "definition": "Pneumatics",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 8
+  },
+  {
+   "id": "VR-SYS-0009",
+   "register": "SYS",
+   "code": "27",
+   "label": "Flight Control",
+   "definition": "Flight Control",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0003",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 9
+  },
+  {
+   "id": "VR-SYS-0010",
+   "register": "SYS",
+   "code": "28",
+   "label": "Fuel",
+   "definition": "Fuel",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002",
+    "VR-SCOPE-0003",
+    "VR-SCOPE-0004"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 10
+  },
+  {
+   "id": "VR-SYS-0011",
+   "register": "SYS",
+   "code": "45",
+   "label": "Vehicle Management",
+   "definition": "Vehicle Management",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0003",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 11
+  },
+  {
+   "id": "VR-SYS-0012",
+   "register": "SYS",
+   "code": "29",
+   "label": "Hydraulics",
+   "definition": "Hydraulics",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0002",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 12
+  },
+  {
+   "id": "VR-SYS-0013",
+   "register": "SYS",
+   "code": "32",
+   "label": "Landing Gear",
+   "definition": "Landing Gear",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0003",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 13
+  },
+  {
+   "id": "VR-SYS-0014",
+   "register": "SYS",
+   "code": "34",
+   "label": "Navigation",
+   "definition": "Navigation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0003",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 14
+  },
+  {
+   "id": "VR-SYS-0015",
+   "register": "SYS",
+   "code": "21",
+   "label": "Environmental Control",
+   "definition": "Environmental Control",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0004",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 15
+  },
+  {
+   "id": "VR-SYS-0016",
+   "register": "SYS",
+   "code": "47",
+   "label": "Thermal Management",
+   "definition": "Thermal Management",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0004",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0002"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 16
+  },
+  {
+   "id": "VR-SYS-0017",
+   "register": "SYS",
+   "code": "26",
+   "label": "Fire Protection",
+   "definition": "Fire Protection",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0004",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0004"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 17
+  },
+  {
+   "id": "VR-SYS-0018",
+   "register": "SYS",
+   "code": "95",
+   "label": "Crew Escape & Safety",
+   "definition": "Crew Escape & Safety",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0004",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 18
+  },
+  {
+   "id": "VR-SYS-0019",
+   "register": "SYS",
+   "code": "31",
+   "label": "Cockpit & Controls",
+   "definition": "Cockpit & Controls",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0005",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 19
+  },
+  {
+   "id": "VR-SYS-0020",
+   "register": "SYS",
+   "code": "61",
+   "label": "Radar / Sensors",
+   "definition": "Radar / Sensors",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0006",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 20
+  },
+  {
+   "id": "VR-SYS-0021",
+   "register": "SYS",
+   "code": "62",
+   "label": "Electronic Warfare",
+   "definition": "Electronic Warfare",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0006",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 21
+  },
+  {
+   "id": "VR-SYS-0022",
+   "register": "SYS",
+   "code": "23",
+   "label": "Communications",
+   "definition": "Communications",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0006",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 22
+  },
+  {
+   "id": "VR-SYS-0023",
+   "register": "SYS",
+   "code": "63",
+   "label": "Data Links",
+   "definition": "Data Links",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0006",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 23
+  },
+  {
+   "id": "VR-SYS-0024",
+   "register": "SYS",
+   "code": "94",
+   "label": "Stores Integration (incl. Armaments)",
+   "definition": "Stores Integration (incl. Armaments)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0006",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 24
+  },
+  {
+   "id": "VR-SYS-0025",
+   "register": "SYS",
+   "code": "98",
+   "label": "Flight Test Instrumentation",
+   "definition": "Flight Test Instrumentation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "parent": "VR-SG-0007",
+   "is_structural": false,
+   "facet_level": 1,
+   "tier": "lower",
+   "applies_to_scopes": [
+    "VR-SCOPE-0001",
+    "VR-SCOPE-0003"
+   ],
+   "applicability_placeholder": true,
+   "sort_order": 25
+  }
+ ]
+}

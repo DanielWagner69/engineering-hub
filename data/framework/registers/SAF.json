@@ -1,0 +1,70 @@
+{
+ "register": "SAF",
+ "entries": [
+  {
+   "id": "VR-SAF-0001",
+   "register": "SAF",
+   "code": "A",
+   "label": "Catastrophic",
+   "definition": "Loss of aircraft or loss of life",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "part_attribute": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-SAF-0002",
+   "register": "SAF",
+   "code": "B",
+   "label": "Hazardous",
+   "definition": "Serious injury or large reduction in safety margins",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "part_attribute": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-SAF-0003",
+   "register": "SAF",
+   "code": "C",
+   "label": "Major",
+   "definition": "Significant reduction in safety margins or crew capability",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "part_attribute": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-SAF-0004",
+   "register": "SAF",
+   "code": "D",
+   "label": "Minor",
+   "definition": "Slight reduction in safety margins",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "part_attribute": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-SAF-0005",
+   "register": "SAF",
+   "code": "E",
+   "label": "No safety effect",
+   "definition": "No effect on safety",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "part_attribute": true,
+   "sort_order": 5
+  }
+ ]
+}

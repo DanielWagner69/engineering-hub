@@ -1,0 +1,71 @@
+{
+ "id": "PG-FW-0000105",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Effectivity and the effectivity selector",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/effectivity",
+ "body": {
+  "blocks": [
+   {
+    "text": "Effectivity is held on links, ranges never overlap or leave gaps, and 999 means open-ended. Presence at a selected effectivity is derived, never stored."
+   },
+   {
+    "clause": "6A.1",
+    "text": "Product effectivities. A project shall have multiple product effectivities, identified by project and effectivity number. For example, Project D effectivities 1 to 2 are built to the initial design release standard, and later changes apply to later effectivities."
+   },
+   {
+    "clause": "6A.2",
+    "text": "Effectivity on the link. Effectivity shall be held on the link between a Part Instance (a position) and a Part revision, not on the Part itself. One Part Instance may link to different revisions over different effectivity ranges."
+   },
+   {
+    "clause": "6A.3",
+    "text": "Complete, non-overlapping ranges. For any one Part Instance, the effectivity ranges of its revision links shall not overlap and shall together cover the full effectivity range over which the Part Instance exists (6A.8), with no gaps. The software shall reject or flag any overlap or gap."
+   },
+   {
+    "clause": "6A.8",
+    "text": "Instance effectivity. A Part Instance shall carry its own existence range (instance effectivity), so that Part Instances can be added or removed by effectivity. By default the range is the full effectivity range of the project (for example 1 to 999, 6A.12). Effectivity shall therefore be held on the Part Instance to Part revision link (6A.2) together with the Part Instance's existence range."
+   },
+   {
+    "clause": "6A.11",
+    "text": "Effectivity types. Effectivity numbers shall be the primary effectivity type. Serial ranges and build standards shall be defined as named mappings to effectivity numbers. Each FDPS revision shall carry the effectivity range over which its exact content applies. Releasing a new FDPS revision shall close the range of the previous revision (6A.5, 6A.12), so that the released revisions of an FDPS neither overlap nor leave gaps. The software shall check that the configuration of the FDPS is the same at every effectivity within a revision's range."
+   },
+   {
+    "clause": "6A.12",
+    "text": "Open-ended ranges. An open-ended range shall be written with the placeholder upper value 999 (for example \"3 to 999\"). The value 999 shall mean \"all later effectivities\", shall never be allocated as a real effectivity number, and shall be shown as an open-ended range in every view. Closing an open-ended range (6A.5) shall replace 999 with the last effectivity number of that range."
+   },
+   {
+    "clause": "6A.14",
+    "text": "Assembly Instance effectivity. An Assembly Instance shall carry its own existence range (instance effectivity), with the same rules as a Part Instance: effectivity shall be held on the link between the Assembly Instance and its Assembly Definition revision (6A.2); the ranges of those revision links shall not overlap and shall together cover the Assembly Instance's existence range with no gaps (6A.3); by default the existence range is the full effectivity range of the project (6A.8); and open-ended ranges shall follow 6A.12. Assembly Instances shall not themselves be revised (6A.6)."
+   },
+   {
+    "clause": "6A.18",
+    "text": "Status for a selected effectivity. Status words shall not imply that an object is out of force when it is only limited by effectivity. The status of a Part Instance, revision or revision link shall be shown for the selected effectivity (Present or Not present, with a note of the ranges over which it applies), and closing a range shall not mark a record as removed."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

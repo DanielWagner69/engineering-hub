@@ -1,0 +1,60 @@
+{
+ "register": "FINCAT",
+ "entries": [
+  {
+   "id": "VR-FINCAT-0001",
+   "register": "FINCAT",
+   "code": "1",
+   "label": "Paint",
+   "definition": "Paint",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-FINCAT-0002",
+   "register": "FINCAT",
+   "code": "2",
+   "label": "Primer",
+   "definition": "Primer",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-FINCAT-0003",
+   "register": "FINCAT",
+   "code": "3",
+   "label": "Surface Treatment",
+   "definition": "Surface Treatment",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-FINCAT-0004",
+   "register": "FINCAT",
+   "code": "4",
+   "label": "Sealant",
+   "definition": "Sealant",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-FINCAT-0005",
+   "register": "FINCAT",
+   "code": "5",
+   "label": "Adhesive",
+   "definition": "Adhesive",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 5
+  }
+ ]
+}

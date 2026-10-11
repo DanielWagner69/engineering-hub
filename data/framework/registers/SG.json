@@ -1,0 +1,96 @@
+{
+ "register": "SG",
+ "entries": [
+  {
+   "id": "VR-SG-0001",
+   "register": "SG",
+   "code": "AF",
+   "label": "Airframe",
+   "definition": "Airframe",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 1
+  },
+  {
+   "id": "VR-SG-0002",
+   "register": "SG",
+   "code": "PP",
+   "label": "Propulsion & Power",
+   "definition": "Propulsion & Power",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 2
+  },
+  {
+   "id": "VR-SG-0003",
+   "register": "SG",
+   "code": "FVM",
+   "label": "Flight & Vehicle Management",
+   "definition": "Flight & Vehicle Management",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 3
+  },
+  {
+   "id": "VR-SG-0004",
+   "register": "SG",
+   "code": "ES",
+   "label": "Environmental & Safety",
+   "definition": "Environmental & Safety",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 4
+  },
+  {
+   "id": "VR-SG-0005",
+   "register": "SG",
+   "code": "CI",
+   "label": "Crew Interface",
+   "definition": "Crew Interface",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 5
+  },
+  {
+   "id": "VR-SG-0006",
+   "register": "SG",
+   "code": "MS",
+   "label": "Mission Systems",
+   "definition": "Mission Systems",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 6
+  },
+  {
+   "id": "VR-SG-0007",
+   "register": "SG",
+   "code": "TI",
+   "label": "Test & Instrumentation",
+   "definition": "Test & Instrumentation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "facet_level": 1,
+   "tier": "upper",
+   "sort_order": 7
+  }
+ ]
+}

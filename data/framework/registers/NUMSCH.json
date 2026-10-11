@@ -1,0 +1,49 @@
+{
+ "register": "NUMSCH",
+ "entries": [
+  {
+   "id": "VR-NUMSCH-0001",
+   "register": "NUMSCH",
+   "code": "MS",
+   "label": "Meaningful stem",
+   "definition": "Meaningful stem",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-NUMSCH-0002",
+   "register": "NUMSCH",
+   "code": "CP",
+   "label": "Common part",
+   "definition": "Common part",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-NUMSCH-0003",
+   "register": "NUMSCH",
+   "code": "CAT",
+   "label": "Catalogue standard",
+   "definition": "Catalogue standard",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-NUMSCH-0004",
+   "register": "NUMSCH",
+   "code": "BIC",
+   "label": "Bought-in control number (Project letter + BI + four-digit sequence, e.g. D-BI-0001)",
+   "definition": "Bought-in control number (Project letter + BI + four-digit sequence, e.g. D-BI-0001)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1",
+   "is_catch_all": false,
+   "sort_order": 4
+  }
+ ]
+}

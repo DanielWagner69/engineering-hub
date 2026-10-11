@@ -1,0 +1,563 @@
+{
+ "register": "BS",
+ "entries": [
+  {
+   "id": "VR-BS-0001",
+   "register": "BS",
+   "code": "F-BS1",
+   "label": "Front Fuselage BS1 Structural Assembly",
+   "definition": "Front Fuselage BS1 Structural Assembly",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0001",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 1
+  },
+  {
+   "id": "VR-BS-0002",
+   "register": "BS",
+   "code": "F-BS2",
+   "label": "Front Fuselage BS2 Systems First-fix Installation",
+   "definition": "Front Fuselage BS2 Systems First-fix Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0001",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 2
+  },
+  {
+   "id": "VR-BS-0003",
+   "register": "BS",
+   "code": "F-BS3",
+   "label": "Front Fuselage BS3 Equipping and Closure",
+   "definition": "Front Fuselage BS3 Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0001",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 3
+  },
+  {
+   "id": "VR-BS-0004",
+   "register": "BS",
+   "code": "F-BS4",
+   "label": "Front Fuselage BS4 Functional Test",
+   "definition": "Front Fuselage BS4 Functional Test",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0001",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 4
+  },
+  {
+   "id": "VR-BS-0005",
+   "register": "BS",
+   "code": "C-BS1",
+   "label": "Centre Fuselage BS1 Structural Assembly",
+   "definition": "Centre Fuselage BS1 Structural Assembly",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0002",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 5
+  },
+  {
+   "id": "VR-BS-0006",
+   "register": "BS",
+   "code": "C-BS2",
+   "label": "Centre Fuselage BS2 Systems First-fix Installation",
+   "definition": "Centre Fuselage BS2 Systems First-fix Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0002",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 6
+  },
+  {
+   "id": "VR-BS-0007",
+   "register": "BS",
+   "code": "C-BS3",
+   "label": "Centre Fuselage BS3 Equipping and Closure",
+   "definition": "Centre Fuselage BS3 Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0002",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 7
+  },
+  {
+   "id": "VR-BS-0008",
+   "register": "BS",
+   "code": "C-BS4",
+   "label": "Centre Fuselage BS4 Functional Test",
+   "definition": "Centre Fuselage BS4 Functional Test",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0002",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 8
+  },
+  {
+   "id": "VR-BS-0009",
+   "register": "BS",
+   "code": "R-BS1",
+   "label": "Rear Fuselage BS1 Structural Assembly",
+   "definition": "Rear Fuselage BS1 Structural Assembly",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0003",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 9
+  },
+  {
+   "id": "VR-BS-0010",
+   "register": "BS",
+   "code": "R-BS2",
+   "label": "Rear Fuselage BS2 Systems First-fix Installation",
+   "definition": "Rear Fuselage BS2 Systems First-fix Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0003",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 10
+  },
+  {
+   "id": "VR-BS-0011",
+   "register": "BS",
+   "code": "R-BS3",
+   "label": "Rear Fuselage BS3 Equipping and Closure",
+   "definition": "Rear Fuselage BS3 Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0003",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 11
+  },
+  {
+   "id": "VR-BS-0012",
+   "register": "BS",
+   "code": "R-BS4",
+   "label": "Rear Fuselage BS4 Functional Test",
+   "definition": "Rear Fuselage BS4 Functional Test",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0003",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 12
+  },
+  {
+   "id": "VR-BS-0013",
+   "register": "BS",
+   "code": "W-BS1",
+   "label": "Wings BS1 Structural Assembly",
+   "definition": "Wings BS1 Structural Assembly",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0004",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 13
+  },
+  {
+   "id": "VR-BS-0014",
+   "register": "BS",
+   "code": "W-BS2",
+   "label": "Wings BS2 Systems First-fix Installation",
+   "definition": "Wings BS2 Systems First-fix Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0004",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 14
+  },
+  {
+   "id": "VR-BS-0015",
+   "register": "BS",
+   "code": "W-BS3",
+   "label": "Wings BS3 Equipping and Closure",
+   "definition": "Wings BS3 Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0004",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 15
+  },
+  {
+   "id": "VR-BS-0016",
+   "register": "BS",
+   "code": "W-BS4",
+   "label": "Wings BS4 Functional Test",
+   "definition": "Wings BS4 Functional Test",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0004",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 16
+  },
+  {
+   "id": "VR-BS-0017",
+   "register": "BS",
+   "code": "N-BS1",
+   "label": "Fins BS1 Structural Assembly",
+   "definition": "Fins BS1 Structural Assembly",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0005",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 17
+  },
+  {
+   "id": "VR-BS-0018",
+   "register": "BS",
+   "code": "N-BS2",
+   "label": "Fins BS2 Systems First-fix Installation",
+   "definition": "Fins BS2 Systems First-fix Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0005",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 18
+  },
+  {
+   "id": "VR-BS-0019",
+   "register": "BS",
+   "code": "N-BS3",
+   "label": "Fins BS3 Equipping and Closure",
+   "definition": "Fins BS3 Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0005",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 19
+  },
+  {
+   "id": "VR-BS-0020",
+   "register": "BS",
+   "code": "N-BS4",
+   "label": "Fins BS4 Functional Test",
+   "definition": "Fins BS4 Functional Test",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0005",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 20
+  },
+  {
+   "id": "VR-BS-0021",
+   "register": "BS",
+   "code": "FA1",
+   "label": "Final Assembly FA1 Major Unit Join",
+   "definition": "Final Assembly FA1 Major Unit Join",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 21
+  },
+  {
+   "id": "VR-BS-0022",
+   "register": "BS",
+   "code": "FA2",
+   "label": "Final Assembly FA2 Cross-join Systems Connection (pipes and looms)",
+   "definition": "Final Assembly FA2 Cross-join Systems Connection (pipes and looms)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 22
+  },
+  {
+   "id": "VR-BS-0023",
+   "register": "BS",
+   "code": "FA3",
+   "label": "Final Assembly FA3 Landing Gear and Propulsion Installation",
+   "definition": "Final Assembly FA3 Landing Gear and Propulsion Installation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 23
+  },
+  {
+   "id": "VR-BS-0024",
+   "register": "BS",
+   "code": "FA4",
+   "label": "Final Assembly FA4 Final Equipping and Closure",
+   "definition": "Final Assembly FA4 Final Equipping and Closure",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 24
+  },
+  {
+   "id": "VR-BS-0025",
+   "register": "BS",
+   "code": "FA5",
+   "label": "Final Assembly FA5 Ground Test and Delivery Preparation",
+   "definition": "Final Assembly FA5 Ground Test and Delivery Preparation",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": false,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Build Station",
+   "sort_order": 25
+  },
+  {
+   "id": "VR-BS-0026",
+   "register": "BS",
+   "code": "F-BEN",
+   "label": "Front Fuselage Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Front Fuselage (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0001",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 26
+  },
+  {
+   "id": "VR-BS-0031",
+   "register": "BS",
+   "code": "C-BEN",
+   "label": "Centre Fuselage Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Centre Fuselage (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0002",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 27
+  },
+  {
+   "id": "VR-BS-0027",
+   "register": "BS",
+   "code": "R-BEN",
+   "label": "Rear Fuselage Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Rear Fuselage (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0003",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 28
+  },
+  {
+   "id": "VR-BS-0028",
+   "register": "BS",
+   "code": "W-BEN",
+   "label": "Wings Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Wings (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0004",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 29
+  },
+  {
+   "id": "VR-BS-0029",
+   "register": "BS",
+   "code": "N-BEN",
+   "label": "Fins Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Fins (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0005",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 30
+  },
+  {
+   "id": "VR-BS-0030",
+   "register": "BS",
+   "code": "FA-BEN",
+   "label": "Final Assembly Bench (off-aircraft assembly)",
+   "definition": "Off-aircraft assembly of Assembly Instances for Final Assembly (2C.12).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.1 (Annex A placeholder: generic, fictional)",
+   "is_catch_all": false,
+   "placeholder": true,
+   "parent": "VR-MU-0006",
+   "is_bench": true,
+   "applies_to_scopes": [
+    "VR-SCOPE-0001"
+   ],
+   "node_kind": "Bench",
+   "sort_order": 31
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "id": "DC-FW-0000005",
+ "type": "Design Consideration",
+ "schema_version": "6.0",
+ "title": "Configuration Management",
+ "status": "Draft",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Human"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0010",
+ "framework_node": "VR-DISC-0005",
+ "discipline": "VR-DISC-0005",
+ "description": "Configuration Management as a design consideration that every design shall address (4.2). Generic framework content.",
+ "guidance": "Answer each item for the review stage. A No needs an Action, a Risk or a justification approved by the Discipline Lead (4.5). Items are Draft starter content for review.",
+ "checklists": [
+  {
+   "stage": "VR-STAGE-0001",
+   "items": [
+    {
+     "item_id": "CM-A-01",
+     "question": "Is the FDPS allocated a number, owning Sub-team and lead Sub-system?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-A-02",
+     "question": "Are all items in the FDPS population linked to a Part Definition?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-A-03",
+     "question": "Is the planned effectivity of the FDPS recorded?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "items": [
+    {
+     "item_id": "CM-B-01",
+     "question": "Are Part, Assembly and FDPS numbers allocated under the numbering rules (stem, dash range, handedness)?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-B-02",
+     "question": "Are revisions and effectivity ranges for every item recorded with no gaps or overlaps?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-B-03",
+     "question": "Are changes since the last review recorded as Change Records?",
+     "item_status": "Draft"
+    }
+   ]
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "items": [
+    {
+     "item_id": "CM-C-01",
+     "question": "Does the release baseline resolve every member to exactly one revision at every effectivity?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-C-02",
+     "question": "Are superseded definitions and non-interchangeable changes numbered by the roll-by-two rule?",
+     "item_status": "Draft"
+    },
+    {
+     "item_id": "CM-C-03",
+     "question": "Are all Review Flags on the FDPS dispositioned?",
+     "item_status": "Draft"
+    }
+   ]
+  }
+ ],
+ "lifecycle_stage": [
+  "VR-LCS-0004",
+  "VR-LCS-0005",
+  "VR-LCS-0006"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "draft_note": "Starter checklist items, Draft: to be reviewed with the framework owner before Framework v1.0 release."
+}

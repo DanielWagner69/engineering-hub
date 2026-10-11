@@ -1,0 +1,47 @@
+{
+ "id": "LL-FW-0000002",
+ "type": "Lesson Learned",
+ "schema_version": "6.0",
+ "title": "Seal material not compatible with the operating fluid",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "summary": "A seal degraded during endurance testing because its compatibility with the fluid had been assumed rather than confirmed.",
+ "what_happened": "During an endurance test a seal swelled and leaked. Investigation showed the selected seal compound was not approved for the fluid at the tested temperature range.",
+ "root_cause": "Material selection relied on a similar earlier design; the compatibility assumption was not recorded or checked against the actual fluid and temperature range.",
+ "recommendation": "Record material compatibility as an explicit, checked requirement for every fluid-wetted part, and verify it against current fluid and temperature data before test.",
+ "applicability": "All fluid systems; most relevant during Detailed Design and Qualification / Certification.",
+ "lifecycle_stage": [
+  "VR-LCS-0008"
+ ],
+ "system": [
+  "VR-SYS-0012"
+ ],
+ "discipline": [
+  "VR-DISC-0015",
+  "VR-DISC-0024"
+ ],
+ "design_type": [
+  "VR-DTY-0007"
+ ],
+ "source": [
+  "VR-SRC-0002"
+ ],
+ "product_scope": [
+  "VR-SCOPE-0001"
+ ],
+ "major_unit": [],
+ "example_note": "Generic, fictional example lesson (from v0.8, re-tagged to the v1.0 registers). Not authoritative engineering guidance.",
+ "alias_of": "LL-0002",
+ "origin": {
+  "kind": "Human",
+  "source_ref": "Framework Hub v0.8 example lesson LL-0002"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "record_version": 1,
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner"
+}
