@@ -1,0 +1,92 @@
+{
+ "id": "PG-FW-0000235",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "Design Sub-team: Flight Control Mechanisms",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T00:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T00:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v23",
+  "source_issue_or_revision": "23"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0005",
+ "framework_node": "VR-DST-0014",
+ "template": "TPL-0005",
+ "body": {
+  "blocks": [
+   {
+    "text": "Placeholder (generic, fictional) starter lists from Annex A.4; each project replaces them on its own Design Team and Sub-team pages."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12",
+ "placeholder": true,
+ "stage_sections": [
+  {
+   "stage": "VR-STAGE-0001",
+   "checklist_items": "derived: every Draft item of the stage less items for Design Types the team does not use",
+   "sign_off_disciplines": [
+    "VR-DISC-0006",
+    "VR-DISC-0019",
+    "VR-DISC-0003",
+    "VR-DISC-0005",
+    "VR-DISC-0018",
+    "VR-DISC-0025",
+    "VR-DISC-0016"
+   ],
+   "type_specific_entry_criteria": []
+  },
+  {
+   "stage": "VR-STAGE-0002",
+   "checklist_items": "derived: every Draft item of the stage less items for Design Types the team does not use",
+   "sign_off_disciplines": [
+    "VR-DISC-0006",
+    "VR-DISC-0019",
+    "VR-DISC-0003",
+    "VR-DISC-0005",
+    "VR-DISC-0018",
+    "VR-DISC-0025",
+    "VR-DISC-0014",
+    "VR-DISC-0022",
+    "VR-DISC-0015",
+    "VR-DISC-0016"
+   ],
+   "type_specific_entry_criteria": []
+  },
+  {
+   "stage": "VR-STAGE-0003",
+   "checklist_items": "derived: every Draft item of the stage less items for Design Types the team does not use",
+   "sign_off_disciplines": [
+    "VR-DISC-0006",
+    "VR-DISC-0019",
+    "VR-DISC-0003",
+    "VR-DISC-0005",
+    "VR-DISC-0018",
+    "VR-DISC-0025",
+    "VR-DISC-0014",
+    "VR-DISC-0022",
+    "VR-DISC-0015",
+    "VR-DISC-0024",
+    "VR-DISC-0013",
+    "VR-DISC-0021",
+    "VR-DISC-0016"
+   ],
+   "type_specific_entry_criteria": []
+  }
+ ]
+}

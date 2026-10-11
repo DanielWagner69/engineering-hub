@@ -2,29 +2,41 @@
  "id": "FV-FW-0000001",
  "type": "Framework Version",
  "schema_version": "6.0",
- "title": "Framework 1.0.0-rc.1",
+ "title": "Framework 1.0.0-rc.2",
  "status": "Draft",
  "owner": "user:framework_owner",
  "hub": "FW",
  "created_at": "2026-10-12T00:00:00Z",
  "created_by": "user:framework_owner",
- "modified_at": "2026-10-12T00:00:00Z",
+ "modified_at": "2026-10-12T01:00:00Z",
  "modified_by": "user:framework_owner",
- "record_version": 1,
+ "record_version": 2,
  "origin": {
   "kind": "Human"
  },
  "verification_status": "Unverified",
  "access_marking": "VR-ACCESS-0000",
- "version": "1.0.0-rc.1",
+ "version": "1.0.0-rc.2",
  "schema_version_supported": "6.0",
  "change_list": [
   "Rebuild on Requirements v23 and Data Schema v6, with late decisions R-15 and R-18",
   "Full Annex A (placeholder) and Annex B registers",
-  "26 Design Considerations with Draft checklists per stage"
+  "26 Design Considerations with Draft checklists per stage",
+  "Framework Hub site: three trees, Lifecycle, Product Scope and Discipline views, Sub-team stage pages, rules and reference pages, registers, glossary, v0.8 redirects (rc.1 site)",
+  "Design Team and Sub-team template pages hold the placeholder applicable Design Types, Disciplines and stage sign-off lists as data (rc.2)",
+  "Per-FDPS rule checks run across every FDPS of a project; generic inference module (rc.2)",
+  "Seven generic example lessons carried from v0.8"
  ],
  "content_review": {
   "state": "Not yet reviewed",
   "due": "before release 1.0.0"
- }
+ },
+ "record_history": [
+  {
+   "record_version": 1,
+   "modified_at": "2026-10-12T00:00:00Z",
+   "version": "1.0.0-rc.1",
+   "title": "Framework 1.0.0-rc.1"
+  }
+ ]
 }

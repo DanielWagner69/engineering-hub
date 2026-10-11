@@ -84,3 +84,31 @@ for i, oid in enumerate(sorted(k for k in oldp if k.startswith("LL-"))):
          "access_marking": "VR-ACCESS-0000", "record_version": 1, "created_at": TS, "created_by": "user:framework_owner", "modified_at": TS, "modified_by": "user:framework_owner"}
     json.dump(r, open(os.path.join(ROOT, "data", "framework", "records", r["id"] + ".json"), "w"), indent=1, ensure_ascii=False)
 print(len(P), "pages;", len(gl), "glossary terms")
+# ---- Design Team and Design Sub-team template pages (placeholder Annex A.4 lists, Phase 3)
+TEAM = {"STR": (["Metallic - Machined","Metallic - Sheet","Metallic - Cast / Forged","Metallic - Additive","Carbon Fibre Composite","Other Composite","Glazing"], ["SA"]),
+ "FLU": (["Pipework","Bought-in Equipment","Metallic - Machined","Metallic - Sheet","Non-metallic - Moulded"], ["FLU"]),
+ "ELE": (["Electrical Looms","Bought-in Equipment","Metallic - Sheet"], ["ELE"]),
+ "PRI": (["Pipework","Metallic - Machined","Metallic - Sheet","Carbon Fibre Composite","Bought-in Equipment"], ["FLU","MEC"]),
+ "MEC": (["Metallic - Machined","Metallic - Cast / Forged","Non-metallic - Moulded","Bought-in Equipment"], ["MEC"]),
+ "AVM": (["Bought-in Equipment","Metallic - Sheet","Electrical Looms","Other Composite"], ["ELE","EMC"])}
+CORE_SIGNOFF = ["DES", "SAF", "AWC", "CM", "QUA", "WGT"]; STAGE_SIGNOFF = {"A": [], "B": ["MFG", "SA", "MP"], "C": ["MFG", "SA", "MP", "TST", "MRG", "SPS"]}
+dty = {e["label"].split(" (")[0]: e["id"] for e in regs.values() if e["register"] == "DTY"}
+dts_ = [e for e in regs.values() if e["register"] == "DT"]; stg = {e["code"]: e["id"] for e in regs.values() if e["register"] == "STAGE"}
+TPLNOTE = "Placeholder (generic, fictional) starter lists from Annex A.4; each project replaces them on its own Design Team and Sub-team pages."
+n = 200
+for t in sorted(dts_, key=lambda e: e["sort_order"]):
+    n += 1; ts, ds = TEAM[t["code"]]
+    r = page(n, None, "Design Team: " + t["label"], TPLNOTE, [], "VR-PAGETYPE-0004", {"framework_node": t["id"], "template": "TPL-0004", "placeholder": True,
+         "applicable_design_types": [dty[x] for x in ts] + [dty["Standard Part"]], "applicable_disciplines": [dcode[x] for x in ds]})
+    r.pop("slug"); json.dump(r, open(os.path.join(ROOT, "data", "framework", "pages", r["id"] + ".json"), "w"), indent=1, ensure_ascii=False)
+n = 220
+for t in sorted(dts_, key=lambda e: e["sort_order"]):
+    for s in sorted([e for e in regs.values() if e["register"] == "DST" and e.get("parent") == t["id"]], key=lambda e: e["sort_order"]):
+        n += 1; secs = []
+        for c in ("A", "B", "C"):
+            so = list(dict.fromkeys(dcode[x] for x in CORE_SIGNOFF + STAGE_SIGNOFF[c] + TEAM[t["code"]][1]))
+            so = [x for x in so if regs[x]["discipline_type"] == "VR-DISCTYPE-0001"]
+            secs.append({"stage": stg[c], "checklist_items": "derived: every Draft item of the stage less items for Design Types the team does not use", "sign_off_disciplines": so, "type_specific_entry_criteria": []})
+        r = page(n, None, "Design Sub-team: " + s["label"], TPLNOTE, [], "VR-PAGETYPE-0005", {"framework_node": s["id"], "template": "TPL-0005", "placeholder": True, "stage_sections": secs})
+        r.pop("slug"); json.dump(r, open(os.path.join(ROOT, "data", "framework", "pages", r["id"] + ".json"), "w"), indent=1, ensure_ascii=False)
+print("team and sub-team template pages written")
