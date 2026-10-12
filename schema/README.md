@@ -13,6 +13,8 @@ Conventions used: categorical fields hold a register entry identifier (VR-REGIST
 
 Held in `schema_delta_R15_R18.json` and applied to the generated type schemas until they are written into Data Schema v7 and Requirements v24.
 
+Data Schema v7 / Requirements v24 (12 Oct 2026) EDR, line-item inheritance and Lesson tagging changes are held in `schema_delta_v7_edr.json` (proposed; not yet applied to the generated type schemas). Note: R-15 and R-18 are not yet written into the v7 / v24 documents.
+
 | Ref | Decision | Schema change | Gate checks |
 | --- | --- | --- | --- |
 | R-15 | Each FDPS has one lead Sub-system (or Sub-structure), set by the owning Design Sub-team and approved by a Design Lead of that Sub-system. A change re-runs interface inheritance. | FDPS gains required `lead_sub_system_approval` {set_by, set_at, approved_by, approved_at, change_record}. Change type register gains VR-CHG-0011 Lead Sub-system change. | I: setter in the owning Sub-team, approver a Design Lead of the lead Sub-system at the date; a changed lead needs a Lead Sub-system change Change Record and flags existing breaks for re-confirmation. |

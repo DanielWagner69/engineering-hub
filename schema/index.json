@@ -40,5 +40,6 @@
   "Tailoring Record": "types/Tailoring_Record.schema.json",
   "Framework Version": "types/Framework_Version.schema.json",
   "Saved AI Answer": "types/Saved_AI_Answer.schema.json"
- }
+ },
+ "deltas_v7": "schema_delta_v7_edr.json"
 }
