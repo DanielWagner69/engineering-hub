@@ -60,6 +60,30 @@
    "is_catch_all": false,
    "framework_fixed": true,
    "sort_order": 5
+  },
+  {
+   "id": "VR-BASIS-0006",
+   "register": "BASIS",
+   "code": "6",
+   "label": "Inherited via EDR Sub-system tag",
+   "definition": "Inherited via EDR Sub-system tag",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-BASIS-0007",
+   "register": "BASIS",
+   "code": "7",
+   "label": "Inherited via Sub-system Design Type",
+   "definition": "Inherited via Sub-system Design Type",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 7
   }
  ]
 }

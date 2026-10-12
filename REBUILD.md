@@ -33,3 +33,6 @@ The Framework Hub is generated into `docs/` (`make site`) and served by GitHub P
 ## Phase 3 (framework side, 1.0.0-rc.2)
 
 Design Team and Sub-team template pages (PG-FW-0000201 to 206, PG-FW-0000221 to 240) now hold the placeholder applicable Design Types, Disciplines and stage sign-off lists as data. `tools/infer.py` (generic inference) and `tools/checks/per_fdps.py` (rule checks run over every FDPS of a project, plus R-16 evidence) are new; the carried WE4 checks in `checks/core.py` are scoped to the FDPS under test. `tools/build_demo.py` generates the Demo Production Hub from a pinned bundle.
+
+## 1.0.0-rc.3 (12 Oct 2026)
+Requirements v24.6 / Schema v7.6: v8 Sub-system layout, EDR/TSM model (schema-v7-edr-delta merged), Users and access records, spec/ copy of the documents.

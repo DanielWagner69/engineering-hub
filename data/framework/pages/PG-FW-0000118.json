@@ -1,0 +1,87 @@
+{
+ "id": "PG-FW-0000118",
+ "type": "Hub Page",
+ "schema_version": "6.0",
+ "title": "EDRs, line items and link maturity",
+ "status": "Published",
+ "owner": "user:framework_owner",
+ "hub": "FW",
+ "created_at": "2026-10-12T14:00:00Z",
+ "created_by": "user:framework_owner",
+ "modified_at": "2026-10-12T14:00:00Z",
+ "modified_by": "user:framework_owner",
+ "record_version": 1,
+ "origin": {
+  "kind": "Imported",
+  "source_ref": "Requirements Prompt Draft v24.6",
+  "source_issue_or_revision": "24.6"
+ },
+ "verification_status": "Unverified",
+ "access_marking": "VR-ACCESS-0000",
+ "page_type": "VR-PAGETYPE-0013",
+ "framework_node": "ALL",
+ "template": "TPL-RULES",
+ "slug": "rules/edrs-and-line-items",
+ "body": {
+  "blocks": [
+   {
+    "text": "Requirements are line items grouped into Requirement Documents (EDRs) tagged to Sub-systems; TSMs reach FDPSs through Design Types. Pages above FDPS level list the documents; FDPS pages list each line item with its state. Clauses quoted from Requirements Prompt v24.6."
+   },
+   {
+    "clause": "5.21",
+    "text": "Level-appropriate display. The information shown on a page shall suit the level of the page. Above FDPS level (Sub-system, System, System Group and Design tree pages above the FDPS), requirement data shall be shown as documents (the applicable EDRs and TSMs, each linking to its own page) and verification data as summaries per document and per FDPS. Only FDPS pages shall list individual EDR line items and TSM statements, with their status (5.27)."
+   },
+   {
+    "clause": "5.22",
+    "text": "EDR and TSM pages. Every EDR and every TSM shall have its own Hub page showing its code, title, issue, tags (Sub-system tags for an EDR; Design Type, Discipline and System tags for a TSM, and the Sub-systems it is reached from), its line items or statements, and the FDPSs inheriting it with a compliance summary."
+   },
+   {
+    "clause": "5.23",
+    "text": "Page layout. Hub tree pages shall use one layout: a left rail holding the page filters above the collapsible Hub tree, with the current page highlighted, the tree being for quick navigation; a content area that starts with the model preview window at the top left (1.12, 5.16), which can be expanded, beside a generic summary of the node; then all the data of the page in the five page groups of 5.24. The summary shall show what the node is, its status chips, and its structure and parent (parent System and System Group, each a link), its Design Lead as owner (5.30), its Design Sub-team and its permanent ID, each a link to its page or register entry; there shall be no separate Structure and parent category. Summary tiles shall show key counts, each linking to its category and updating with the filters; on a Sub-system page the tiles are FDPS, EDRs, TSMs, Non-compliant, Open Issues and Lessons, with no Part Instances tile."
+   },
+   {
+    "clause": "5.24",
+    "text": "Page groups and categories. Categories shall be grouped into five page groups, each with its own accessible colour family from the palette (5.28) and shown in a colour key: (a) Requirement (navy #00405E family), on the left: EDRs and TSMs, as documents above FDPS level; (b) Verification (teal #46C1BE family), on the right beside Requirement: Compliance, Verifications and Reviews; (c) Product (neutral grey family), full width below them: on a Sub-system page an FDPSs category only, listing the linked FDPSs, each a link to its FDPS page with a status chip and its Build Stations, and no Part Instances (5.21); (d) Considerations (violet family, light #5B3F8C on #F4F0FA, dark #C7B3EE on #1E1830): Interfacing Systems and Disciplines and Stakeholders; (e) Working Data (amber family, light #7A4E00 on #FBF5E9, dark #F0C674 on #2A2111), at the bottom of the page: Issues and Lessons Learned as separate categories. Every category shall be collapsed by default, with a header showing its name and a count or status chip, and shall expand on selection; an Expand all control shall open or close every category. Selecting or hovering a requirement document shall highlight its compliance and verification rows. There shall be no dedicated Links area: links shall be built into the data, so that every data item that has a page is a link in place (FDPS rows to FDPS pages, EDR and TSM names to their pages, Interfacing Systems to System pages, Issues and Lessons to their records, roles to the Role register, reviews to their Design Reviews, registers from the relevant category), and every page reachable from the former Links list shall stay reachable from the page data, the summary or the tree. On narrow screens the groups shall stack in the order Requirement, Verification, Product, Considerations, Working Data. FDPS pages shall use the same five groups at FDPS level (line items with their status in Requirement, Part Instances in Product); the detailed FDPS page layout is to be confirmed when the FDPS page is designed."
+   },
+   {
+    "clause": "5.27",
+    "text": "FDPS line items. FDPS pages shall list every inherited EDR line item and TSM statement, grouped by document, with its inheritance route and its status (Inherited, not reviewed; Kept; Broken, with reason and approver; Superseded (auto), with any pending Design Authority bulk confirmation; Direct), and a maturity indicator (line items reviewed of total, counting Kept, Broken and Superseded (auto), and numbers broken and superseded) (6B.7A)."
+   },
+   {
+    "clause": "5.30",
+    "text": "Owner of tree pages. The owner shown on a Sub-system (or Sub-structure) page shall be its Design Lead from the Role register (6C.14), shown as Design Lead (owner); there is no separate owner field for these pages."
+   },
+   {
+    "clause": "6B.1A",
+    "text": "Requirement documents. Requirements shall be held as line items grouped into Requirement Documents of kind EDR (Engineering Design Requirements). Every Requirement shall be Part of exactly one EDR. An EDR shall have its own code, title, issue and status, and may cover several Systems (EDRs are intended to be split by System, but overlap is allowed). Each line item shall keep its own level (2C.7), and one EDR may hold line items of different levels."
+   },
+   {
+    "clause": "6B.2",
+    "text": "Allocation. Each EDR shall be tagged at document level to one or more Sub-systems (or Sub-structures); one EDR may be tagged to many Sub-systems and one Sub-system may carry many EDRs. An FDPS shall inherit every EDR tagged to any Sub-system in which at least one of its Part Instances is homed, with all of its line items, by default. A line item may additionally be allocated to one or more nodes of the System tree (a Sub-system, a System or a System Group) as an optional narrowing: where it is, it shall flow only to inheriting FDPSs that have at least one Part Instance homed in a Sub-system at or below an allocated node. Example: a Fuel System usable storage requirement is allocated to the Fuel Storage Sub-system, and every FDPS containing a Part Instance homed in Fuel Storage inherits it. A Requirement may also be linked directly to an FDPS, or to an item for traceability, by a Satisfied by link; the FDPS concerned then holds the Requirement directly."
+   },
+   {
+    "clause": "6B.5",
+    "text": "TSM inheritance. Each TSM shall be tagged with one or more of Design Type, Discipline and System; TSMs shall not be tagged to Sub-systems. Each Sub-system (and Sub-structure) page shall list its applicable Design Types, and a TSM tagged with one of those Design Types shall reach every FDPS with a Part Instance homed in that Sub-system (the route Sub-system > Design Type > TSM). This route is in addition to the matches below. Each kind of tag is optional, but every TSM shall carry at least one tag. A TSM shall reach an FDPS if any one of its tags matches (tags are combined with OR, never AND): a Design Type tag matches when a Part or Assembly in the FDPS's population has that Design Type, including the modification Design Type of a modified bought-in Part (2B.10) and the Design Type Standard Part of catalogue items (1.10.1); a System tag matches when a Part Instance of the FDPS is homed in a Sub-system of that System; and a Discipline tag matches when the Discipline is listed on the Hub page of the FDPS's owning Design Team (the Design Team of its owning Design Sub-team). Matching is never against the Discipline register as a whole, because every Discipline applies to every design (4.2). Where there is doubt, a TSM shall be over-tagged rather than under-tagged. Each Design Team shall list its applicable Design Types and its applicable Disciplines on its Hub page. A Part in an FDPS whose Design Type is not on the owning Design Team's list, or not on the Design Type list of its home Sub-system, shall be flagged. Every matching tag is a basis of the Compliance Statement (6B.6)."
+   },
+   {
+    "clause": "6B.7",
+    "text": "Line-item review and breaks. Every line item inherited by an FDPS (each Requirement of an inherited EDR and each statement of an inherited TSM) shall apply by default, with status Inherited, not reviewed. As the design matures, each line item shall be reviewed and either Kept (it applies) or Broken (it does not apply). A break shall record its reason, author, approver and date, and shall be approved under 6C.13. The inheritance shall not be deleted: a Broken line item stays visible and shall be flagged for re-confirmation when the FDPS population, its lead Sub-system, the document's tags or the line item itself change. A Requirement or TSM all of whose line items are Broken does not apply to the FDPS. Directly linked Requirements (6B.2) are shown as Direct alongside their status. Once the FDPS has defined links for a document, 6B.7A applies."
+   },
+   {
+    "clause": "6B.7A",
+    "text": "Link maturity: flow down, define, flow up and supersede. Early, high-level links (EDRs tagged to Sub-systems, 6B.2; TSMs reached through Design Types, 6B.5) let work be linked before it is defined, and flow DOWN to every FDPS below as inherited line items (6B.7). As the design matures and Part Instances are known, defined links shall be made at the lowest level (to Part Instances or Assembly Instances); defined links flow back UP and SUPERSEDE the flowed-down links. Once a level has defined links (P2 below), every flowed-down line item of that document in that FDPS that no defined link reaches shall be superseded AUTOMATICALLY, with status Superseded (auto), and no manual break is needed. Superseded EDR line items need no confirmation. Superseded TSM statements shall require a BULK confirmation by the Design Authority (6C.13) for each FDPS and TSM; until confirmed they are shown as Superseded (auto), pending confirmation. Before a level has defined links, line items may still be Kept or Broken manually under 6B.7, a break still requiring reason and approver. For the gates (6C.11, 6C.15), Kept, Broken and Superseded (auto) line items count as reviewed; a pending Design Authority bulk confirmation of TSM supersessions blocks both gates."
+   },
+   {
+    "clause": "6B.10",
+    "text": "Change flags. Line items shall carry their own revisions. A new issue of an EDR or TSM shall flag, for every inheriting FDPS, only the line items that changed, were added or were removed in that issue, together with their Compliance Statements and Kept or Broken status; unchanged line items keep their status. Added line items arrive as Inherited, not reviewed. A changed item, revision or Verification shall flag the Compliance Statements whose evidence it affects."
+   }
+  ]
+ },
+ "lifecycle_stage": [
+  "ALL"
+ ],
+ "discipline": [
+  "ALL"
+ ],
+ "last_reviewed_at": "2026-10-12"
+}

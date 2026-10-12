@@ -1,0 +1,65 @@
+{
+ "register": "ACCROLE",
+ "entries": [
+  {
+   "id": "VR-ACCROLE-0001",
+   "register": "ACCROLE",
+   "code": "1",
+   "label": "Admin",
+   "definition": "Engineer permissions plus administer users, Project Assignments, effectivity restrictions and permission overrides on the project; view the audit trail (B.6).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-ACCROLE-0002",
+   "register": "ACCROLE",
+   "code": "2",
+   "label": "Design Lead",
+   "definition": "Engineer permissions; may hold Design Lead authority roles; approve EDR line-item breaks and interface breaks within the Role register area (B.6).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-ACCROLE-0003",
+   "register": "ACCROLE",
+   "code": "3",
+   "label": "Design Authority",
+   "definition": "Engineer permissions; may hold Design Authority authority roles; approve TSM statement breaks and bulk-confirm TSM supersessions within the area; approve for release where delegated (B.6).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-ACCROLE-0004",
+   "register": "ACCROLE",
+   "code": "4",
+   "label": "Engineer",
+   "definition": "View all project data within the allowed effectivities; create and edit the items owned or contributed to; raise review flags. May hold Technical Authority for Design, Design Approver and Discipline Lead roles (B.6, 5A.6).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-ACCROLE-0005",
+   "register": "ACCROLE",
+   "code": "5",
+   "label": "Viewer",
+   "definition": "View only, within the allowed effectivities; may comment and use the AI bar (B.6).",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5
+  }
+ ]
+}

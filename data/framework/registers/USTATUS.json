@@ -1,0 +1,41 @@
+{
+ "register": "USTATUS",
+ "entries": [
+  {
+   "id": "VR-USTATUS-0001",
+   "register": "USTATUS",
+   "code": "1",
+   "label": "Active",
+   "definition": "Active",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-USTATUS-0002",
+   "register": "USTATUS",
+   "code": "2",
+   "label": "Suspended",
+   "definition": "Suspended",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-USTATUS-0003",
+   "register": "USTATUS",
+   "code": "3",
+   "label": "Left",
+   "definition": "Left",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  }
+ ]
+}

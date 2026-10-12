@@ -1,6 +1,6 @@
 # Engineering Hub (Framework) v1.0 rebuild: build gate and tools. Python 3 standard library only.
 PY ?= python3
-VERSION ?= 1.0.0-rc.2
+VERSION ?= 1.0.0-rc.3
 check:            ## schema, rule, register and purity checks, then framework negative tests
 	$(PY) tools/validate.py --framework data/framework --repo . --out build/val.json
 	$(PY) tools/neg.py --framework data/framework --out build/neg.json

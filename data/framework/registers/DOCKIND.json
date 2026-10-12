@@ -1,0 +1,17 @@
+{
+ "register": "DOCKIND",
+ "entries": [
+  {
+   "id": "VR-DOCKIND-0001",
+   "register": "DOCKIND",
+   "code": "1",
+   "label": "EDR",
+   "definition": "Engineering Design Requirements document: a group of Requirement line items with a Sub-system tag (6B.1A)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  }
+ ]
+}

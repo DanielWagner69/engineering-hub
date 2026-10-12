@@ -7,7 +7,7 @@ import argparse, html, json, os, re, shutil, sys, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import validate, purity
 SITE = os.path.join(HERE, "..", "site")
-VERSION_LABEL = "Framework v1.0 (release candidate 1.0.0-rc.2)"
+VERSION_LABEL = "Framework v1.0 (release candidate 1.0.0-rc.3)"
 DEMO = "https://danielwagner69.github.io/engineering-hub-demo/"
 E = html.escape
 def slug(s): return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower().replace("&", "and"))).strip("-")
@@ -81,7 +81,7 @@ class Site:
         body = "<p>The Engineering Hub framework: generic, project-independent guidance and controlled registers for designing aircraft installations. Every item is stored once with a permanent identifier and reached through three trees (Manufacturing, Design and System) and cross-cutting views (Lifecycle, Product Scope, Discipline).</p>"
         body += '<div class="cards">' + "".join('<a class="card" href="%s"><div class="n">%s</div><div>%s</div></a>' % (u, E(t), E(d)) for t, u, d in cards) + "</div>"
         body += '<h2>How to read this Hub</h2><ul><li>Hub levels (Full Aircraft down to Build Station, Design Sub-team and Sub-system) are pages. There are no pages for individual parts or Part Instances; those live in a Production Hub.</li><li>Annex A lists (Major Units, Build Stations, Sub-systems, Design Teams, Design Types, Safety Classification, applicability, Type codes) are %s starter values; each project replaces them through Tailoring Records.</li><li>Rules pages: <a href="rules/requirements/">Requirements</a>, <a href="rules/tsms/">TSMs</a>, <a href="rules/compliance/">Compliance</a>, <a href="rules/verification/">Verification</a>, <a href="rules/effectivity/">Effectivity</a>, <a href="rules/revisions-and-numbering/">Numbering</a>, <a href="rules/baselines/">Baselines</a>, <a href="rules/interfaces/">Interfaces</a>, <a href="issues/escalation/">Issue escalation</a>, <a href="lessons/">Lessons Learned</a>, <a href="part-attributes/">Part attributes</a>.</li></ul>' % ph
-        body += '<h2>Demo Production Hub</h2><p>See the framework applied to an entirely fictional project: <a href="%s">Demo Production Hub (Sparrow Light Trainer, fictional)</a>. The Demo is still on v0.8-demo.1 and is rebuilt on this framework in Phase 3.</p>' % DEMO
+        body += '<h2>Demo Production Hub</h2><p>See the framework applied to an entirely fictional project: <a href="%s">Demo Production Hub (Sparrow Light Trainer, fictional)</a>. The Demo (v1.1-demo) is built on this framework version.</p>' % DEMO
         body += '<h2>Version</h2><p>%s. Framework Version record FV-FW-0000001: content review not yet done (due before release 1.0.0). See <a href="versions/">version log</a> and <a href="framework-vs-production/">Framework vs Production</a>. Links from v0.8 (<code>#/p/…</code>) redirect to their v1.0 page.</p>' % E(VERSION_LABEL)
         self.add("", "Engineering Hub: Framework", body, "FV-FW-0000001", "home", meta=self.metap("FV-FW-0000001"))
         # Product Scopes
@@ -146,7 +146,7 @@ class Site:
                 body = "<p>%s %s</p><h2>Interfacing Systems</h2><table><thead><tr><th scope=col>Interfacing System</th><th scope=col>Reason</th></tr></thead><tbody><tr><td colspan=2>Set per project (6C.20). The list is finite: it never says 'all Systems'.%s</td></tr></tbody></table><p>%s</p>" % (
                     E(s["definition"]), ph, " A non-structural Sub-system page names the structural Systems it attaches to." if not y["is_structural"] else " Every FDPS with a Part Instance homed in this Sub-structure inherits the whole list (over-inclusion accepted).",
                     "Catch-all: holds only items that serve the System as a whole and cannot be placed in a single other %s (2B.11)." % kind if s.get("is_catch_all") else "Requirements allocated here flow to every FDPS with a Part Instance homed in it (6B.2).")
-                self.add(q, "%s: %s" % (kind, s["label"]), body, s["id"], "tree", [("", "Home"), (sfa, "Systems"), (p, y["label"])], self.metap(s["id"]), trees=[("System", "Full Aircraft > %s > %s > %s" % (self.lab(y["parent"]), y["label"], s["label"]))], preview=True)
+                self.sub_page(s, y, q, kind, body, [("", "Home"), (sfa, "Systems"), (p, y["label"])], trees=[("System", "Full Aircraft > %s > %s > %s" % (self.lab(y["parent"]), y["label"], s["label"]))])
         # Lifecycle
         self.add("lifecycle/", "Lifecycle Stages", "<p>Cross-cutting facet. The current scope is stages 4 to 6; other stages may be tagged now but no stage rules apply to them yet (2B.13).</p><ol>%s</ol>" % "".join("<li>%s%s</li>" % (L("lifecycle/", l["id"]), " <span class='badge so'>in current scope</span>" if l["in_current_scope"] else "") for l in B["LCS"]), "VR-LCS", "index", [("", "Home")], self.metap("register LCS"))
         for l in B["LCS"]:
@@ -179,7 +179,7 @@ class Site:
         # Rules and reference pages from Hub Page records
         for s, pg in sorted(hubp.items()):
             if s in ("glossary", "lessons", "retired"): continue
-            self.add(U[pg["id"]], pg["title"], blocks(U[pg["id"]], pg), pg["id"], "rules", [("", "Home")], self.metap(pg["id"], extra={"Source": "Requirements v23 (clauses quoted)"}))
+            self.add(U[pg["id"]], pg["title"], blocks(U[pg["id"]], pg), pg["id"], "rules", [("", "Home")], self.metap(pg["id"], extra={"Source": "%s (clauses quoted)" % pg.get("origin", {}).get("source_ref", "Requirements v23").replace("Requirements Prompt Draft ", "Requirements ")}))
         gp = hubp["glossary"]
         self.add("glossary/", "Glossary", "<p>%s</p><dl>%s</dl>" % (E(gp["body"]["blocks"][0]["text"]), "".join("<dt><b>%s</b></dt><dd>%s</dd>" % (E(g["term"]), E(g["definition"])) for g in sorted(gp["glossary"], key=lambda g: g["term"].lower()))), gp["id"], "reference", [("", "Home")], self.metap(gp["id"]))
         rt = hubp["retired"]; self.add("retired/", rt["title"], "<p>%s</p><p><a href='../'>Home</a></p>" % E(rt["body"]["blocks"][0]["text"]), rt["id"], "reference", [("", "Home")], self.metap(rt["id"]))
@@ -199,20 +199,94 @@ class Site:
         fv = [x for x in self.R if x["type"] == "Framework Version"][0]
         self.add("versions/", "Framework version log", "<p><b>%s</b> (%s). Content review: %s.</p><ul>%s</ul><p>Previous: v0.8 (prototype), kept as git tag <code>v0.8</code> for rollback.</p>" % (E(fv["title"]), E(fv["id"]), E(fv["content_review"]["state"]), "".join("<li>%s</li>" % E(x) for x in fv["change_list"])), fv["id"], "reference", [("", "Home")], self.metap(fv["id"]))
         self.add("search/", "Search", "<p>Use the Ask the Hub box at the top of every page. Search covers this Framework Hub only (no production data).</p>", "SEARCH", "reference", [("", "Home")], self.metap("SEARCH"))
+    # ---- v8 tree-page layout (Requirements v24.6 5.23 to 5.30)
+    GROUPS = [("req", "Requirement"), ("ver", "Verification"), ("prod", "Product"), ("con", "Considerations"), ("wk", "Working Data")]
+    def cat(self, cid, title, body, n=None, chips=""):
+        return dict(id=cid, title=title, body=body, n=n, chips=chips)
+    def v8_html(self, path, lead, facts, chips, tiles, groups, img, alt):
+        im = '<figure class=mp><div class=mpi><img src="%s" alt="%s"></div><figcaption>%s</figcaption></figure>' % (self.rel(path, "assets/" + img), E(alt), E(alt))
+        fx = "".join("<div><dt>%s</dt><dd>%s</dd></div>" % (E(k), v) for k, v in facts)
+        tl = "".join('<a class="tile%s" href="#cat-%s" data-cat="cat-%s"%s><b>%s</b>%s</a>' % (" bad" if t.get("bad") else "", t["cat"], t["cat"], (' data-sel="%s"' % E(t["sel"])) if t.get("sel") else "", t["n"], E(t["label"])) for t in tiles)
+        h = '<div class=sumgrid>%s<div><p class=lead>%s</p><div class=chips>%s</div><dl class=facts>%s</dl><div class=tiles>%s</div></div></div>' % (im, lead, chips, fx, tl)
+        h += '<div class=fstate hidden>Filtered by <b></b><button type=button class=clr>Clear filters</button></div><div class=bar><span class=bl>Page data</span><button type=button class=xall>Expand all</button></div>'
+        h += '<div class=key>' + "".join('<span class="k %s">%s</span>' % (k, E(n)) for k, n in self.GROUPS) + '<span class=hint>Categories are collapsed: select one to open it</span></div><div class=zones>'
+        for k, n in self.GROUPS:
+            h += '<section class="zone %s" aria-label="%s"><h2>%s</h2>' % (k, E(n), E(n))
+            for c in groups.get(k, []):
+                h += '<details class=cat id="cat-%s"><summary><span class=ct>%s</span><span class=cc><span class="chip cnt">%s</span>%s</span></summary><div class=cb>%s<p class="empty fempty" hidden>Nothing here matches the filters.</p></div></details>' % (c["id"], E(c["title"]), "" if c["n"] is None else c["n"], c["chips"], c["body"])
+            h += "</section>"
+        return h + "</div>"
+    def filter_opts(self):
+        B = self.by
+        return [("scope", "Product Scope", [(e["id"], e["label"]) for e in B["SCOPE"]]), ("eff", "Effectivity", []), ("lcs", "Lifecycle Stage", [(e["id"], e["label"]) for e in B["LCS"]]),
+                ("disc", "Discipline", [(e["id"], e["label"].split(" (")[0]) for e in B["DISC"]]), ("dty", "Design Type", [(e["id"], e["label"].split(" (")[0]) for e in B["DTY"]])]
+    def sub_groups(self, sub, sys_, path, fw_body):
+        """Framework content of a Sub-system page in the five page groups; a Production Hub overrides this with its data."""
+        L = self.link; ph = '<span class="badge ph">Placeholder (generic, fictional)</span>'
+        so = [d for d in self.by["DISC"] if d["discipline_type"].endswith("1")]
+        ls = [l for l in self.R if l["type"] == "Lesson Learned" and (sys_["id"] in l.get("system", []) or "ALL" in l.get("system", []))]
+        lrow = lambda l: "<li data-row data-lcs='%s' data-disc='%s' data-dty='%s'><a href='%s'><b>%s</b></a> %s</li>" % (" ".join(l.get("lifecycle_stage", [])), " ".join(l.get("discipline", [])), " ".join(l.get("design_type", []) or ["ALL"]), self.rel(path, self.url[l["id"]]), E(l["id"]), E(l["title"]))
+        G = {"req": [self.cat("edrs", "EDRs", "<p>Set per project: the EDRs tagged to this %s are listed here as documents, each a link to its EDR page (5.21, 6B.2). Line items are shown only on FDPS pages.</p>" % E(sub["label"]), 0),
+                     self.cat("tsms", "TSMs", "<p>Set per project: TSMs reach this %s through its applicable Design Types (route Sub-system &gt; Design Type &gt; TSM, 6B.5), and through System and Discipline tags. Each TSM is listed as a document link.</p>" % E(sub["label"]), 0)],
+             "ver": [self.cat("compliance", "Compliance", "<p>Per project: a compliance summary per document and per FDPS (5.21).</p>", 0), self.cat("verifications", "Verifications", "<p>Per project: Verification records of the FDPSs linked to this page.</p>", 0),
+                     self.cat("reviews", "Reviews", "<p>Per project: Design Reviews covering FDPSs linked here. See <a href='%s'>design reviews</a>.</p>" % self.rel(path, "reviews/"), 0)],
+             "prod": [self.cat("fdps", "FDPSs", "<p>FDPS pages exist only in a Production Hub. On a Sub-system page the Product group lists only the linked FDPSs, each with its status and Build Stations; Part Instances are listed on FDPS pages (5.21, 5.24).</p>", 0)],
+             "con": [self.cat("ifs", "Interfacing Systems", fw_body, None, ph), self.cat("disc", "Disciplines and Stakeholders", "<ul class=rows>%s</ul>" % "".join("<li data-row data-disc='%s'>%s</li>" % (d["id"], L(path, d["id"], d["label"].split(" (")[0])) for d in so), len(so))],
+             "wk": [self.cat("issues", "Issues", "<p>Per project: open Issues affecting this %s. See <a href='%s'>Issue escalation</a>.</p>" % (E(sub["label"]), self.rel(path, "issues/escalation/")), 0),
+                    self.cat("lessons", "Lessons Learned", ("<ul class=rows>%s</ul>" % "".join(lrow(l) for l in ls)) if ls else "<p>No framework lesson is tagged to this System yet. Lessons are matched by tag (Lifecycle Stage, Discipline, Design Type, System, optionally Sub-system), not by keyword (2G.3).</p>", len(ls))]}
+        tiles = [dict(label="FDPS", n=0, cat="fdps"), dict(label="EDRs", n=0, cat="edrs"), dict(label="TSMs", n=0, cat="tsms"), dict(label="Non-compliant", n=0, cat="compliance"), dict(label="Open Issues", n=0, cat="issues"), dict(label="Lessons", n=len(ls), cat="lessons")]
+        return G, tiles, [], "model-placeholder.svg", "Model preview: image placeholder until the live model is available (1.12, 5.16)", "Framework template: a Production Hub shows its data here."
+    def sub_page(self, sub, sys_, path, kind, fw_body, crumbs, trees):
+        meta = self.metap(sub["id"], **self.sub_meta(sub))
+        G, tiles, chips, img, alt, note = self.sub_groups(sub, sys_, path, fw_body)
+        facts = [("Parent", "%s › %s" % (self.link(path, sys_["id"]), self.link(path, sys_["parent"]))), ("Design Lead (owner)", self.sub_owner(sub, path)), ("Design Sub-team", self.sub_team(sub, path)),
+                 ("ID", '<a href="%s#%s">%s</a>' % (self.rel(path, self.url["register:SUB"]), E(sub["id"]), E(sub["id"]))), ("Verification status", E(meta["Verification status"])), ("Last reviewed", E(meta["Last reviewed"]))]
+        ch = '<span class="chip">%s</span>%s%s' % (E(kind), " <span class='chip mid'>Catch-all</span>" if sub.get("is_catch_all") else "", "".join(chips))
+        lead = "%s %s" % (E(sub["definition"]), E(note))
+        self.add(path, "%s: %s" % (kind, sub["label"]), self.v8_html(path, lead, facts, ch, tiles, G, img, alt), sub["id"], "v8", crumbs, meta, trees=trees, preview=False, text=sub["label"] + " " + sub["definition"])
+        self.pages[path]["v8"] = True
+    def sub_meta(self, sub): return {}
+    def sub_owner(self, sub, path): return "Set per project: the Design Lead from the Role register (5.30)"
+    def sub_team(self, sub, path): return "Set per project"
+    def rail(self, path):
+        R = self.rel(path, "")
+        f = "".join('<label class=f><span>%s</span><select data-f=%s><option value="">All</option>%s</select></label>' % (E(n), k, "".join('<option value="%s">%s</option>' % (E(v), E(t)) for v, t in opts)) for k, n, opts in self.filter_opts())
+        t = ""
+        for g in self.by["SG"]:
+            ys = self.kids("SYS", g["id"]); og = any(path.startswith(self.url[y["id"]]) for y in ys)
+            t += "<li><details%s><summary>%s</summary><ul>" % (" open" if og else "", E(g["label"]))
+            for y in ys:
+                oy = path.startswith(self.url[y["id"]])
+                t += '<li><details%s><summary><a href="%s">%s</a></summary><ul>%s</ul></details></li>' % (" open" if oy else "", R + self.url[y["id"]], E(y["label"]), "".join('<li><a href="%s"%s>%s</a></li>' % (R + self.url[s["id"]], ' aria-current="page"' if self.url[s["id"]] == path else "", E(s["label"])) for s in self.kids("SUB", y["id"])))
+            t += "</ul></details></li>"
+        return '<aside class=rail aria-label="Navigation and filters"><section class=filters><h2>Filters</h2>%s<button type=button class=reset>Reset filters</button></section><nav class=navtree aria-label="System tree"><h2>System tree</h2><ul class=tree>%s</ul><h2 style="margin-top:14px">Hub</h2><ul class=tree><li><a href="%s">Home</a></li>%s</ul></nav></aside>' % (f, t, R or "./", "".join('<li><a href="%s">%s</a></li>' % (R + u, E(n)) for _, items in self.NAV[:1] for u, n in items))
+    def render_v8(self, path, p):
+        R = self.rel(path, "")
+        crumbs = " › ".join('<a href="%s">%s</a>' % (R + u, E(t)) for u, t in p["crumbs"])
+        return """<!doctype html><html lang="en" data-root="%s" data-theme="company"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>%s · Engineering Hub Framework</title><link rel="stylesheet" href="%sassets/v8.css"><script src="%sassets/v8.js"></script></head>
+<body><a class="skip" href="#main">Skip to content</a><header class="top"><button class=rail-btn type=button aria-label="Open navigation">☰</button><a class="brand" href="%s">Engineering Hub · Framework</a><span class="ver">%s</span><span class=sp></span><button class=gear type=button aria-label="Settings" aria-expanded=false>⚙</button>
+<div class=settings role=dialog aria-label="Settings"><h3>Theme</h3><label><input type=radio name=th value=company> Company (default)</label><label><input type=radio name=th value=dark> Dark</label><label><input type=radio name=th value=light> Light</label></div></header>
+<div class=layout>%s<main id="main"><p class="crumbs">%s</p><h1>%s</h1>%s</main></div>
+<form id="ask" class="ask" role="search"><span class=spark aria-hidden=true>✦</span><label for="q" class="skip">Ask the Hub</label><input id="q" type="search" placeholder="Ask the Hub about this page (keyword search)" autocomplete="off"><button type="submit">Ask</button></form><div id="results" aria-live="polite"></div>
+<footer class=v8f>%s · Generic framework content only; no project data. <a href="%s">Demo Production Hub (fictional)</a> · <a href="%sversions/">Versions</a></footer>
+<script src="%sassets/search-index.js"></script><script src="%sassets/aliases.js"></script><script src="%sassets/ai.js"></script><script src="%sassets/site.js"></script></body></html>""" % (
+            R, E(p["title"]), R, R, R, E(VERSION_LABEL), self.rail(path), crumbs, E(p["title"]), p["body"], E(VERSION_LABEL), DEMO, R, R, R, R, R)
     # ---- render
     NAV = [("Trees", [("manufacturing/", "Manufacturing"), ("design/", "Design"), ("systems/", "System")]), ("Views", [("lifecycle/", "Lifecycle"), ("product-scopes/", "Product Scope"), ("disciplines/", "Discipline")]),
-           ("Rules", [("reviews/", "Design reviews"), ("rules/requirements/", "Requirements"), ("rules/tsms/", "TSMs"), ("rules/compliance/", "Compliance"), ("rules/verification/", "Verification"), ("rules/effectivity/", "Effectivity"), ("rules/revisions-and-numbering/", "Numbering"), ("rules/baselines/", "Baselines"), ("rules/interfaces/", "Interfaces"), ("part-attributes/", "Part attributes"), ("issues/escalation/", "Issue escalation"), ("lessons/", "Lessons Learned")]),
+           ("Rules", [("reviews/", "Design reviews"), ("rules/requirements/", "Requirements"), ("rules/tsms/", "TSMs"), ("rules/compliance/", "Compliance"), ("rules/verification/", "Verification"), ("rules/effectivity/", "Effectivity"), ("rules/revisions-and-numbering/", "Numbering"), ("rules/baselines/", "Baselines"), ("rules/interfaces/", "Interfaces"), ("rules/edrs-and-line-items/", "EDRs and line items"), ("rules/users-and-access/", "Users and access"), ("part-attributes/", "Part attributes"), ("issues/escalation/", "Issue escalation"), ("lessons/", "Lessons Learned")]),
            ("Reference", [("registers/", "Registers"), ("glossary/", "Glossary"), ("framework-vs-production/", "Framework vs Production"), ("versions/", "Versions")])]
     def render(self):
         if os.path.exists(self.out): shutil.rmtree(self.out)
         os.makedirs(os.path.join(self.out, "assets"))
-        for f in ("style.css", "site.js", "ai.js"): shutil.copy(os.path.join(SITE, f), os.path.join(self.out, "assets", f))
+        for f in ("style.css", "site.js", "ai.js", "v8.css", "v8.js", "model-placeholder.svg"): shutil.copy(os.path.join(SITE, f), os.path.join(self.out, "assets", f))
         open(os.path.join(self.out, "assets", "search-index.js"), "w").write("window.HUB_INDEX=" + json.dumps(self.index, ensure_ascii=False) + ";\n")
         open(os.path.join(self.out, "assets", "aliases.js"), "w").write("window.HUB_ALIASES=" + json.dumps(self.aliases, ensure_ascii=False) + ";\n")
         json.dump(self.aliases, open(os.path.join(self.out, "aliases.json"), "w"), indent=1)
         open(os.path.join(self.out, ".nojekyll"), "w").write("")
         for path, p in self.pages.items():
             R = self.rel(path, "")
+            if p.get("v8"):
+                d = os.path.join(self.out, path); os.makedirs(d, exist_ok=True); open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(self.render_v8(path, p)); continue
             nav = "".join("<h2>%s</h2><ul>%s</ul>" % (E(h), "".join('<li><a href="%s"%s>%s</a></li>' % (R + u, ' aria-current="page"' if path.startswith(u) else "", E(t)) for u, t in items)) for h, items in self.NAV)
             crumbs = " › ".join('<a href="%s">%s</a>' % (R + u, E(t)) for u, t in p["crumbs"])
             meta = "".join("<span class=k>%s</span><span>%s</span>" % (E(k), E(str(v))) for k, v in p["meta"].items())
@@ -289,7 +363,9 @@ def checks(site, out, repo, project=False):
     def lum(h):
         c = [int(h[i:i+2], 16) / 255 for i in (1, 3, 5)]; c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]; return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
     def cr(a, b): la, lb = sorted([lum(a), lum(b)], reverse=True); return (la + 0.05) / (lb + 0.05)
-    pairs = [("#10232E", "#FFFFFF"), ("#00405E", "#FFFFFF"), ("#00405E", "#EAF7F6"), ("#FFFFFF", "#00405E"), ("#00405E", "#9EDEDC"), ("#3E5663", "#EAF7F6"), ("#8A3B12", "#FFF1E8"), ("#5B4300", "#FFF6D6"), ("#00405E", "#F6FBFB"), ("#10232E", "#F6FBFB")]
+    pairs = [("#10232E", "#FFFFFF"), ("#00405E", "#FFFFFF"), ("#00405E", "#EAF7F6"), ("#FFFFFF", "#00405E"), ("#00405E", "#9EDEDC"), ("#3E5663", "#EAF7F6"), ("#8A3B12", "#FFF1E8"), ("#5B4300", "#FFF6D6"), ("#00405E", "#F6FBFB"), ("#10232E", "#F6FBFB"),
+             ("#00405E", "#E8F0F4"), ("#1D6B69", "#EAF7F6"), ("#4A5A62", "#F2F5F6"), ("#5B3F8C", "#F4F0FA"), ("#7A4E00", "#FBF5E9"), ("#0F5E3A", "#E3F4EC"), ("#3E5663", "#F4F9F9"), ("#10232E", "#F4F9F9"),
+             ("#C7B3EE", "#1E1830"), ("#F0C674", "#2A2111"), ("#9FC6DB", "#0E2532"), ("#7FDCD9", "#0C2A2A"), ("#E3EEF0", "#0F2530"), ("#9EDEDC", "#0F2530")]
     low = [(a, b, round(cr(a, b), 2)) for a, b in pairs if cr(a, b) < 4.5]
     chk("Colour contrast of every text/background pair in the stylesheet at least 4.5:1 (WCAG 2.1 AA)", not low, low)
     css = open(os.path.join(SITE, "style.css")).read()
@@ -299,6 +375,11 @@ def checks(site, out, repo, project=False):
     if project: chk("Built site holds no blocked term (real programme or employer) (6.10)", not purity.blocked_hits(allt, H))
     else: chk("Built site holds no project record identifier and no blocked term (6.10)", not purity.PROJ_ID.search(allt) and not purity.blocked_hits(allt, H), purity.PROJ_ID.findall(allt)[:5])
     chk("Every v0.8 page identifier has a redirect to a v1.0 page", all((t == "" or t in site.pages) for t in site.aliases.values()))
+    v8 = [p for p in site.pages if re.match(r"^systems/[^/]+/[^/]+/$", p)]
+    bad8 = [p for p in v8 if not site.pages[p].get("v8") or not all(x in open(os.path.join(out, p, "index.html"), encoding="utf-8").read() for x in ('class="zone req"', 'class="zone ver"', 'class="zone prod"', 'class="zone con"', 'class="zone wk"', 'class="ask"', "data-f=eff", 'name=th value=dark', "<details class=cat", "class=rail"))]
+    chk("Sub-system pages use the v8 layout: rail filters and tree, preview, five collapsed page groups, fixed Ask bar, theme setting (5.23 to 5.29)", v8 and not bad8, bad8[:5])
+    opn = [p for p in v8 if "<details class=cat open" in open(os.path.join(out, p, "index.html"), encoding="utf-8").read()]
+    chk("Categories collapsed by default on v8 pages; no dedicated Links area (5.24)", not opn and not any("Linked from</h2>" in open(os.path.join(out, p, "index.html"), encoding="utf-8").read() for p in v8), opn[:3])
     chk("Readable addresses: no permanent identifier in any page path (decision 5)", not [p for p in site.pages if re.search(r"VR-|-FW-\d", p)])
     return res
 def main():

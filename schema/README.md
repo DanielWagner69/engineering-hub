@@ -13,7 +13,11 @@ Conventions used: categorical fields hold a register entry identifier (VR-REGIST
 
 Held in `schema_delta_R15_R18.json` and applied to the generated type schemas until they are written into Data Schema v7 and Requirements v24.
 
+Data Schema v7 / Requirements v24 (12 Oct 2026) EDR, line-item inheritance and Lesson tagging changes are held in `schema_delta_v7_edr.json` (proposed; not yet applied to the generated type schemas). R-15 and R-18 are written into Requirements Prompt v24.1 (1.7.7A, 6C.24A) and Data Schema v7.1 (section 6.21). Link maturity (Superseded (auto), TSM Supersession Confirmation) follows Requirements Prompt v24.2 (6B.7A) and Data Schema v7.2 (section 6.22); its definitions P1 to P8 are settled. The change proposal is in `proposals/edr_tsm_inheritance_proposal.md`.
+
 | Ref | Decision | Schema change | Gate checks |
 | --- | --- | --- | --- |
 | R-15 | Each FDPS has one lead Sub-system (or Sub-structure), set by the owning Design Sub-team and approved by a Design Lead of that Sub-system. A change re-runs interface inheritance. | FDPS gains required `lead_sub_system_approval` {set_by, set_at, approved_by, approved_at, change_record}. Change type register gains VR-CHG-0011 Lead Sub-system change. | I: setter in the owning Sub-team, approver a Design Lead of the lead Sub-system at the date; a changed lead needs a Lead Sub-system change Change Record and flags existing breaks for re-confirmation. |
 | R-18 | A cross-FDPS Secures link needs no confirmation. The other FDPS's owner gets a Review Flag and records Accept or Query. | Review Flag gains `fdps_interface` (bool); decision values add Accept and Query (register RFDEC). | I: a flag to the other owner for every cross-FDPS Secures link, decided by that owner; Accept or Query only on interface flags; a Query stays open and never blocks the link or the release. |
+
+Hub page layout v2 (five page groups, no Links area) follows Requirements Prompt v24.3 (5.23, 5.24) and Data Schema v7.3 (section 6.23); recorded in `schema_delta_v7_edr.json` under Hub Page.

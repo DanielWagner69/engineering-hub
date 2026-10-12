@@ -363,6 +363,30 @@
    "source": "Framework 1.0.0-rc.1",
    "is_catch_all": false,
    "sort_order": 33
+  },
+  {
+   "id": "VR-LINKTYPE-0034",
+   "register": "LINK_TYPE",
+   "code": "34",
+   "label": "Part of",
+   "definition": "Part of",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 34
+  },
+  {
+   "id": "VR-LINKTYPE-0035",
+   "register": "LINK_TYPE",
+   "code": "35",
+   "label": "Reviews line item",
+   "definition": "Reviews line item",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 35
   }
  ]
 }

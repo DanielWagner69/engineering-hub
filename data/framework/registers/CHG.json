@@ -121,6 +121,18 @@
    "source": "Framework 1.0.0-rc.1",
    "is_catch_all": false,
    "sort_order": 11
+  },
+  {
+   "id": "VR-CHG-0012",
+   "register": "CHG",
+   "code": "12",
+   "label": "Access change",
+   "definition": "Access change",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 12
   }
  ]
 }

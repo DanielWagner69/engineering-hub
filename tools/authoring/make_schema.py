@@ -60,7 +60,7 @@ os.makedirs(os.path.join(ROOT, "schema", "types"), exist_ok=True)
 # common
 ctab = [t for t in tables(section(r"^### 1\.2 ")) if t["head"][0] == "Field"][0]
 cprops, creq = fields_of(ctab)
-cprops["id"]["pattern"] = r"^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|RF|CK|RT|CON|RA|RSK|TR|FV|AIQ|IMG|LNK)-([A-Z]|FW)-\d{7}$"
+cprops["id"]["pattern"] = r"^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|RF|CK|RT|CON|RA|RSK|TR|FV|AIQ|IMG|LNK|EDR|LIR|TSC|USR|PA|ER|PO)-([A-Z]|FW)-\d{7}$"
 cprops["hub"] = {"type": "string", "pattern": r"^(FW|PRJ-[A-Z]-\d{7})$", "description": "FW or project id; production data never sits in FW (6.2)"}
 cprops["links"] = {"type": "array", "items": {"$ref": "#/$defs/link"}}
 common = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": "common.schema.json", "title": "Common fields (schema v6 1.2)",

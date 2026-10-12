@@ -156,6 +156,54 @@
    "source": "Framework 1.0.0-rc.1",
    "is_catch_all": false,
    "sort_order": 14
+  },
+  {
+   "id": "VR-PAGETYPE-0015",
+   "register": "PAGETYPE",
+   "code": "15",
+   "label": "EDR",
+   "definition": "EDR",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 15
+  },
+  {
+   "id": "VR-PAGETYPE-0016",
+   "register": "PAGETYPE",
+   "code": "16",
+   "label": "TSM",
+   "definition": "TSM",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 16
+  },
+  {
+   "id": "VR-PAGETYPE-0017",
+   "register": "PAGETYPE",
+   "code": "17",
+   "label": "Admin",
+   "definition": "Admin",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 17
+  },
+  {
+   "id": "VR-PAGETYPE-0018",
+   "register": "PAGETYPE",
+   "code": "18",
+   "label": "User",
+   "definition": "User",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 18
   }
  ]
 }
