@@ -338,7 +338,7 @@
  },
  "link_maturity": {
   "principle": "6B.7A: high-level links flow down; defined links at lowest level flow up and supersede; unlinked flowed-down items auto-superseded once the level has defined links; TSM needs DA bulk confirmation, EDR none",
-  "proposed": [
+  "settled": [
    "P1 defined link = Satisfied by to a Part/Assembly Instance (EDR) or claimed TSM statement naming parts",
    "P2 level has defined links = >=1 line item of the document has a defined link in the FDPS; per FDPS per document",
    "P3 manual Kept/Broken prevail",
@@ -347,6 +347,7 @@
    "P6 one DA confirmation per FDPS per TSM; lapses on set change; DA may reject statements",
    "P7 no Compliance Statement for superseded items",
    "P8 defined links roll up to FDPS/Sub-system/System pages"
-  ]
+  ],
+  "status": "P1 to P8 accepted by Daniel as written, 12 Oct 2026"
  }
 }
