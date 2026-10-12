@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "source": "Data Schema - Draft v7.2 and Requirements Prompt v24.2 (12 Oct 2026), sections 6.20 to 6.22",
+  "source": "Data Schema - Draft v7.3 and Requirements Prompt v24.3 (12 Oct 2026), sections 6.20 to 6.23",
   "applies_after": "schema_delta_R15_R18.json",
   "status": "proposed, not yet applied to generated type schemas"
  },
@@ -315,8 +315,30 @@
    "add_fields": {
     "layout": {
      "type": "string",
-     "description": "Tree page layout v1"
+     "description": "Tree page layout v2 (v7.3 / 6.23): five groups Requirement, Verification, Product (Sub-system: FDPS list only), Considerations, Working Data; no Links area; summary links; FDPS page layout TBC"
     }
+   },
+   "page_groups": {
+    "Requirement": [
+     "EDRs",
+     "TSMs"
+    ],
+    "Verification": [
+     "Compliance",
+     "Verifications",
+     "Reviews"
+    ],
+    "Product": [
+     "FDPSs"
+    ],
+    "Considerations": [
+     "Interfacing Systems",
+     "Disciplines and Stakeholders"
+    ],
+    "Working Data": [
+     "Issues",
+     "Lessons Learned"
+    ]
    }
   },
   "FDPS": {
