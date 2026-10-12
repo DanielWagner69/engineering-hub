@@ -13,7 +13,7 @@ Conventions used: categorical fields hold a register entry identifier (VR-REGIST
 
 Held in `schema_delta_R15_R18.json` and applied to the generated type schemas until they are written into Data Schema v7 and Requirements v24.
 
-Data Schema v7 / Requirements v24 (12 Oct 2026) EDR, line-item inheritance and Lesson tagging changes are held in `schema_delta_v7_edr.json` (proposed; not yet applied to the generated type schemas). Note: R-15 and R-18 are not yet written into the v7 / v24 documents.
+Data Schema v7 / Requirements v24 (12 Oct 2026) EDR, line-item inheritance and Lesson tagging changes are held in `schema_delta_v7_edr.json` (proposed; not yet applied to the generated type schemas). R-15 and R-18 are written into Requirements Prompt v24.1 (1.7.7A, 6C.24A) and Data Schema v7.1 (section 6.21).
 
 | Ref | Decision | Schema change | Gate checks |
 | --- | --- | --- | --- |
