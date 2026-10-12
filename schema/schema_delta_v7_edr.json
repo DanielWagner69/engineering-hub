@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "source": "Data Schema - Draft v7 and Requirements Prompt v24 (12 Oct 2026), section 6.20",
+  "source": "Data Schema - Draft v7.2 and Requirements Prompt v24.2 (12 Oct 2026), sections 6.20 to 6.22",
   "applies_after": "schema_delta_R15_R18.json",
   "status": "proposed, not yet applied to generated type schemas"
  },
@@ -11,7 +11,8 @@
    ],
    "LISTATE": [
     "Kept",
-    "Broken"
+    "Broken",
+    "Superseded (auto)"
    ]
   },
   "extend": {
@@ -140,8 +141,10 @@
     "state": {
      "enum": [
       "Kept",
-      "Broken"
-     ]
+      "Broken",
+      "Superseded (auto)"
+     ],
+     "description": "Superseded (auto) is set by the system only (6B.7A)"
     },
     "bases": {
      "type": "array",
@@ -168,6 +171,17 @@
       "Current",
       "Flagged for re-confirmation"
      ]
+    },
+    "superseded_by": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "Defined links causing the supersession"
+    },
+    "bulk_confirmation": {
+     "type": "string",
+     "description": "ref(TSM Supersession Confirmation); TSM statements only; empty = pending"
     }
    },
    "if_broken_required": [
@@ -176,6 +190,66 @@
     "approved_by",
     "approved_at"
    ]
+  },
+  "TSM Supersession Confirmation": {
+   "required": [
+    "fdps",
+    "tsm",
+    "statements",
+    "confirmed_by",
+    "confirmed_at",
+    "status"
+   ],
+   "properties": {
+    "fdps": {
+     "type": "string"
+    },
+    "tsm": {
+     "type": "string"
+    },
+    "statements": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "properties": {
+       "clause": {
+        "type": "string"
+       },
+       "revision": {
+        "type": "integer"
+       }
+      }
+     }
+    },
+    "rejected": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "properties": {
+       "clause": {
+        "type": "string"
+       },
+       "reason": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "confirmed_by": {
+     "type": "string",
+     "description": "Design Authority (6C.13)"
+    },
+    "confirmed_at": {
+     "type": "string"
+    },
+    "status": {
+     "enum": [
+      "Current",
+      "Lapsed"
+     ]
+    }
+   }
   }
  },
  "type_changes": {
@@ -250,8 +324,8 @@
     "line_item_maturity {reviewed,total,broken,unreviewed}"
    ],
    "gates": [
-    "Stage C entry: unreviewed == 0",
-    "Release gate: unreviewed == 0"
+    "Stage C entry: unreviewed == 0 (Kept, Broken, Superseded (auto) count as reviewed) and pending TSM bulk confirmations == 0",
+    "Release gate: same"
    ]
   }
  },
@@ -260,6 +334,19 @@
    "Part of (Requirement -> Requirement Document)",
    "Tagged to (Requirement Document -> Sub-system)",
    "Reviews line item (Line-item Review -> Requirement or TSM statement)"
+  ]
+ },
+ "link_maturity": {
+  "principle": "6B.7A: high-level links flow down; defined links at lowest level flow up and supersede; unlinked flowed-down items auto-superseded once the level has defined links; TSM needs DA bulk confirmation, EDR none",
+  "proposed": [
+   "P1 defined link = Satisfied by to a Part/Assembly Instance (EDR) or claimed TSM statement naming parts",
+   "P2 level has defined links = >=1 line item of the document has a defined link in the FDPS; per FDPS per document",
+   "P3 manual Kept/Broken prevail",
+   "P4 reversal when last defined link removed",
+   "P5 new/changed items auto-superseded unless linked",
+   "P6 one DA confirmation per FDPS per TSM; lapses on set change; DA may reject statements",
+   "P7 no Compliance Statement for superseded items",
+   "P8 defined links roll up to FDPS/Sub-system/System pages"
   ]
  }
 }
