@@ -5,7 +5,7 @@ Writes a JSON report with --out and prints a human summary."""
 import argparse, json, os, sys, importlib.util
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import load, check_schema, purity
-from checks import core, late, per_fdps
+from checks import core, late, per_fdps, v76
 def gate(framework, project=None, schema=None, repo=None, store=None):
     schema = schema or os.path.join(HERE, "..", "schema")
     if store is None: store = load.load(framework, project)
@@ -22,6 +22,7 @@ def gate(framework, project=None, schema=None, repo=None, store=None):
         def _per():
             r, i = per_fdps.run(store, cfg); info.update({"per_fdps": i["per_fdps"], "r16": i["r16"]}); return r
         res += safe("Per-FDPS checks", _per)
+        res += safe("v7.6 checks (EDRs, line items, users)", lambda: v76.run(store, cfg))
     res += safe("Rebuild checks", lambda: late.run(store, cfg, project_mode=bool(project)))
     res += safe("Purity checks", lambda: purity.store_checks(store, bool(project)))
     if repo: res += purity.tree_checks(repo)

@@ -2,22 +2,22 @@
  "id": "FV-FW-0000001",
  "type": "Framework Version",
  "schema_version": "6.0",
- "title": "Framework 1.0.0-rc.2",
+ "title": "Framework 1.0.0-rc.3",
  "status": "Draft",
  "owner": "user:framework_owner",
  "hub": "FW",
  "created_at": "2026-10-12T00:00:00Z",
  "created_by": "user:framework_owner",
- "modified_at": "2026-10-12T01:00:00Z",
+ "modified_at": "2026-10-12T14:00:00Z",
  "modified_by": "user:framework_owner",
- "record_version": 2,
+ "record_version": 3,
  "origin": {
   "kind": "Human"
  },
  "verification_status": "Unverified",
  "access_marking": "VR-ACCESS-0000",
- "version": "1.0.0-rc.2",
- "schema_version_supported": "6.0",
+ "version": "1.0.0-rc.3",
+ "schema_version_supported": "7.6",
  "change_list": [
   "Rebuild on Requirements v23 and Data Schema v6, with late decisions R-15 and R-18",
   "Full Annex A (placeholder) and Annex B registers",
@@ -25,7 +25,10 @@
   "Framework Hub site: three trees, Lifecycle, Product Scope and Discipline views, Sub-team stage pages, rules and reference pages, registers, glossary, v0.8 redirects (rc.1 site)",
   "Design Team and Sub-team template pages hold the placeholder applicable Design Types, Disciplines and stage sign-off lists as data (rc.2)",
   "Per-FDPS rule checks run across every FDPS of a project; generic inference module (rc.2)",
-  "Seven generic example lessons carried from v0.8"
+  "Seven generic example lessons carried from v0.8",
+  "Requirements Prompt v24.6 and Data Schema v7.6 applied (rc.3): Requirement Document (EDR), Line-item Review and TSM Supersession Confirmation types; User, Project Assignment, Effectivity Restriction and Permission Override types; Owner and Contributors; registers ACCROLE, PERM, USTATUS, DOCKIND, LISTATE",
+  "Sub-system pages in the v8 layout (rc.3): filters and System tree in the left rail, model preview beside the summary, five collapsed page groups (Requirement, Verification, Product, Considerations, Working Data), fixed Ask the Hub bar, Company, Dark and Light themes",
+  "Rules pages: Users, access roles and permissions; EDRs, line items and link maturity (rc.3)"
  ],
  "content_review": {
   "state": "Not yet reviewed",
@@ -37,6 +40,12 @@
    "modified_at": "2026-10-12T00:00:00Z",
    "version": "1.0.0-rc.1",
    "title": "Framework 1.0.0-rc.1"
+  },
+  {
+   "record_version": 2,
+   "modified_at": "2026-10-12T01:00:00Z",
+   "version": "1.0.0-rc.2",
+   "title": "Framework 1.0.0-rc.2"
   }
  ]
 }

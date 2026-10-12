@@ -7,7 +7,7 @@
   "id": {
    "type": "string",
    "description": "string; card. 1; 1.1 format",
-   "pattern": "^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|RF|CK|RT|CON|RA|RSK|TR|FV|AIQ|IMG|LNK)-([A-Z]|FW)-\\d{7}$"
+   "pattern": "^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|RF|CK|RT|CON|RA|RSK|TR|FV|AIQ|IMG|LNK|EDR|LIR|TSC|USR|PA|ER|PO)-([A-Z]|FW)-\\d{7}$"
   },
   "type": {
    "type": "string",
@@ -29,7 +29,7 @@
   },
   "owner": {
    "type": "string",
-   "description": "ref(Person); card. 1; Directory user"
+   "description": "ref(User) (handle of a User record in a Production Hub, 5A.7); card. 1; exactly one accountable Owner"
   },
   "hub": {
    "type": "string",
@@ -113,6 +113,13 @@
    "items": {
     "$ref": "#/$defs/link"
    }
+  },
+  "contributors": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "ref(User); card. 0..n; optional Contributors (5A.7, added in v7.4)"
   }
  },
  "required": [

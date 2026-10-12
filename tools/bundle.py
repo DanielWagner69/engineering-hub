@@ -12,7 +12,7 @@ body = {"register_entries": sorted(st["register_entries"], key=lambda e: e["id"]
 h = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 try: commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=HERE, capture_output=True, text=True).stdout.strip()
 except Exception: commit = ""
-meta = {"framework_version": o.version, "framework_version_record": "FV-FW-0000001", "schema_version": "6.0", "schema_deltas": ["R-15", "R-18"],
+meta = {"framework_version": o.version, "framework_version_record": "FV-FW-0000001", "schema_version": "7.6", "schema_deltas": ["R-15", "R-18", "v7 EDR, line items and link maturity", "v7.4 to v7.6 Users"],
         "content_hash": "sha256:" + h, "source_commit": commit, "counts": {"register_entries": len(body["register_entries"]), "records": len(body["records"])}}
 os.makedirs(os.path.dirname(os.path.abspath(o.out)), exist_ok=True)
 json.dump(dict(meta=meta, **body), open(o.out, "w"), indent=1, ensure_ascii=False)

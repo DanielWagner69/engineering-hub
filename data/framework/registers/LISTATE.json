@@ -1,0 +1,65 @@
+{
+ "register": "LISTATE",
+ "entries": [
+  {
+   "id": "VR-LISTATE-0001",
+   "register": "LISTATE",
+   "code": "1",
+   "label": "Inherited, not reviewed",
+   "definition": "Inherited, not reviewed",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-LISTATE-0002",
+   "register": "LISTATE",
+   "code": "2",
+   "label": "Kept",
+   "definition": "Kept",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-LISTATE-0003",
+   "register": "LISTATE",
+   "code": "3",
+   "label": "Broken",
+   "definition": "Broken",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-LISTATE-0004",
+   "register": "LISTATE",
+   "code": "4",
+   "label": "Superseded (auto)",
+   "definition": "Superseded (auto)",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-LISTATE-0005",
+   "register": "LISTATE",
+   "code": "5",
+   "label": "Direct",
+   "definition": "Direct",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5
+  }
+ ]
+}

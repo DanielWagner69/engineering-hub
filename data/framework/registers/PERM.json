@@ -1,0 +1,89 @@
+{
+ "register": "PERM",
+ "entries": [
+  {
+   "id": "VR-PERM-0001",
+   "register": "PERM",
+   "code": "1",
+   "label": "View",
+   "definition": "View",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 1
+  },
+  {
+   "id": "VR-PERM-0002",
+   "register": "PERM",
+   "code": "2",
+   "label": "Create",
+   "definition": "Create",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 2
+  },
+  {
+   "id": "VR-PERM-0003",
+   "register": "PERM",
+   "code": "3",
+   "label": "Edit",
+   "definition": "Edit",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 3
+  },
+  {
+   "id": "VR-PERM-0004",
+   "register": "PERM",
+   "code": "4",
+   "label": "Approve",
+   "definition": "Approve",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 4
+  },
+  {
+   "id": "VR-PERM-0005",
+   "register": "PERM",
+   "code": "5",
+   "label": "Release",
+   "definition": "Release",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 5
+  },
+  {
+   "id": "VR-PERM-0006",
+   "register": "PERM",
+   "code": "6",
+   "label": "Administer users",
+   "definition": "Administer users",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 6
+  },
+  {
+   "id": "VR-PERM-0007",
+   "register": "PERM",
+   "code": "7",
+   "label": "Comment",
+   "definition": "Comment",
+   "state": "Active",
+   "source": "Framework 1.0.0-rc.3 (Requirements v24.6, Data Schema v7.6)",
+   "is_catch_all": false,
+   "framework_fixed": true,
+   "sort_order": 7
+  }
+ ]
+}

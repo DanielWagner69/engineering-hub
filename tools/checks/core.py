@@ -23,7 +23,7 @@ def run(store, cfg):
         if not h: return None
         c=dict(r); c.update({k:x for k,x in h[0].items() if k not in("record_version","modified_at")}); c["record_version"]=v; return c
     # ---- A. identity and common fields
-    idre=re.compile(r"^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|AIQ|IMG|RF|LNK|CK|TR|FV|RT|CON|RA|RSK)-([A-Z]|FW)-\d{7}$")  # schema 1.1 prefix table
+    idre=re.compile(r"^(PRJ|EFF|PD|PR|PI|IRL|AD|AV|AI|FD|FR|FS|REQ|TSM|CS|VER|ISS|DR|RS|ACT|LL|DC|PAR|PIT|PG|PL|AR|BL|CR|AIQ|IMG|RF|LNK|CK|TR|FV|RT|CON|RA|RSK|EDR|LIR|TSC|USR|PA|ER|PO)-([A-Z]|FW)-\d{7}$")  # schema 1.1 prefix table
     chk("A","Identifier format PREFIX-SCOPE-NNNNNNN (schema 1.1)",all(idre.match(r["id"]) for r in R),[r["id"] for r in R if not idre.match(r["id"])])
     chk("A","Identifiers unique (2A.4)",len(IDX)==len(R))
     common=["id","type","schema_version","title","status","owner","hub","created_at","created_by","modified_at","modified_by","record_version","origin","verification_status","access_marking"]
